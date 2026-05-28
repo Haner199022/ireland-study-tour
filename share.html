@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#1A1A1A" />
+<title>CUC × Ireland Study Tour · 微信分享卡</title>
+<meta name="description" content="CUC × Ireland Study Tour — AI × Chinese traditional culture · 12-day Beijing program for Irish undergraduates." />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="CUC × Ireland Study Tour" />
+<meta property="og:title" content="钟·声·人 · AI × Chinese Culture · CUC × Ireland Study Tour" />
+<meta property="og:description" content="A 12-day Beijing study tour for Irish undergraduates — from a 600-year-old bell to AI-composed music and an interactive page their friends back home can touch." />
+<meta property="og:image" content="https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=1200&q=80&auto=format&fit=crop" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:      #1A1A1A;
+    --paper:    #FAF6F0;
+    --paper-2:  #F2EBDE;
+    --bronze:   #B08D57;
+    --bronze-d: #8C6D3F;
+    --jade:     #5B8C7E;
+    --mute:     #8B847B;
+    --line:     #D9D2C4;
+  }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Inter", "Noto Serif SC", -apple-system, sans-serif;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  /* paper grain */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .card {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 48px 32px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* central vertical line — Beijing axis motif */
+  .card::after {
+    content: '';
+    position: absolute; left: 50%; top: 24px; bottom: 24px;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--bronze) 30%, var(--bronze) 70%, transparent);
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--bronze-d);
+    margin-bottom: 28px;
+  }
+
+  .bell {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .bell svg {
+    width: 38px; height: 38px;
+    stroke: var(--bronze);
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  h1 {
+    font-family: "Noto Serif SC", serif;
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: 0.06em;
+    text-align: center;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  h1 .accent { color: var(--bronze); }
+
+  h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 19px;
+    text-align: center;
+    color: var(--bronze-d);
+    margin-bottom: 28px;
+  }
+
+  .lead {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 32px;
+    padding: 0 4px;
+  }
+  .lead.cn {
+    color: var(--mute);
+    margin-top: 6px;
+    margin-bottom: 36px;
+    font-size: 13px;
+  }
+
+  .qr-box {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 0 auto 24px;
+    width: 280px;
+    box-shadow: 0 12px 30px -10px rgba(0,0,0,0.12);
+  }
+  .qr-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .qr-caption {
+    text-align: center;
+    font-size: 12px;
+    color: var(--mute);
+    margin-bottom: 28px;
+    letter-spacing: 0.02em;
+  }
+  .qr-caption .strong { color: var(--bronze-d); font-weight: 500; }
+
+  .url-box {
+    background: var(--paper-2);
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    text-align: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    word-break: break-all;
+    color: var(--bronze-d);
+    user-select: all;
+    -webkit-user-select: all;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat .n {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--bronze-d);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat .l {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  .signature {
+    text-align: center;
+    font-size: 11px;
+    color: var(--mute);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+  .signature .accent { color: var(--bronze-d); }
+
+  .open-btn {
+    display: block;
+    text-align: center;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 100px;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 16px;
+    margin-bottom: 18px;
+    transition: background 0.2s;
+  }
+  .open-btn:active { background: var(--bronze-d); }
+
+  .open-btn .arrow { display: inline-block; margin-left: 6px; transition: transform 0.2s; }
+  .open-btn:hover .arrow { transform: translateX(4px); }
+
+  .hint {
+    text-align: center;
+    font-size: 11px;
+    color: var(--mute);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="eyebrow">CUC × Irish Undergraduates · 2026</div>
+
+  <div class="bell">
+    <svg viewBox="0 0 64 64">
+      <path d="M32 14 C20 14, 16 26, 16 38 L48 38 C48 26, 44 14, 32 14 Z M32 14 L32 10 M28 42 L36 42 L36 46 L28 46 Z M30 48 L34 48 L34 52 L30 52 Z" />
+    </svg>
+  </div>
+
+  <h1>钟 · 声 · <span class="accent">人</span></h1>
+  <h2>A bell, a slider, a new voice.</h2>
+
+  <p class="lead">
+    Twelve Irish undergraduates spend two weeks in Beijing — listening to a 600-year-old bell, walking the northern endpoint of an 800-year-old urban axis, sitting inside two of China's most influential AI companies, and turning all of it into music they composed with AI and a page their friends back home can <em>touch</em>.
+  </p>
+  <p class="lead cn">
+    中国传媒大学 × 爱尔兰本科生游学项目 · AI × 中国传统文化国际传播 · 2026 · 北京 · 12 天
+  </p>
+
+  <div class="qr-box">
+    <img src="qr.png" alt="QR code · scan to open project site" />
+  </div>
+
+  <div class="qr-caption">
+    长按二维码识别 · 或扫码<br />
+    <span class="strong">SCAN · OPEN · EXPLORE</span>
+  </div>
+
+  <a class="open-btn" href="index.html">
+    Open the project <span class="arrow">→</span>
+  </a>
+
+  <div class="url-box">
+    haner199022.github.io/ireland-study-tour
+  </div>
+
+  <p class="hint">
+    长按 URL 可复制 · long-press URL to copy
+  </p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">12</div><div class="l">Days</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">Venues</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">AI Days</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">Works</div></div>
+  </div>
+
+  <p class="signature">
+    Communication University of China<br />
+    <span class="accent">AI Lab · School of International Communication</span>
+  </p>
+
+</div>
+
+</body>
+</html>
