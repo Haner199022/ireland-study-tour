@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Communication, Culture, and Artificial Intelligence — Opening Address by Dean Jin · CUC × Ireland Study Tour</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow-x: hidden; }
+  html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+
+  :root {
+    --ink:      #1A1A1A;
+    --ink-2:    #2C2724;
+    --paper:    #FAF6F0;
+    --paper-2:  #F2EBDE;
+    --bronze:   #B08D57;
+    --bronze-d: #8C6D3F;
+    --jade:     #5B8C7E;
+    --mute:     #8B847B;
+    --line:     #D9D2C4;
+
+    --serif:    "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+    --sans:     "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* ===== Slide base ===== */
+  .slide {
+    min-height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: clamp(40px, 6vw, 100px) clamp(40px, 8vw, 120px);
+    position: relative;
+    z-index: 2;
+  }
+  .slide-inner { max-width: 1080px; margin: 0 auto; width: 100%; }
+
+  .slide.dark { background: var(--ink); color: var(--paper); }
+  .slide.dark::before { opacity: 0.03; filter: invert(1); }
+  .slide.cream { background: var(--paper-2); }
+  .slide.center { text-align: center; }
+  .slide.center .slide-inner { display: flex; flex-direction: column; align-items: center; }
+
+  /* subtle central axis line — used sparingly */
+  .slide.axis::after {
+    content: '';
+    position: absolute; left: 50%; top: 80px; bottom: 80px;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--bronze) 30%, var(--bronze) 70%, transparent);
+    opacity: 0.18;
+  }
+
+  /* ===== Eyebrow ===== */
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--bronze-d);
+    margin-bottom: 36px;
+    font-weight: 500;
+  }
+  .dark .eyebrow { color: var(--bronze); }
+  .eyebrow.institutional {
+    color: var(--mute);
+    font-weight: 400;
+    letter-spacing: 0.28em;
+  }
+  .dark .eyebrow.institutional { color: rgba(250, 246, 240, 0.55); }
+
+  /* ===== Typography presets ===== */
+  .h-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(46px, 7.5vw, 96px);
+    line-height: 1.05;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .dark .h-title { color: var(--paper); }
+  .h-title em { font-style: italic; font-weight: 500; color: var(--bronze-d); }
+  .dark .h-title em { color: var(--bronze); }
+
+  .h-body {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(34px, 5vw, 60px);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .dark .h-body { color: var(--paper); }
+  .h-body em { font-style: italic; color: var(--bronze-d); }
+  .dark .h-body em { color: var(--bronze); }
+
+  .lede {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(19px, 1.9vw, 24px);
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 780px;
+    margin-bottom: 22px;
+  }
+  .dark .lede { color: rgba(250, 246, 240, 0.86); }
+  .lede.small { font-size: clamp(16px, 1.5vw, 19px); color: #4A4A4A; }
+  .dark .lede.small { color: rgba(250, 246, 240, 0.7); }
+
+  .quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 4.5vw, 52px);
+    line-height: 1.25;
+    color: var(--ink);
+    border-left: 2px solid var(--bronze);
+    padding-left: clamp(20px, 3vw, 36px);
+    margin: 30px 0;
+    max-width: 900px;
+  }
+  .dark .quote { color: var(--paper); border-color: var(--bronze); }
+  .quote.center {
+    border-left: none;
+    padding-left: 0;
+    text-align: center;
+    margin-left: auto; margin-right: auto;
+  }
+  .quote.center::before, .quote.center::after {
+    content: '"';
+    color: var(--bronze);
+    font-family: var(--serif);
+    font-style: italic;
+  }
+
+  .accent { color: var(--bronze-d); }
+  .dark .accent { color: var(--bronze); }
+  .jade { color: var(--jade); }
+
+  /* ===== Slide 1 Title ===== */
+  .title-slide .slide-inner { max-width: 1080px; }
+  .title-slide .h-title {
+    font-size: clamp(48px, 7.5vw, 92px);
+    font-weight: 500;
+    line-height: 1.08;
+    margin-bottom: 24px;
+  }
+  .title-slide .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 30px);
+    color: var(--bronze-d);
+    margin-bottom: 60px;
+    font-weight: 400;
+  }
+  .title-slide .institutional-block {
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    letter-spacing: 0.02em;
+  }
+  .title-slide .institutional-block .speaker {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .title-slide .institutional-block .institution {
+    color: var(--mute);
+  }
+  .title-slide .occasion {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-top: 24px;
+  }
+
+  /* ===== Three forces / cards row ===== */
+  .force-row {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .force-row { grid-template-columns: 1fr; } }
+  .fcard {
+    padding: 28px 24px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .cream .fcard { background: var(--paper); }
+  .fcard .roman-num {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--bronze);
+    letter-spacing: 0.15em;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .fcard h4 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .fcard p {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+    color: #4A4A4A;
+  }
+
+  /* ===== Six-form list ===== */
+  .six-list {
+    margin-top: 40px;
+    counter-reset: form-counter;
+  }
+  .six-list li {
+    list-style: none;
+    counter-increment: form-counter;
+    padding: 22px 0 22px 70px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    font-family: var(--serif);
+  }
+  .six-list li:last-child { border-bottom: none; }
+  .six-list li::before {
+    content: counter(form-counter, upper-roman) ".";
+    position: absolute;
+    left: 0;
+    top: 22px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--bronze);
+    font-size: 22px;
+  }
+  .six-list .name {
+    font-weight: 600;
+    font-size: clamp(20px, 2vw, 24px);
+    color: var(--ink);
+  }
+  .six-list .desc {
+    font-size: clamp(15px, 1.5vw, 18px);
+    color: #4A4A4A;
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  /* ===== Mapping table ===== */
+  .map-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 36px;
+    font-family: var(--serif);
+    font-size: clamp(15px, 1.5vw, 18px);
+  }
+  .map-table th, .map-table td {
+    padding: 16px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+  .map-table th {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--bronze-d);
+  }
+  .map-table .pattern {
+    font-weight: 600;
+    color: var(--ink);
+    width: 38%;
+  }
+  .map-table tr.featured td { background: rgba(176, 141, 87, 0.06); }
+  .map-table tr.featured .pattern { color: var(--bronze-d); }
+
+  /* ===== Cost table ===== */
+  .cost-table {
+    margin-top: 40px;
+    font-family: var(--serif);
+    width: 100%;
+    max-width: 760px;
+  }
+  .cost-table tr td {
+    padding: 22px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cost-table .year {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--bronze-d);
+    width: 130px;
+    font-size: clamp(22px, 2.5vw, 28px);
+  }
+  .cost-table .cost {
+    font-weight: 600;
+    width: 180px;
+    font-size: clamp(28px, 3.5vw, 40px);
+  }
+  .cost-table tr:nth-child(1) .cost { color: var(--ink); }
+  .cost-table tr:nth-child(2) .cost { color: var(--bronze-d); font-size: clamp(22px, 2.8vw, 32px); }
+  .cost-table tr:nth-child(3) .cost { color: var(--jade); font-size: clamp(18px, 2vw, 24px); }
+  .cost-table .by {
+    color: var(--mute);
+    font-style: italic;
+    font-size: clamp(15px, 1.5vw, 18px);
+  }
+
+  /* ===== Pillar row ===== */
+  .pillar-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 44px;
+  }
+  @media (max-width: 900px) { .pillar-row { grid-template-columns: 1fr 1fr; } }
+  .pblock {
+    text-align: center;
+    padding: 28px 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .pblock .roman {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--bronze);
+    letter-spacing: 0.2em;
+    margin-bottom: 14px;
+  }
+  .pblock h5 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 19px;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .pblock p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--mute);
+  }
+  .pillar-caption {
+    text-align: center;
+    margin-top: 24px;
+    color: var(--mute);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+  }
+
+  /* ===== Three deliverables ===== */
+  .three-del {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 48px;
+  }
+  @media (max-width: 900px) { .three-del { grid-template-columns: 1fr; } }
+  .dblock {
+    padding: 32px 26px;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--bronze);
+    background: var(--paper);
+  }
+  .dblock .roman {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--bronze);
+    margin-bottom: 14px;
+  }
+  .dblock h4 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .dblock p {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: #4A4A4A;
+    line-height: 1.6;
+  }
+
+  /* ===== Three observations ===== */
+  .three-obs {
+    margin-top: 44px;
+  }
+  .obrow {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 28px;
+    align-items: baseline;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .obrow:last-child { border-bottom: none; }
+  .obrow .n {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 44px;
+    color: var(--bronze);
+    line-height: 1;
+    font-weight: 500;
+  }
+  .obrow .q {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.3vw, 28px);
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  /* ===== Two questions ===== */
+  .two-q { margin-top: 44px; display: grid; gap: 32px; }
+  .two-q .one {
+    border-left: 2px solid var(--bronze);
+    padding-left: clamp(20px, 3vw, 36px);
+  }
+  .two-q .one:nth-child(2) { border-left-color: var(--jade); }
+  .two-q .one .n {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--mute);
+    margin-bottom: 8px;
+  }
+  .two-q .one .q {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.3;
+    color: var(--ink);
+  }
+
+  /* ===== HUD ===== */
+  .hud {
+    position: fixed;
+    bottom: 18px; right: 24px;
+    z-index: 50;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--mute);
+    background: rgba(250, 246, 240, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--line);
+    user-select: none;
+  }
+  .hud .cur { color: var(--bronze-d); font-weight: 600; }
+
+  .keyhint {
+    position: fixed; bottom: 18px; left: 24px;
+    z-index: 50;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mute);
+    opacity: 0.55;
+    user-select: none;
+  }
+
+  .progress {
+    position: fixed; top: 0; left: 0;
+    height: 2px;
+    background: var(--bronze);
+    width: 0%;
+    z-index: 100;
+    transition: width 0.15s ease-out;
+  }
+
+  /* ===== Print / PDF export ===== */
+  @page { size: 297mm 167mm; margin: 0; }  /* 16:9 landscape, ~A4-width */
+  @media print {
+    html, body {
+      scroll-snap-type: none !important;
+      background: var(--paper) !important;
+      height: auto !important;
+      overflow: visible !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    body::before { display: none !important; }
+    .hud, .keyhint, .progress { display: none !important; }
+
+    .slide {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+      width: 297mm !important;
+      height: 167mm !important;
+      min-height: 167mm !important;
+      max-height: 167mm !important;
+      padding: 12mm 22mm !important;
+      page-break-after: always !important;
+      break-after: page !important;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+      overflow: hidden !important;
+      scroll-snap-align: none !important;
+    }
+    .slide:last-child {
+      page-break-after: auto !important;
+      break-after: auto !important;
+    }
+
+    /* tighten typography for print so content fits each slide canvas */
+    .h-title { font-size: 44px !important; line-height: 1.1 !important; }
+    .title-slide .h-title { font-size: 46px !important; }
+    .title-slide .subtitle { font-size: 18px !important; margin-bottom: 24px !important; }
+    .title-slide .institutional-block { padding-top: 16px !important; font-size: 12px !important; }
+    .title-slide .institutional-block .speaker { font-size: 15px !important; }
+    .title-slide .occasion { font-size: 10px !important; margin-top: 12px !important; }
+
+    .h-body { font-size: 32px !important; line-height: 1.15 !important; margin-bottom: 14px !important; }
+    .lede { font-size: 14px !important; line-height: 1.5 !important; max-width: 640px !important; margin-bottom: 10px !important; }
+    .lede.small { font-size: 12px !important; }
+    .quote { font-size: 22px !important; line-height: 1.25 !important; margin: 14px 0 !important; }
+
+    .eyebrow { font-size: 9px !important; margin-bottom: 14px !important; letter-spacing: 0.3em !important; }
+
+    .force-row { margin-top: 22px !important; gap: 14px !important; }
+    .fcard { padding: 14px 14px !important; }
+    .fcard .roman-num { font-size: 11px !important; margin-bottom: 8px !important; }
+    .fcard h4 { font-size: 15px !important; margin-bottom: 4px !important; }
+    .fcard p { font-size: 12px !important; line-height: 1.45 !important; }
+
+    .six-list { margin-top: 18px !important; }
+    .six-list li { padding: 8px 0 8px 46px !important; }
+    .six-list li::before { font-size: 16px !important; top: 8px !important; }
+    .six-list .name { font-size: 14px !important; }
+    .six-list .desc { font-size: 11px !important; margin-top: 2px !important; }
+
+    .map-table { font-size: 12px !important; margin-top: 16px !important; }
+    .map-table th, .map-table td { padding: 7px 10px !important; }
+
+    .cost-table { margin-top: 20px !important; }
+    .cost-table tr td { padding: 10px 8px !important; }
+    .cost-table .year { font-size: 18px !important; width: 90px !important; }
+    .cost-table .cost { font-size: 24px !important; width: 130px !important; }
+    .cost-table tr:nth-child(2) .cost { font-size: 20px !important; }
+    .cost-table tr:nth-child(3) .cost { font-size: 16px !important; }
+    .cost-table .by { font-size: 12px !important; }
+
+    .pillar-row { margin-top: 22px !important; gap: 12px !important; }
+    .pblock { padding: 14px 10px !important; }
+    .pblock .roman { font-size: 11px !important; margin-bottom: 8px !important; }
+    .pblock h5 { font-size: 13px !important; margin-bottom: 4px !important; }
+    .pblock p { font-size: 11px !important; }
+    .pillar-caption { font-size: 12px !important; margin-top: 14px !important; }
+
+    .three-del { margin-top: 22px !important; gap: 16px !important; }
+    .dblock { padding: 16px 14px !important; }
+    .dblock .roman { font-size: 12px !important; margin-bottom: 8px !important; }
+    .dblock h4 { font-size: 15px !important; }
+    .dblock p { font-size: 12px !important; line-height: 1.4 !important; }
+
+    .three-obs { margin-top: 18px !important; }
+    .obrow { padding: 10px 0 !important; gap: 18px !important; grid-template-columns: 50px 1fr !important; }
+    .obrow .n { font-size: 28px !important; }
+    .obrow .q { font-size: 16px !important; line-height: 1.3 !important; }
+
+    .two-q { margin-top: 22px !important; gap: 18px !important; }
+    .two-q .one .n { font-size: 12px !important; margin-bottom: 4px !important; }
+    .two-q .one .q { font-size: 18px !important; line-height: 1.3 !important; }
+
+    .slide.axis::after { top: 30px !important; bottom: 30px !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="hud"><span class="cur" id="cur">1</span> / <span id="total">20</span></div>
+<div class="keyhint">← / → · space · home / end · F fullscreen</div>
+
+<!-- ============ Slide 1: TITLE ============ -->
+<section class="slide title-slide axis">
+  <div class="slide-inner">
+    <div class="eyebrow institutional">An Opening Address · Day 2 of the Programme</div>
+    <h1 class="h-title">Communication, Culture,<br />and <em>Artificial Intelligence</em></h1>
+    <div class="subtitle">Reflections on the Field, on the Moment, and on the Work Ahead</div>
+
+    <div class="institutional-block">
+      <div class="speaker">Dean Jin</div>
+      <div class="institution">
+        Dean, School of International Communication<br />
+        Communication University of China
+      </div>
+      <div class="occasion">CUC × Ireland Study Tour · Beijing · 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Slide 2: WELCOME ============ -->
+<section class="slide cream">
+  <div class="slide-inner">
+    <div class="eyebrow institutional">A welcome from the School of International Communication</div>
+    <h2 class="h-body">It is my privilege to <em>welcome you</em> to Beijing.</h2>
+    <p class="lede">
+      The Communication University of China has been engaged in the study of
+      communication — its theories, its practices, and its global circulation —
+      for more than half a century. Your presence here, as undergraduates from
+      Ireland, is part of a longer conversation between our institutions and
+      traditions. We do not take that lightly.
+    </p>
+    <p class="lede small" style="margin-top: 18px;">
+      I would also like to acknowledge our partner colleagues in Ireland,
+      whose work has made your journey here possible.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 3: WHAT THIS HOUR IS ============ -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow">On what this hour is</div>
+    <h2 class="h-body">Not a lecture in the traditional sense.<br /><em>An orientation.</em></h2>
+    <p class="lede">
+      I am not going to ask you to take notes on a body of theory. I am going
+      to ask you to consider a few questions — questions that are, in fact,
+      unsettled in our field, and that you will encounter, in concrete form,
+      almost every day of the next twelve.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 4: THE QUESTION ============ -->
+<section class="slide center axis">
+  <div class="slide-inner">
+    <div class="eyebrow">The Question of Our Time</div>
+    <h2 class="h-title" style="text-align: center;">
+      <em>How does meaning travel<br />across borders today?</em>
+    </h2>
+    <p class="lede" style="margin: 50px auto 0; text-align: center; color: var(--mute); font-style: italic;">
+      This was the question of our field fifty years ago.<br />
+      The answer has changed beyond recognition.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 5: INTELLECTUAL MAP ============ -->
+<section class="slide cream">
+  <div class="slide-inner">
+    <div class="eyebrow">A Brief Intellectual Map</div>
+    <h2 class="h-body">The field has <em>moved through paradigms</em>.</h2>
+    <p class="lede">
+      The press and broadcasting era. The cultural-imperialism debate of
+      Schiller and his interlocutors. The turn to globalisation and flow.
+      The platform era — what Castells called the <em>Network Society</em>.
+    </p>
+    <p class="lede" style="margin-top: 28px; color: var(--bronze-d);">
+      And now, what I would suggest we call an emerging fourth paradigm:
+      the era of synthetic media, in which the production of meaning itself
+      is increasingly automated.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 6: THREE FORCES ============ -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow">Three Structural Forces of Our Decade</div>
+    <h2 class="h-body">Three forces distinguish<br />the <em>present moment</em>.</h2>
+    <div class="force-row">
+      <div class="fcard">
+        <div class="roman-num">I · The Platform</div>
+        <h4>Enclosure</h4>
+        <p>Communication today happens largely inside proprietary digital environments.</p>
+      </div>
+      <div class="fcard">
+        <div class="roman-num">II · The Algorithm</div>
+        <h4>Computation</h4>
+        <p>Distribution is no longer primarily editorial. It is computational.</p>
+      </div>
+      <div class="fcard">
+        <div class="roman-num">III · The Model</div>
+        <h4>Generation</h4>
+        <p>The act of producing text, image, voice, is now within the reach of large-scale AI systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Slide 7: CHINA'S TRAJECTORY ============ -->
+<section class="slide cream">
+  <div class="slide-inner">
+    <div class="eyebrow">China's Distinctive Trajectory</div>
+    <h2 class="h-body">China has lived through these transitions<br />in a <em>particular sequence</em>.</h2>
+    <p class="lede">
+      Many other societies passed through several decades of personal-computer-based
+      media before encountering the mobile internet. China largely arrived at
+      mobility first. The platform turn here is more deeply integrated with
+      daily life — commerce, services, identity, communication — than in most
+      other parts of the world. And the development of indigenous artificial
+      intelligence capacity has, in the past three years, been remarkably rapid.
+    </p>
+    <p class="lede" style="margin-top: 30px; font-style: italic; color: var(--bronze-d);">
+      You will see this every day on the streets of Beijing. I would invite
+      you to observe it not as foreign, but as instructive.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 8: SIX FORMS ============ -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow">A Working Vocabulary</div>
+    <h2 class="h-body">Six contemporary forms<br />of <em>digital communication</em>.</h2>
+    <ol class="six-list">
+      <li><span class="name">The platform</span><div class="desc">Meituan, Alibaba — environments in which other actors transact</div></li>
+      <li><span class="name">Algorithmic media</span><div class="desc">ByteDance, Douyin, TikTok — distribution as computation</div></li>
+      <li><span class="name">Subscription media</span><div class="desc">iQIYI, Tencent Video, the AI services you will use this week</div></li>
+      <li><span class="name">Ecosystem architectures</span><div class="desc">Xiaomi, Huawei — integration across devices and contexts</div></li>
+      <li><span class="name">Foundation models as service</span><div class="desc">DeepSeek, Wenxin, Doubao — the model itself as the offering</div></li>
+      <li><span class="name">AI-mediated persons</span><div class="desc">Baidu's Xiling digital humans — synthetic figures who communicate on behalf of organisations</div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ Slide 9: WHERE YOU WILL ENCOUNTER ============ -->
+<section class="slide cream">
+  <div class="slide-inner">
+    <div class="eyebrow">Where You Will Encounter Each Form</div>
+    <h2 class="h-body">Walk into each setting<br />with this <em>map in mind</em>.</h2>
+    <table class="map-table">
+      <thead><tr><th>Form</th><th>Where you will see it</th></tr></thead>
+      <tbody>
+        <tr><td class="pattern">The platform</td><td>Daily life in Beijing — meal ordering, transportation, museum services</td></tr>
+        <tr><td class="pattern">Algorithmic media</td><td>Open Douyin or TikTok during your stay; the editorial logic is different here</td></tr>
+        <tr><td class="pattern">Subscription media</td><td>The AI music platforms you will use in the Day 2 workshop</td></tr>
+        <tr class="featured"><td class="pattern">Ecosystem architectures</td><td><strong>Xiaomi visit, Day 5</strong> — the architecture is the subject</td></tr>
+        <tr class="featured"><td class="pattern">Foundation models as service</td><td><strong>Baidu visit, Day 3</strong> — Wenxin in conversation with international peers</td></tr>
+        <tr class="featured"><td class="pattern">AI-mediated persons</td><td><strong>Baidu Xiling demonstration</strong> — synthetic communication, observed directly</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ Slide 10: AI AS THRESHOLD ============ -->
+<section class="slide dark">
+  <div class="slide-inner">
+    <div class="eyebrow">A Genuine Threshold</div>
+    <h2 class="h-body">For most of human history,<br />the production of meaning<br />required <em>time, training, and skill</em>.</h2>
+    <p class="lede" style="margin-top: 36px;">
+      A written article. A translated text. A composed image. A recorded
+      performance. Each of these required human craft.
+    </p>
+    <p class="lede" style="margin-top: 22px; color: var(--bronze);">
+      Today, increasingly, it does not. This is not merely a tool update.
+      It is a structural change in the economy of meaning-making.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 11: COST CURVE ============ -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow">A Measurable Change · The cost of translating one page of English into Chinese</div>
+    <h2 class="h-body">A fall of <em>three orders of magnitude</em><br />in ten years.</h2>
+    <table class="cost-table">
+      <tr><td class="year">2015</td><td class="cost">€50.00</td><td class="by">a human translator</td></tr>
+      <tr><td class="year">2020</td><td class="cost">€5.00</td><td class="by">a junior with machine assistance</td></tr>
+      <tr><td class="year">2025</td><td class="cost">€0.05</td><td class="by">a single model call</td></tr>
+    </table>
+    <p class="lede" style="margin-top: 40px;">
+      This is not a small change. It does not merely reduce expense. It
+      reorganises who can communicate, at what scale, across which borders,
+      and with what professional structures around the act.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 12: THE NEW QUESTION ============ -->
+<section class="slide dark center axis">
+  <div class="slide-inner">
+    <div class="eyebrow">The Central Question of Our Decade</div>
+    <h2 class="h-title" style="text-align: center; max-width: 900px;">
+      <em>If the production cost of cultural and<br />
+      communicative work approaches zero,<br />
+      what cultural work becomes <span class="accent">worth doing</span>?</em>
+    </h2>
+    <p class="lede" style="margin: 60px auto 0; text-align: center; font-style: italic; color: rgba(250,246,240,0.7);">
+      I would invite you to hold this question through the next twelve days.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 13: CULTURE ACROSS TIME ============ -->
+<section class="slide cream">
+  <div class="slide-inner">
+    <div class="eyebrow">Chinese Culture Across Time</div>
+    <h2 class="h-body">For a thousand years,<br />Chinese culture travelled <em>slowly</em>.</h2>
+    <p class="lede">
+      The silk roads. Religious missions. Scholarly translation. Library
+      collection. Museum loan.
+    </p>
+    <p class="lede" style="margin-top: 22px;">
+      Each transmission required <em>custodianship</em> — a person, an
+      institution, a tradition that took responsibility for what was being
+      conveyed and how.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 14: NEW CONDITIONS ============ -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow">The New Conditions of Cultural Circulation</div>
+    <h2 class="h-body">Today, that same culture can be circulated<br />in a <em>sixty-second video</em>.</h2>
+    <p class="lede">
+      The constraint has shifted. The question is no longer whether culture
+      can travel — clearly, it can. The question is what is worth sending,
+      how it should be framed, who curates, who interprets, and to whom
+      the work answers.
+    </p>
+    <p class="lede" style="margin-top: 26px; color: var(--bronze-d); font-style: italic;">
+      These are not technical questions. They are questions of communicative
+      ethics, of responsibility, and of craft. They are the questions of our field.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 15: PROVOCATION ============ -->
+<section class="slide cream">
+  <div class="slide-inner">
+    <div class="eyebrow">A Provocation</div>
+    <blockquote class="quote">
+      Consider three objects you will encounter in the next twelve days:<br /><br />
+      A <span class="accent">six-hundred-year-old bell</span> at the Dazhongsi museum.<br />
+      A <span class="accent">large language model</span> capable of processing tens of trillions of tokens daily.<br />
+      A <span class="accent">translation that costs five cents</span> to produce.<br /><br />
+      What does international communication look like<br />
+      when these three artefacts share a single room?
+    </blockquote>
+    <p class="lede small" style="margin-top: 24px; font-style: italic;">
+      I do not have a complete answer. Neither, I believe, does our field.
+      Your work over the next two weeks is, in part, an attempted small reply.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 16: FOUR PILLARS ============ -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow">The Architecture of Your Programme</div>
+    <h2 class="h-body">Four pillars.<br /><em>Each feeds the next.</em></h2>
+    <div class="pillar-row">
+      <div class="pblock">
+        <div class="roman">I</div>
+        <h5>The Bell-Theme Day</h5>
+        <p>encountering a cultural source</p>
+      </div>
+      <div class="pblock">
+        <div class="roman">II</div>
+        <h5>The Corporate Visits</h5>
+        <p>observing the contemporary architecture</p>
+      </div>
+      <div class="pblock">
+        <div class="roman">III</div>
+        <h5>The AI Workshops</h5>
+        <p>practising the new craft</p>
+      </div>
+      <div class="pblock">
+        <div class="roman">IV</div>
+        <h5>The Capstone</h5>
+        <p>producing an original work</p>
+      </div>
+    </div>
+    <div class="pillar-caption">Source → Architecture → Practice → Original work.</div>
+  </div>
+</section>
+
+<!-- ============ Slide 17: WHAT YOU WILL CREATE ============ -->
+<section class="slide cream">
+  <div class="slide-inner">
+    <div class="eyebrow">What You Will Create</div>
+    <h2 class="h-body">A single coherent work<br />in <em>three elements</em>.</h2>
+    <div class="three-del">
+      <div class="dblock">
+        <div class="roman">I.</div>
+        <h4>A research brief</h4>
+        <p>Written in conversation with artificial intelligence — not by it. The text is yours; the inquiry is shared.</p>
+      </div>
+      <div class="dblock">
+        <div class="roman">II.</div>
+        <h4>An original composition</h4>
+        <p>Music composed using AI tools and field recordings made by your own hand during the Bell-Theme Day.</p>
+      </div>
+      <div class="dblock">
+        <div class="roman">III.</div>
+        <h4>An interactive work</h4>
+        <p>A page on the open internet that audiences in Ireland can experience directly, in their own time.</p>
+      </div>
+    </div>
+    <p class="lede" style="margin-top: 44px; text-align: center; font-style: italic;">
+      Together, one coherent act of cultural communication — one that you have authored.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 18: THREE OBSERVATIONS ============ -->
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow">Three Observations to Carry, Daily</div>
+    <h2 class="h-body">In every setting you enter,<br /><em>ask three questions</em>.</h2>
+    <div class="three-obs">
+      <div class="obrow">
+        <div class="n">I.</div>
+        <div class="q">Whose voice is being amplified?<br />Whose voice is being filtered, or absent?</div>
+      </div>
+      <div class="obrow">
+        <div class="n">II.</div>
+        <div class="q">What is being produced — and, by the same act,<br />what is being lost or displaced?</div>
+      </div>
+      <div class="obrow">
+        <div class="n">III.</div>
+        <div class="q">Who is the audience,<br />and what is being asked of them?</div>
+      </div>
+    </div>
+    <p class="lede small" style="margin-top: 36px; font-style: italic; color: var(--mute);">
+      These are not new questions in our field. But artificial intelligence has given them new urgency.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 19: TWO QUESTIONS HOME ============ -->
+<section class="slide cream">
+  <div class="slide-inner">
+    <div class="eyebrow">Two Questions to Carry Home</div>
+    <h2 class="h-body">Before you return to Ireland,<br />I would be honoured by <em>your reply</em> to two questions.</h2>
+    <div class="two-q">
+      <div class="one">
+        <div class="n">I.</div>
+        <div class="q">What have you learned about communication in China<br />that you could not have learned anywhere else?</div>
+      </div>
+      <div class="one">
+        <div class="n">II.</div>
+        <div class="q">What kind of communicator<br />do you hope to become?</div>
+      </div>
+    </div>
+    <p class="lede small" style="margin-top: 40px; font-style: italic; color: var(--bronze-d);">
+      The second question, I confess, is the one I most hope you will spend time with.
+    </p>
+  </div>
+</section>
+
+<!-- ============ Slide 20: CLOSING WELCOME ============ -->
+<section class="slide dark center axis">
+  <div class="slide-inner">
+    <div class="eyebrow institutional">In Closing</div>
+    <h2 class="h-title" style="text-align: center; max-width: 880px; color: var(--paper);">
+      The next two weeks will ask you<br />
+      to <em>listen carefully</em>, to <em>look closely</em>,<br />
+      and to <em>make things</em>.
+    </h2>
+    <p class="lede" style="margin: 50px auto 0; text-align: center; color: rgba(250,246,240,0.8); font-style: italic;">
+      I have every confidence that you will rise to the occasion.
+    </p>
+    <div style="margin-top: 100px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.35em; color: var(--bronze); text-transform: uppercase;">
+      Thank you · Questions are welcome
+    </div>
+  </div>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  document.getElementById('total').textContent = total;
+  const curEl = document.getElementById('cur');
+  const progress = document.getElementById('progress');
+
+  function currentIndex() {
+    const h = window.innerHeight;
+    return Math.min(total - 1, Math.round(window.scrollY / h));
+  }
+
+  function update() {
+    const i = currentIndex();
+    curEl.textContent = i + 1;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = max > 0 ? (window.scrollY / max * 100) + '%' : '0%';
+  }
+
+  function goTo(i) {
+    i = Math.max(0, Math.min(total - 1, i));
+    slides[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.code === 'Space') {
+      e.preventDefault();
+      goTo(currentIndex() + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      goTo(currentIndex() - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goTo(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goTo(total - 1);
+    } else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('a, button, input, .hud, .keyhint')) return;
+    goTo(currentIndex() + 1);
+  });
+</script>
+
+</body>
+</html>

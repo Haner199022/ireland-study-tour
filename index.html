@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#1A1A1A" />
+<meta name="robots" content="index, follow" />
+
+<title>钟·声·人 | AI × 中国传统文化国际传播 · 爱尔兰游学项目</title>
+<meta name="description" content="A 12-day Beijing study tour for Irish undergraduates: from the bronze bells of Dazhongsi to AI-generated music and an interactive page their friends back home can touch. 中国传媒大学 × 爱尔兰本科生游学项目。" />
+<meta name="keywords" content="CUC, Communication University of China, Ireland study tour, AI × Chinese culture, international communication, bell theme, Dazhongsi, Baidu, Xiaomi" />
+<meta name="author" content="CUC AI Lab" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="CUC × Ireland Study Tour" />
+<meta property="og:title" content="钟·声·人 · AI × Chinese Culture · CUC × Ireland Study Tour" />
+<meta property="og:description" content="A 12-day Beijing study tour for Irish undergraduates — from a 600-year-old bell to AI-composed music and an interactive page their friends back home can touch." />
+<meta property="og:image" content="https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=1200&q=80&auto=format&fit=crop" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:locale:alternate" content="en_US" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="钟·声·人 · AI × Chinese Culture · CUC × Ireland Study Tour" />
+<meta name="twitter:description" content="A 12-day Beijing study tour for Irish undergraduates — bells, AI, and a page their friends in Dublin can touch." />
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=1200&q=80&auto=format&fit=crop" />
+
+<!-- Inline SVG favicon — a stylized bell with bronze accent -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23FAF6F0'/><path d='M32 14 C20 14, 16 26, 16 38 L48 38 C48 26, 44 14, 32 14 Z M32 14 L32 10 M28 42 L36 42 L36 46 L28 46 Z M30 48 L34 48 L34 52 L30 52 Z' stroke='%23B08D57' stroke-width='2.5' fill='none' stroke-linejoin='round' stroke-linecap='round'/></svg>" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://images.unsplash.com" />
+<link rel="dns-prefetch" href="https://picsum.photos" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;800&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============ Reset & Base ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
+
+  :root {
+    --ink:      #1A1A1A;
+    --ink-2:    #2C2724;
+    --paper:    #FAF6F0;
+    --paper-2:  #F2EBDE;
+    --paper-3:  #ECE2D0;
+    --bronze:   #B08D57;
+    --bronze-d: #8C6D3F;
+    --bronze-l: #C9AB7C;
+    --jade:     #5B8C7E;
+    --mute:     #8B847B;
+    --line:     #D9D2C4;
+
+    --serif-en: "Cormorant Garamond", "Georgia", serif;
+    --serif-cn: "Noto Serif SC", "Songti SC", "STSong", serif;
+    --sans-en:  "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --sans-cn:  "Noto Sans SC", "PingFang SC", "Heiti SC", sans-serif;
+
+    --w-max: 1180px;
+    --pad-x: clamp(20px, 5vw, 64px);
+
+    --shadow-soft: 0 12px 30px -10px rgba(0, 0, 0, 0.12);
+    --shadow-medium: 0 22px 50px -18px rgba(0, 0, 0, 0.18);
+  }
+
+  body {
+    font-family: var(--sans-en), var(--sans-cn);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  /* paper grain */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* ============ Image with fallback ============ */
+  .img-wrap {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--paper-2), var(--paper-3));
+  }
+  .img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .img-wrap.image-fallback img { opacity: 0; }
+  .img-wrap.image-fallback::after {
+    content: attr(data-fallback-label);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bronze);
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 24px;
+    text-align: center;
+    padding: 20px;
+  }
+  /* duotone treatment for atmosphere */
+  .duotone img {
+    filter: sepia(0.15) saturate(0.95) contrast(1.05);
+  }
+
+  /* ============ Scroll progress ============ */
+  .progress {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: linear-gradient(90deg, var(--bronze), var(--bronze-l));
+    width: 0%;
+    z-index: 100;
+    transition: width 0.1s linear;
+  }
+
+  /* ============ Top Nav ============ */
+  .topnav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 246, 240, 0.85);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    border-bottom: 1px solid var(--line);
+  }
+  .topnav-inner {
+    max-width: var(--w-max);
+    margin: 0 auto;
+    padding: 14px var(--pad-x);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    font-family: var(--serif-cn);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .brand .bell-icon {
+    width: 22px; height: 22px;
+    display: inline-block;
+    color: var(--bronze);
+  }
+  .brand .accent { color: var(--bronze); }
+  .nav-links {
+    display: flex; gap: clamp(12px, 2vw, 24px);
+    font-size: 13px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.72;
+    transition: opacity 0.2s, color 0.2s;
+    position: relative;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--bronze-d); }
+  .nav-links a.active {
+    opacity: 1;
+    color: var(--bronze-d);
+  }
+  .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 50%;
+    transform: translateX(-50%);
+    width: 4px; height: 4px;
+    background: var(--bronze);
+    border-radius: 50%;
+  }
+  @media (max-width: 720px) {
+    .nav-links li:not(:last-child) { display: none; }
+  }
+
+  /* ============ Right-side TOC ============ */
+  .toc {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .toc li {
+    position: relative;
+  }
+  .toc a {
+    display: block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--bronze);
+    background: transparent;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+  .toc a:hover {
+    background: var(--bronze-l);
+    transform: scale(1.25);
+  }
+  .toc a.active {
+    background: var(--bronze);
+    transform: scale(1.4);
+  }
+  .toc a::after {
+    content: attr(data-label);
+    position: absolute;
+    right: 18px; top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--bronze-d);
+    background: rgba(250, 246, 240, 0.95);
+    padding: 4px 10px;
+    border-radius: 100px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .toc a:hover::after { opacity: 1; }
+  @media (max-width: 960px) { .toc { display: none; } }
+
+  /* ============ Back to top button ============ */
+  .back-top {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 40;
+    width: 44px; height: 44px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.25s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    box-shadow: var(--shadow-medium);
+  }
+  .back-top.show { opacity: 1; pointer-events: auto; }
+  .back-top:hover { background: var(--bronze-d); transform: translateY(-2px); }
+
+  /* ============ Layout helpers ============ */
+  section { padding: clamp(60px, 9vw, 120px) var(--pad-x); position: relative; z-index: 2; }
+  .container { max-width: var(--w-max); margin: 0 auto; }
+
+  .eyebrow {
+    font-family: var(--sans-en);
+    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--bronze-d);
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-family: var(--serif-cn);
+    font-weight: 800;
+    font-size: clamp(28px, 4.5vw, 42px);
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+  .section-title .en {
+    display: block;
+    font-family: var(--serif-en);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 0.55em;
+    color: var(--mute);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+  .section-lead {
+    font-size: clamp(15px, 1.5vw, 17px);
+    color: #444;
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  /* ============ Section dividers — ink brush ============ */
+  .divider {
+    height: 60px;
+    position: relative;
+    z-index: 3;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .divider svg {
+    height: 18px; width: auto;
+    opacity: 0.35;
+  }
+
+  /* ============ Hero ============ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: clamp(100px, 18vw, 200px) var(--pad-x) clamp(80px, 12vw, 140px);
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    z-index: 0;
+  }
+  .hero-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: sepia(0.25) saturate(0.85) brightness(0.55) contrast(1.05);
+    animation: heroZoom 30s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.08); }
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at center, rgba(26, 26, 26, 0.35), rgba(26, 26, 26, 0.75) 70%),
+      linear-gradient(180deg, rgba(26, 26, 26, 0.2), rgba(26, 26, 26, 0.6));
+  }
+  .hero-bg.image-fallback img { opacity: 0; }
+  .hero-bg.image-fallback {
+    background: linear-gradient(180deg, #2A2520 0%, #1A1A1A 100%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--bronze) 30%, var(--bronze) 70%, transparent);
+    opacity: 0.35;
+    z-index: 1;
+  }
+  .hero-inner {
+    max-width: var(--w-max); margin: 0 auto;
+    position: relative; z-index: 2;
+    color: var(--paper);
+  }
+
+  .hero .eyebrow {
+    color: var(--bronze-l);
+    animation: fadeUp 1.1s ease 0.1s both;
+  }
+  .hero h1 {
+    font-family: var(--serif-en);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(48px, 9vw, 112px);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    color: var(--paper);
+  }
+  .hero h1 span { display: block; animation: fadeUp 1.1s ease both; }
+  .hero h1 .l1 { color: var(--paper); animation-delay: 0.25s; }
+  .hero h1 .l2 { color: var(--bronze); animation-delay: 0.4s; }
+  .hero h1 .l3 { color: var(--bronze-l); animation-delay: 0.55s; }
+
+  .hero-cn {
+    font-family: var(--serif-cn);
+    font-weight: 600;
+    font-size: clamp(22px, 3.2vw, 36px);
+    letter-spacing: 0.08em;
+    margin-bottom: 36px;
+    color: var(--paper);
+    animation: fadeUp 1.1s ease 0.7s both;
+  }
+  .hero-cn .sep { color: var(--bronze); margin: 0 0.25em; }
+
+  .hero-tagline {
+    max-width: 580px;
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 1.75;
+    color: rgba(250, 246, 240, 0.82);
+    margin-bottom: 14px;
+    animation: fadeUp 1.1s ease 0.85s both;
+  }
+  .hero-tagline.cn {
+    font-family: var(--sans-cn);
+    color: rgba(250, 246, 240, 0.55);
+    margin-bottom: 56px;
+    animation-delay: 0.95s;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: clamp(16px, 3vw, 36px);
+    padding-top: 40px;
+    border-top: 1px solid rgba(176, 141, 87, 0.4);
+    animation: fadeUp 1.1s ease 1.1s both;
+  }
+  .stat .n {
+    font-family: var(--serif-en);
+    font-weight: 600;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1;
+    color: var(--bronze-l);
+  }
+  .stat .label {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(250, 246, 240, 0.7);
+    margin-top: 8px;
+  }
+  .stat .label .cn {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: none;
+    color: rgba(250, 246, 240, 0.5);
+    margin-top: 4px;
+  }
+
+  /* scroll-down indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    color: var(--bronze-l);
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    animation: bobUp 2s ease-in-out infinite;
+  }
+  .scroll-hint::after {
+    content: '↓';
+    display: block;
+    text-align: center;
+    margin-top: 6px;
+    font-size: 14px;
+    font-style: normal;
+  }
+  @keyframes bobUp {
+    0%, 100% { transform: translate(-50%, 0); }
+    50%      { transform: translate(-50%, -6px); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============ Journey / Timeline ============ */
+  #journey { background: var(--paper); }
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+    margin-top: 40px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 7px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--line);
+  }
+  .t-row {
+    position: relative;
+    padding: 0 0 28px 28px;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 18px;
+    align-items: baseline;
+  }
+  .t-row::before {
+    content: '';
+    position: absolute;
+    left: -21px;
+    top: 12px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1.5px solid var(--bronze);
+    transition: transform 0.25s;
+  }
+  .t-row:hover::before { transform: scale(1.4); }
+  .t-row.featured::before {
+    background: var(--bronze);
+    width: 11px; height: 11px;
+    left: -22px; top: 11px;
+    box-shadow: 0 0 0 4px rgba(176, 141, 87, 0.15);
+  }
+  .t-day {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--bronze-d);
+    letter-spacing: 0.02em;
+  }
+  .t-content h3 {
+    font-family: var(--serif-cn);
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+  .t-content .en {
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--mute);
+    font-size: 14px;
+  }
+  .t-row.featured .t-content h3 { color: var(--bronze-d); }
+
+  .week-banner {
+    display: inline-block;
+    font-family: var(--sans-en);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--bronze-d);
+    border: 1px solid var(--bronze);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin: 8px 0 28px;
+  }
+
+  /* ============ Bell Thread — with image ============ */
+  #thread {
+    background: var(--paper-2);
+    position: relative;
+  }
+  .thread-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+    margin-top: 50px;
+  }
+  @media (max-width: 880px) {
+    .thread-layout { grid-template-columns: 1fr; }
+  }
+  .thread-img {
+    aspect-ratio: 4 / 5;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+  }
+  .thread-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(176, 141, 87, 0.3);
+    pointer-events: none;
+  }
+  .thread-content { }
+
+  .thread-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 16px;
+    align-items: stretch;
+    margin: 36px 0 30px;
+  }
+  @media (max-width: 768px) {
+    .thread-flow { grid-template-columns: 1fr; }
+    .thread-arrow { transform: rotate(90deg); margin: 4px auto; }
+  }
+  .thread-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 18px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .thread-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-soft);
+  }
+  .thread-card .ico {
+    font-family: var(--serif-cn);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--bronze);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .thread-card h4 {
+    font-family: var(--serif-cn);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .thread-card .en {
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--mute);
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .thread-card p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.55;
+  }
+  .thread-arrow {
+    align-self: center;
+    color: var(--bronze);
+    font-size: 18px;
+    line-height: 1;
+  }
+  .thread-pull {
+    border-left: 3px solid var(--bronze);
+    padding: 16px 22px;
+    margin-top: 28px;
+    background: var(--paper);
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink);
+    border-radius: 0 4px 4px 0;
+  }
+  .thread-pull .cn {
+    display: block;
+    font-family: var(--serif-cn);
+    font-style: normal;
+    color: var(--mute);
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  /* ============ Pillars with image headers ============ */
+  #pillars { background: var(--paper); }
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 40px;
+  }
+  .pillar {
+    background: var(--paper-2);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .pillar:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+  }
+  .pillar:hover .pillar-img img { transform: scale(1.06); }
+  .pillar-img {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+  }
+  .pillar-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(176, 141, 87, 0.12) 100%);
+    pointer-events: none;
+  }
+  .pillar-body { padding: 28px 26px 30px; flex: 1; display: flex; flex-direction: column; }
+  .pillar .num {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--bronze);
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+  .pillar h3 {
+    font-family: var(--serif-cn);
+    font-weight: 700;
+    font-size: 21px;
+    margin-bottom: 4px;
+  }
+  .pillar .en {
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--mute);
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .pillar p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #555;
+  }
+  .pillar ul {
+    margin-top: 12px;
+    padding-left: 16px;
+    font-size: 13.5px;
+    color: #555;
+  }
+  .pillar ul li { margin-bottom: 4px; }
+
+  /* ============ Atmosphere strip ============ */
+  #atmosphere {
+    padding: 0;
+    background: var(--ink);
+    overflow: hidden;
+  }
+  .atmos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  @media (max-width: 720px) {
+    .atmos-grid { grid-template-columns: 1fr; }
+  }
+  .atmos-tile {
+    aspect-ratio: 4 / 5;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .atmos-tile img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+    filter: sepia(0.18) saturate(0.92) brightness(0.85);
+  }
+  .atmos-tile:hover img {
+    transform: scale(1.08);
+    filter: sepia(0.05) saturate(1.05) brightness(1);
+  }
+  .atmos-tile .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px 24px;
+    color: var(--paper);
+  }
+  .atmos-tile .overlay .label {
+    font-family: var(--sans-en);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--bronze-l);
+    margin-bottom: 8px;
+  }
+  .atmos-tile .overlay h4 {
+    font-family: var(--serif-cn);
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .atmos-tile .overlay .en {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(250, 246, 240, 0.75);
+  }
+
+  /* ============ Materials ============ */
+  #materials { background: var(--paper-2); }
+  .mat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+  }
+  @media (max-width: 880px) {
+    .mat-grid { grid-template-columns: 1fr; }
+  }
+  .mat-col h3 {
+    font-family: var(--serif-cn);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bronze-d);
+    margin-bottom: 4px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--bronze);
+  }
+  .mat-col h3 .en {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--mute);
+    margin-left: 8px;
+  }
+  .mat-item {
+    padding: 18px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .mat-item:last-child { border-bottom: none; }
+  .mat-item .name {
+    font-family: var(--sans-cn);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .mat-item .name code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    color: var(--bronze-d);
+    background: rgba(176, 141, 87, 0.1);
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+  }
+  .mat-item .name a { color: var(--bronze-d); text-decoration: none; transition: color 0.2s; }
+  .mat-item .name a:hover { color: var(--bronze); text-decoration: underline; }
+  .mat-item .desc {
+    font-size: 13px;
+    color: var(--mute);
+    line-height: 1.5;
+  }
+
+  /* ============ Showcase ============ */
+  #showcase {
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+  }
+  .show-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 880px) {
+    .show-hero { grid-template-columns: 1fr; }
+  }
+  .show-img {
+    aspect-ratio: 4 / 3;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+  }
+  .show-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+  @media (max-width: 800px) { .show-grid { grid-template-columns: 1fr; } }
+
+  .show-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .show-card h4 {
+    font-family: var(--serif-cn);
+    font-size: 18px;
+    margin-bottom: 14px;
+    color: var(--bronze-d);
+  }
+  .schedule-list {
+    list-style: none;
+    font-size: 14px;
+  }
+  .schedule-list li {
+    display: grid;
+    grid-template-columns: 86px 1fr;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--line);
+    line-height: 1.5;
+  }
+  .schedule-list li:last-child { border-bottom: none; }
+  .schedule-list time {
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--bronze-d);
+  }
+  .awards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .award {
+    border-left: 3px solid var(--bronze);
+    padding: 8px 14px;
+    transition: padding 0.2s;
+  }
+  .award:hover { padding-left: 18px; }
+  .award .zh { font-family: var(--serif-cn); font-weight: 600; font-size: 14px; }
+  .award .en { font-family: var(--serif-en); font-style: italic; font-size: 12px; color: var(--mute); }
+
+  /* ============ Footer ============ */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 64px var(--pad-x) 40px;
+    position: relative; z-index: 2;
+  }
+  .foot-inner {
+    max-width: var(--w-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+  }
+  @media (max-width: 700px) { .foot-inner { grid-template-columns: 1fr; gap: 24px; } }
+  footer h4 {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--bronze);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  footer p, footer li {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(250, 246, 240, 0.72);
+  }
+  footer ul { list-style: none; }
+  footer a {
+    color: rgba(250, 246, 240, 0.72);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--bronze-l); }
+  .foot-brand {
+    font-family: var(--serif-cn);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--paper);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .foot-brand .accent { color: var(--bronze); }
+  .foot-bottom {
+    max-width: var(--w-max);
+    margin: 44px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(250, 246, 240, 0.15);
+    font-size: 12px;
+    color: rgba(250, 246, 240, 0.45);
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  /* ============ Reveal on scroll ============ */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+
+  /* ============ Reduced motion ============ */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ============ Print ============ */
+  @media print {
+    .topnav, .progress, .toc, .back-top, .scroll-hint, footer { display: none; }
+    body { background: white; }
+    body::before { display: none; }
+    section { page-break-inside: avoid; padding: 40px; }
+    .hero-bg img { filter: none; opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- =================== NAV =================== -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <svg class="bell-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 14 C20 14, 16 26, 16 38 L48 38 C48 26, 44 14, 32 14 Z M32 14 L32 10 M28 42 L36 42 L36 46 L28 46 Z M30 48 L34 48 L34 52 L30 52 Z" />
+      </svg>
+      钟 · 声 · <span class="accent">人</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#journey">旅程</a></li>
+      <li><a href="#thread">钟线</a></li>
+      <li><a href="#pillars">四支柱</a></li>
+      <li><a href="#atmosphere">气场</a></li>
+      <li><a href="#materials">资料</a></li>
+      <li><a href="#showcase">Showcase</a></li>
+      <li><a href="opening-lecture.html" style="color: var(--bronze-d); font-weight: 500;">🎓 Opening</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- =================== Right-side TOC (desktop only) =================== -->
+<ul class="toc" id="toc">
+  <li><a href="#hero"      data-label="开篇 Hero"></a></li>
+  <li><a href="#journey"   data-label="十二天 Journey"></a></li>
+  <li><a href="#thread"    data-label="钟的线索 Bell Thread"></a></li>
+  <li><a href="#pillars"   data-label="四支柱 Pillars"></a></li>
+  <li><a href="#atmosphere" data-label="北京气场 Atmosphere"></a></li>
+  <li><a href="#materials" data-label="资料 Materials"></a></li>
+  <li><a href="#showcase"  data-label="路演 Showcase"></a></li>
+</ul>
+
+<!-- =================== HERO =================== -->
+<header class="hero" id="hero">
+  <div class="hero-bg img-wrap" data-fallback-label="Beijing · 北京">
+    <img src="https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=2200&q=85&auto=format&fit=crop"
+         alt="Beijing Forbidden City rooftops at golden hour"
+         loading="eager"
+         onerror="this.onerror=null; this.src='https://picsum.photos/seed/beijing-hero/2200/1400';" />
+  </div>
+
+  <div class="hero-inner">
+    <div class="eyebrow">CUC × Irish Undergraduates · Beijing · 2026</div>
+
+    <h1>
+      <span class="l1">A bell,</span>
+      <span class="l2">a slider,</span>
+      <span class="l3">a new voice.</span>
+    </h1>
+
+    <div class="hero-cn">
+      一口钟<span class="sep">·</span>一根滑块<span class="sep">·</span>一个新声音
+    </div>
+
+    <p class="hero-tagline">
+      Twelve Irish undergraduates spend two weeks in Beijing — listening to a
+      600-year-old bell, walking the northern endpoint of an 800-year-old urban
+      axis, sitting inside two of China's most influential AI companies, and
+      turning all of it into music they composed with AI and a page their
+      friends back home can <em>touch</em>.
+    </p>
+    <p class="hero-tagline cn">
+      十二位爱尔兰本科生用两周时间，把六百年前的钟声、八百年的中轴线、
+      与两家中国 AI 公司的现场，变成自己用 AI 创作的音乐，
+      与一张他们爱尔兰朋友能"触摸"的页面。
+    </p>
+
+    <div class="stats">
+      <div class="stat"><div class="n">12</div><div class="label">Days<span class="cn">天</span></div></div>
+      <div class="stat"><div class="n">4</div><div class="label">Venues<span class="cn">场所</span></div></div>
+      <div class="stat"><div class="n">3</div><div class="label">AI Days<span class="cn">AI 课</span></div></div>
+      <div class="stat"><div class="n">4</div><div class="label">Capstones<span class="cn">毕业作品</span></div></div>
+      <div class="stat"><div class="n">5</div><div class="label">Awards<span class="cn">奖项</span></div></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<!-- divider -->
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 2, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
+<!-- =================== JOURNEY =================== -->
+<section id="journey">
+  <div class="container">
+    <div class="eyebrow">The 12-day Arc</div>
+    <h2 class="section-title">十二天旅程<span class="en">Two weeks, two halves: Input then Creation.</span></h2>
+    <p class="section-lead">
+      Week 1 is for collecting — bells, drums, AI products, ideas, surprises.
+      Week 2 is for building — research becomes music, music becomes a page
+      strangers can touch.<br />
+      第一周收集素材，第二周把素材变成作品。
+    </p>
+
+    <div class="week-banner">Week 1 — INPUT · 输入</div>
+    <div class="timeline">
+      <div class="t-row"><div class="t-day">D1 · Sun</div><div class="t-content"><h3>抵达 + 欢迎晚宴</h3><div class="en">Arrival & welcome dinner</div></div></div>
+      <div class="t-row"><div class="t-day">D2 · Mon</div><div class="t-content"><h3>开课式 + 院长讲座</h3><div class="en">Opening: Communication, Culture, and AI · Dean Jin</div></div></div>
+      <div class="t-row featured"><div class="t-day">D3 · Tue</div><div class="t-content"><h3>百度 AI 数字人 参观</h3><div class="en">Baidu — content / generative AI</div></div></div>
+      <div class="t-row"><div class="t-day">D4 · Wed</div><div class="t-content"><h3>故宫 + 798 文化日</h3><div class="en">Forbidden City + 798 Art District</div></div></div>
+      <div class="t-row featured"><div class="t-day">D5 · Thu</div><div class="t-content"><h3>小米 AI 超级工坊 参观</h3><div class="en">Xiaomi — interaction / hardware AI</div></div></div>
+      <div class="t-row"><div class="t-day">D6 · Fri</div><div class="t-content"><h3>Bridge Day · 桥接日</h3><div class="en">Task-card debrief + Hutong walk</div></div></div>
+      <div class="t-row featured"><div class="t-day">D7 · Sat</div><div class="t-content"><h3>钟主题一日游：大钟寺 + 钟鼓楼</h3><div class="en">Bell-Theme Day — sacred bell → civic drum → Central Axis</div></div></div>
+    </div>
+
+    <div class="week-banner" style="margin-top: 40px;">Week 2 — CREATION · 创作</div>
+    <div class="timeline">
+      <div class="t-row featured"><div class="t-day">D8 · Sun</div><div class="t-content"><h3>AI 课 Day 1：LLM 文化研究</h3><div class="en">Prompt Gym · 5 progressive exercises</div></div></div>
+      <div class="t-row featured"><div class="t-day">D9 · Mon</div><div class="t-content"><h3>AI 课 Day 2：AI 音乐创作</h3><div class="en">From bell recordings to a 60–120s composition</div></div></div>
+      <div class="t-row featured"><div class="t-day">D10 · Tue</div><div class="t-content"><h3>AI 课 Day 3：Gemini 交互可视化</h3><div class="en">Vibe-coded interactive HTML in a browser</div></div></div>
+      <div class="t-row"><div class="t-day">D11 · Wed</div><div class="t-content"><h3>Capstone Polish + 排练</h3><div class="en">Cross-cultural critique &amp; dress rehearsal</div></div></div>
+      <div class="t-row featured"><div class="t-day">D12 · Thu</div><div class="t-content"><h3>Showcase + 颁奖 + 告别晚宴</h3><div class="en">Public showcase &amp; awards by dimension</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 16, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
+<!-- =================== BELL THREAD =================== -->
+<section id="thread">
+  <div class="container">
+    <div class="eyebrow">The Concept · 核心线索</div>
+    <h2 class="section-title">钟的线索<span class="en">One thread runs through the whole tour.</span></h2>
+
+    <div class="thread-layout">
+      <div class="thread-img img-wrap duotone" data-fallback-label="A bronze bell · 一口铜钟">
+        <img src="https://images.unsplash.com/photo-1601731876057-f9f2dc1c1e9c?w=900&q=85&auto=format&fit=crop"
+             alt="Ancient bronze temple bell"
+             loading="lazy"
+             onerror="this.onerror=null; this.src='https://picsum.photos/seed/bronze-bell/900/1100';" />
+      </div>
+
+      <div class="thread-content">
+        <p class="section-lead">
+          A bell rung in 1420 becomes a recording in a student's phone, becomes a
+          sound in an AI-composed track, becomes a ripple on a webpage someone in
+          Dublin can scroll through. Same vibration, four media.<br />
+          1420 年响起的一口钟，变成手机里的一段录音，变成 AI 写出的一段音乐，
+          变成都柏林某个人在网页上滚出的一圈涟漪。同一次震动，四种媒介。
+        </p>
+
+        <div class="thread-flow">
+          <div class="thread-card">
+            <div class="ico">钟</div>
+            <h4>博物馆现场</h4>
+            <div class="en">In the museum</div>
+            <p>Record the bronze bell at Dazhongsi and the drum at Gulou.</p>
+          </div>
+          <div class="thread-arrow">→</div>
+          <div class="thread-card">
+            <div class="ico">研</div>
+            <h4>LLM 研究</h4>
+            <div class="en">Research with LLMs</div>
+            <p>Distill the bell's story into a Cultural Concept Brief.</p>
+          </div>
+          <div class="thread-arrow">→</div>
+          <div class="thread-card">
+            <div class="ico">乐</div>
+            <h4>音乐 + 交互</h4>
+            <div class="en">AI music + interactive page</div>
+            <p>The bell becomes a track; the track becomes a page you can touch.</p>
+          </div>
+        </div>
+
+        <blockquote class="thread-pull">
+          "Sacred bell at dawn. Civic bell at dusk. Stand on the Bell Tower at sunset
+          and look south down 7.8 km of imperial axis."
+          <span class="cn">「晨听寺院钟，暮俯城市轴。」</span>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 2, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
+<!-- =================== PILLARS =================== -->
+<section id="pillars">
+  <div class="container">
+    <div class="eyebrow">Four Pillars · 四支柱</div>
+    <h2 class="section-title">四块基石<span class="en">What the program is built on.</span></h2>
+    <p class="section-lead">
+      Four interlocking modules. Field visits feed the AI workshop. The AI
+      workshop feeds the Capstone. Nothing is decoration.<br />
+      四块互锁的模块：现场素材喂工作坊，工作坊喂毕业作品。每一块都对下游有用。
+    </p>
+
+    <div class="pillar-grid">
+
+      <div class="pillar">
+        <div class="pillar-img img-wrap" data-fallback-label="Bell · 钟">
+          <img src="https://images.unsplash.com/photo-1545569310-a2ce5f30f5ce?w=900&q=80&auto=format&fit=crop"
+               alt="Chinese temple architecture and bell"
+               loading="lazy"
+               onerror="this.onerror=null; this.src='https://picsum.photos/seed/temple-bell/900/506';" />
+        </div>
+        <div class="pillar-body">
+          <div class="num">01 / Field</div>
+          <h3>钟主题一日游</h3>
+          <div class="en">The Bell-Theme Day</div>
+          <p>D7. Morning at Dazhongsi (the 46.5-ton Yongle Bell, the *one bell, two tones* phenomenon). Afternoon at the Bell-and-Drum Towers — the UNESCO-listed northern endpoint of Beijing's Central Axis.</p>
+          <ul>
+            <li>Record bell &amp; drum sounds (≥ 30 s each)</li>
+            <li>4-part task card: Record / Observe / Distill / Connect</li>
+            <li>Feeds Day 1 LLM research next morning</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-img img-wrap" data-fallback-label="AI in industry · AI 与产业">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80&auto=format&fit=crop"
+               alt="Circuit board representing AI technology"
+               loading="lazy"
+               onerror="this.onerror=null; this.src='https://picsum.photos/seed/ai-industry/900/506';" />
+        </div>
+        <div class="pillar-body">
+          <div class="num">02 / Industry</div>
+          <h3>AI 企业参观</h3>
+          <div class="en">Baidu + Xiaomi</div>
+          <p>Two contrasting visits. Baidu (D3) for generative AI — Wenxin LLM, Xiling digital humans. Xiaomi (D5) for embodied AI — HyperOS, smart home, SU7. Content vs interaction.</p>
+          <ul>
+            <li>Bilingual task cards per company</li>
+            <li>Wenxin joins the Day-1 LLM comparison</li>
+            <li>Xiling digital human can narrate a Capstone</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-img img-wrap" data-fallback-label="Workshop · 工作坊">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=80&auto=format&fit=crop"
+               alt="Students collaborating with laptops"
+               loading="lazy"
+               onerror="this.onerror=null; this.src='https://picsum.photos/seed/workshop-studio/900/506';" />
+        </div>
+        <div class="pillar-body">
+          <div class="num">03 / Studio</div>
+          <h3>3 天 AI 课程</h3>
+          <div class="en">Three days, one pipeline</div>
+          <p>Each day's output is the next day's input. Text becomes music; music becomes an interactive page. No prior coding or music training required.</p>
+          <ul>
+            <li><strong>D8 · Text:</strong> 5-exercise Prompt Gym</li>
+            <li><strong>D9 · Audio:</strong> 60–120 s AI composition using real bell samples</li>
+            <li><strong>D10 · Visual:</strong> Gemini-built interactive visualizer</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-img img-wrap" data-fallback-label="Showcase · 路演">
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=900&q=80&auto=format&fit=crop"
+               alt="Stage spotlights at a presentation venue"
+               loading="lazy"
+               onerror="this.onerror=null; this.src='https://picsum.photos/seed/showcase-stage/900/506';" />
+        </div>
+        <div class="pillar-body">
+          <div class="num">04 / Capstone</div>
+          <h3>毕业作品 + Showcase</h3>
+          <div class="en">A single interlocking work</div>
+          <p>Each team submits one integrated piece: Cultural Brief + AI Music + Interactive Visualizer + Prompt Log. Graded across four dimensions: depth, craft, communication, surprise.</p>
+          <ul>
+            <li>Public showcase on D12</li>
+            <li>Awards by dimension (no single winner)</li>
+            <li>Anti-pattern red lines apply</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =================== ATMOSPHERE STRIP =================== -->
+<section id="atmosphere">
+  <div class="atmos-grid">
+    <div class="atmos-tile img-wrap" data-fallback-label="Forbidden City">
+      <img src="https://images.unsplash.com/photo-1584032318089-3a06d36a04cc?w=900&q=80&auto=format&fit=crop"
+           alt="Forbidden City rooftops in Beijing"
+           loading="lazy"
+           onerror="this.onerror=null; this.src='https://picsum.photos/seed/forbidden-city/900/1125';" />
+      <div class="overlay">
+        <div class="label">D4 · Culture Day</div>
+        <h4>故宫</h4>
+        <div class="en">The Forbidden City</div>
+      </div>
+    </div>
+    <div class="atmos-tile img-wrap" data-fallback-label="Hutong streets">
+      <img src="https://images.unsplash.com/photo-1576697010413-c1f6b9e1c7d8?w=900&q=80&auto=format&fit=crop"
+           alt="Traditional Beijing hutong street"
+           loading="lazy"
+           onerror="this.onerror=null; this.src='https://picsum.photos/seed/beijing-hutong/900/1125';" />
+      <div class="overlay">
+        <div class="label">D6 · Bridge Day</div>
+        <h4>胡同</h4>
+        <div class="en">The Hutong walk</div>
+      </div>
+    </div>
+    <div class="atmos-tile img-wrap" data-fallback-label="Calligraphy">
+      <img src="https://images.unsplash.com/photo-1604154434321-58fbb04edbeb?w=900&q=80&auto=format&fit=crop"
+           alt="Chinese ink calligraphy"
+           loading="lazy"
+           onerror="this.onerror=null; this.src='https://picsum.photos/seed/ink-calligraphy/900/1125';" />
+      <div class="overlay">
+        <div class="label">A visual register</div>
+        <h4>水墨</h4>
+        <div class="en">Ink-wash aesthetic for Day 3</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 16, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
+<!-- =================== MATERIALS =================== -->
+<section id="materials">
+  <div class="container">
+    <div class="eyebrow">Project Documents · 项目资料</div>
+    <h2 class="section-title">资料索引<span class="en">Everything in the workspace.</span></h2>
+    <p class="section-lead">
+      All program materials live in the CUC Obsidian vault. The summary below
+      mirrors the folder structure: Plans (strategy), Courses (teaching),
+      Materials (handouts &amp; templates).<br />
+      下方目录与 Obsidian 仓库三个文件夹一一对应。
+    </p>
+
+    <div class="mat-grid">
+
+      <div class="mat-col">
+        <h3>Plans<span class="en">战略层</span></h3>
+        <div class="mat-item">
+          <div class="name">2 周日程 v3 <code>Curriculum-Outline-v3.md</code></div>
+          <div class="desc">12 天主排期 · 可压缩至 10 / 扩展至 14 · 含关键依赖图</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">钟主题日整合 <code>Bell-Theme-Day-Integration.md</code></div>
+          <div class="desc">大钟寺 + 钟鼓楼一日游 · 任务卡 · Day 1/2/3 衔接</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">企业参观整合 <code>AI-Company-Visits-Integration.md</code></div>
+          <div class="desc">小米 + 百度 · 内容生成 vs 人机交互 · 各自任务卡</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">项目预算 <code>Project-Budget.md</code></div>
+          <div class="desc">精简 / 标准 / 充裕三档 · 标准档约 ¥170,500</div>
+        </div>
+      </div>
+
+      <div class="mat-col">
+        <h3>Courses<span class="en">教学层</span></h3>
+        <div class="mat-item">
+          <div class="name">3 天 AI 课总览 <code>3-Day-AI-Course.md</code></div>
+          <div class="desc">Day 1 文本 → Day 2 音乐 → Day 3 可视化 · 每天产出喂下一天</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">Day 1 Prompt Gym <code>Day-1-Prompt-Gym.md</code></div>
+          <div class="desc">5 道练习：多模型对比 → persona → 约束 → few-shot → 自我批评</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">Day 2 音乐工作坊 <code>Day-2-AI-Music-Workshop.md</code></div>
+          <div class="desc">5 道练习：拆歌 → 首发 → 钟声融合 → 终稿 → 互评</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">Day 3 Gemini 工作坊 <code>Day-3-Gemini-Visualizer-Workshop.md</code></div>
+          <div class="desc">5 道练习：Hello Canvas → 音频反应 → 交互 → 文化样式 → 部署</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">Capstone 评估细则 <code>Capstone-Rubric.md</code></div>
+          <div class="desc">4 维 × 4 级 · 红线扣分 · 提交清单 · 反模式</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">🎓 D2 开场讲座（金院长）<a href="opening-lecture.html">→ 幻灯片</a> · <a href="opening-lecture.pdf">→ PDF</a></div>
+          <div class="desc">Communication, Culture, and Artificial Intelligence · 20 张 · 全英文 · 学术正式</div>
+        </div>
+      </div>
+
+      <div class="mat-col">
+        <h3>Materials<span class="en">工具层</span></h3>
+        <div class="mat-item">
+          <div class="name">钟主题术语表 <code>Bell-Vocabulary-Cheat-Sheet.md</code></div>
+          <div class="desc">钟铃铎镈 · 一钟双音 · 含音乐与可视化 prompt 词包</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">学员行前包 <code>Pre-Arrival-Pack.md</code></div>
+          <div class="desc">英文 · 12 天速览 · 装箱清单 · 10 句活命中文</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">对接邮件模板 <code>Outreach-Email-Templates.md</code></div>
+          <div class="desc">大钟寺 / 钟鼓楼 / 百度 / 小米 · 含 T-8/6/4/2/3 周时间线</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">Showcase 节目单 + 邀请函 <code>Showcase-Day-Program.md</code></div>
+          <div class="desc">D12 全天流程 · 评委组成 · 双语邀请卡</div>
+        </div>
+        <div class="mat-item">
+          <div class="name">结业报告模板 <code>Project-Closing-Report-Template.md</code></div>
+          <div class="desc">8 页结构 · 9 个附录 · 含可复制性建议</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 2, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
+<!-- =================== SHOWCASE =================== -->
+<section id="showcase">
+  <div class="container">
+    <div class="eyebrow">D12 · The Public Night</div>
+    <h2 class="section-title">Showcase 之夜<span class="en">What happens on Day 12.</span></h2>
+
+    <div class="show-hero">
+      <div class="show-img img-wrap" data-fallback-label="Stage · 舞台">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&auto=format&fit=crop"
+             alt="Audience at a presentation event"
+             loading="lazy"
+             onerror="this.onerror=null; this.src='https://picsum.photos/seed/showcase-audience/1200/900';" />
+      </div>
+      <p class="section-lead" style="margin: 0;">
+        Four teams. Eight minutes each. A bell from 1420, music from a model,
+        a page you can touch. Awards by dimension, not by ranking. Then dinner.<br />
+        四组学员 · 每组 8 分钟展示 + 4 分钟问答 · 五项分维度奖项 · 然后是晚宴。
+      </p>
+    </div>
+
+    <div class="show-grid">
+
+      <div class="show-card">
+        <h4>下午流程</h4>
+        <ul class="schedule-list">
+          <li><time>13:30</time><span>签到 + 茶歇 + 海报展览</span></li>
+          <li><time>14:00</time><span>CUC + 爱方代表致辞</span></li>
+          <li><time>14:20</time><span>项目纪录短片（3 min）</span></li>
+          <li><time>14:30</time><span>第一轮路演 · Group 1 &amp; 2</span></li>
+          <li><time>15:30</time><span>茶歇 + 现场互玩交互作品</span></li>
+          <li><time>15:50</time><span>第二轮路演 · Group 3 &amp; 4</span></li>
+          <li><time>16:50</time><span>评议 + 观众投票</span></li>
+          <li><time>17:10</time><span>颁奖 + 签合作意向</span></li>
+          <li><time>17:45</time><span>合影 · 闭幕</span></li>
+          <li><time>18:30</time><span>告别晚宴</span></li>
+        </ul>
+      </div>
+
+      <div class="show-card">
+        <h4>五项分维度奖</h4>
+        <div class="awards">
+          <div class="award"><div class="zh">🔔 钟鸣奖</div><div class="en">The Bell Ringer — Overall</div></div>
+          <div class="award"><div class="zh">🌿 静观奖</div><div class="en">The Quiet Insight — Depth</div></div>
+          <div class="award"><div class="zh">⚙️ 流水线奖</div><div class="en">The Pipeline — AI Craft</div></div>
+          <div class="award"><div class="zh">🌉 桥梁奖</div><div class="en">The Bridge — Communication</div></div>
+          <div class="award"><div class="zh">✨ 惊喜奖</div><div class="en">The Surprise — Originality</div></div>
+        </div>
+        <p style="margin-top: 20px; font-size: 13px; color: #555; line-height: 1.7;">
+          The Bridge award is decided by Irish friends invited from outside the
+          program — the ultimate live test of cross-cultural communication.
+          <br /><br />
+          桥梁奖由项目外的爱尔兰朋友现场投票决定，是跨文化沟通的活体检验。
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="foot-inner">
+    <div>
+      <div class="foot-brand">钟 · 声 · <span class="accent">人</span></div>
+      <p>
+        AI × Chinese Traditional Culture · International Communication.<br />
+        A study tour designed by the CUC AI Lab for Irish undergraduates.
+      </p>
+      <p style="margin-top: 12px; opacity: 0.6;">
+        中国传媒大学 AI Lab · 爱尔兰本科生游学项目 · 2026
+      </p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#journey">12-Day Journey</a></li>
+        <li><a href="#thread">The Bell Thread</a></li>
+        <li><a href="#pillars">Four Pillars</a></li>
+        <li><a href="#materials">Documents</a></li>
+        <li><a href="#showcase">Showcase</a></li>
+        <li><a href="opening-lecture.html">🎓 Opening Address</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Communication University of China<br />
+        AI Lab · Project Office<br />
+        Beijing · 北京</p>
+      <p style="margin-top: 12px; opacity: 0.55;">[ contact details TBD ]</p>
+      <p style="margin-top: 18px; opacity: 0.5; font-size: 11px;">
+        Photos: Unsplash. Will be replaced with project field-photography.
+      </p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    © 2026 CUC AI Lab · Made with care, ink and a few hundred prompts. · Press <kbd style="background: rgba(250,246,240,0.1); padding: 1px 6px; border-radius: 3px; font-family: ui-monospace, monospace;">G</kbd> top · <kbd style="background: rgba(250,246,240,0.1); padding: 1px 6px; border-radius: 3px; font-family: ui-monospace, monospace;">/</kbd> nav
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+<script>
+  // ===== Image fallback handler (mark parent for fallback styling) =====
+  document.querySelectorAll('.img-wrap img').forEach((img) => {
+    img.addEventListener('error', function self() {
+      const wrap = this.closest('.img-wrap');
+      if (wrap && !wrap.classList.contains('image-fallback')) {
+        // wait for the secondary src (picsum) to fail too before adding fallback
+        this.addEventListener('error', () => wrap.classList.add('image-fallback'), { once: true });
+      }
+    });
+  });
+
+  // ===== Scroll progress bar =====
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = scrolled + '%';
+  }
+
+  // ===== Back-to-top button =====
+  const backTop = document.getElementById('backTop');
+  function updateBackTop() {
+    if (window.scrollY > 600) backTop.classList.add('show');
+    else backTop.classList.remove('show');
+  }
+  backTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ===== Active section tracking (for nav + TOC) =====
+  const sections = ['hero', 'journey', 'thread', 'pillars', 'atmosphere', 'materials', 'showcase']
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+  const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+  const tocAnchors = document.querySelectorAll('.toc a');
+
+  function updateActive() {
+    const scrollPos = window.scrollY + window.innerHeight * 0.35;
+    let activeId = sections[0]?.id;
+    for (const s of sections) {
+      if (s.offsetTop <= scrollPos) activeId = s.id;
+    }
+    navAnchors.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + activeId));
+    tocAnchors.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + activeId));
+  }
+
+  // ===== Reveal on scroll =====
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+  );
+  document
+    .querySelectorAll('section, .t-row, .pillar, .thread-card, .show-card, .mat-col, .atmos-tile')
+    .forEach((el, i) => {
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+
+  // ===== Master scroll handler =====
+  function onScroll() {
+    updateProgress();
+    updateBackTop();
+    updateActive();
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ===== Keyboard shortcuts =====
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'g' || e.key === 'G') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (e.key === 'b' || e.key === 'B') {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    } else if (e.key === '/' || e.key === '?') {
+      e.preventDefault();
+      document.querySelector('.nav-links a').focus();
+    } else if (e.key === '1') document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '2') document.getElementById('thread')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '3') document.getElementById('pillars')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '4') document.getElementById('atmosphere')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '5') document.getElementById('materials')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '6') document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>

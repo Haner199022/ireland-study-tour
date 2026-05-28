@@ -1,0 +1,6 @@
+.DS_Store
+.vercel
+.edgeone
+.env
+*.log
+node_modules/
