@@ -6,28 +6,28 @@
 <meta name="theme-color" content="#1A1A1A" />
 <meta name="robots" content="index, follow" />
 
-<title>钟·声·人 | AI × 中国传统文化国际传播 · 爱尔兰游学项目</title>
-<meta name="description" content="A 12-day Beijing study tour for Irish undergraduates: from the bronze bells of Dazhongsi to AI-generated music and an interactive page their friends back home can touch. 中国传媒大学 × 爱尔兰本科生游学项目。" />
-<meta name="keywords" content="CUC, Communication University of China, Ireland study tour, AI × Chinese culture, international communication, bell theme, Dazhongsi, Baidu, Xiaomi" />
-<meta name="author" content="CUC AI Lab" />
+<title>灵境工坊 Miracle Craft Workshop | 国际学生 AIGC 应用培训 · 中国传媒大学</title>
+<meta name="description" content="A 10-day AIGC application training in Beijing for international students: text, image, music and video generation, two site visits (Future Education · 798 Art District), and a cultural-heritage-themed team project. 中国传媒大学国际传媒教育学院主办。" />
+<meta name="keywords" content="CUC, Communication University of China, AIGC, Miracle Craft Workshop, 灵境工坊, international students, AI generated content, prompt engineering, Beijing, Future Education, 798" />
+<meta name="author" content="Faculty of International Media, CUC" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="CUC × Ireland Study Tour" />
-<meta property="og:title" content="钟·声·人 · AI × Chinese Culture · CUC × Ireland Study Tour" />
-<meta property="og:description" content="A 12-day Beijing study tour for Irish undergraduates — from a 600-year-old bell to AI-composed music and an interactive page their friends back home can touch." />
+<meta property="og:site_name" content="灵境工坊 · Miracle Craft Workshop" />
+<meta property="og:title" content="灵境工坊 Miracle Craft Workshop · 国际学生 AIGC 应用培训 · CUC" />
+<meta property="og:description" content="A 10-day AIGC application training in Beijing for international students — text, image, music & video generation, three company visits, and a cultural-heritage team project." />
 <meta property="og:image" content="https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=1200&q=80&auto=format&fit=crop" />
 <meta property="og:locale" content="zh_CN" />
 <meta property="og:locale:alternate" content="en_US" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="钟·声·人 · AI × Chinese Culture · CUC × Ireland Study Tour" />
-<meta name="twitter:description" content="A 12-day Beijing study tour for Irish undergraduates — bells, AI, and a page their friends in Dublin can touch." />
+<meta name="twitter:title" content="灵境工坊 Miracle Craft Workshop · AIGC Training · CUC" />
+<meta name="twitter:description" content="A 10-day AIGC application training in Beijing for international students — from prompt alchemy to a finished cultural-heritage project." />
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=1200&q=80&auto=format&fit=crop" />
 
-<!-- Inline SVG favicon — a stylized bell with bronze accent -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23FAF6F0'/><path d='M32 14 C20 14, 16 26, 16 38 L48 38 C48 26, 44 14, 32 14 Z M32 14 L32 10 M28 42 L36 42 L36 46 L28 46 Z M30 48 L34 48 L34 52 L30 52 Z' stroke='%23B08D57' stroke-width='2.5' fill='none' stroke-linejoin='round' stroke-linecap='round'/></svg>" />
+<!-- Inline SVG favicon — a four-point creative spark with bronze accent -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23FAF6F0'/><path d='M32 12 C34 24, 40 30, 52 32 C40 34, 34 40, 32 52 C30 40, 24 34, 12 32 C24 30, 30 24, 32 12 Z' fill='%23B08D57'/></svg>" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -976,6 +976,134 @@
     section { page-break-inside: avoid; padding: 40px; }
     .hero-bg img { filter: none; opacity: 0.3; }
   }
+
+  /* ============ Schedule AM/PM slots ============ */
+  .t-content .slots {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .t-slot {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .t-slot .ap {
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--bronze-d);
+    padding-top: 1px;
+  }
+  .t-slot .ttl {
+    font-family: var(--serif-cn);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .t-row.featured .t-slot .ttl { color: var(--bronze-d); }
+  .t-slot .en {
+    display: block;
+    font-family: var(--serif-en);
+    font-style: italic;
+    color: var(--mute);
+    font-size: 13.5px;
+    margin-top: 1px;
+  }
+  .t-slot .visit-tag {
+    display: inline-block;
+    font-family: var(--sans-en);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--bronze-d);
+    border: 1px solid var(--bronze);
+    border-radius: 100px;
+    padding: 1px 8px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* ============ Fees / Logistics ============ */
+  #fees { background: var(--paper-2); }
+  .fee-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(28px, 5vw, 56px);
+    margin-top: 40px;
+    align-items: start;
+  }
+  @media (max-width: 820px) { .fee-grid { grid-template-columns: 1fr; } }
+  .fee-price {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 16px;
+    padding: 38px 34px;
+    box-shadow: var(--shadow-medium);
+  }
+  .fee-price .big {
+    font-family: var(--serif-en);
+    font-weight: 600;
+    font-size: clamp(48px, 8vw, 72px);
+    line-height: 1;
+    color: var(--bronze-l);
+  }
+  .fee-price .big .cur { font-size: 0.45em; vertical-align: super; margin-right: 2px; }
+  .fee-price .per {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: rgba(250, 246, 240, 0.7);
+    margin-top: 10px;
+  }
+  .fee-price .rate {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(176, 141, 87, 0.4);
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--paper);
+  }
+  .fee-price .rate span { color: var(--bronze-l); }
+  .fee-incl { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 520px) { .fee-incl { grid-template-columns: 1fr; } }
+  .fee-incl h4 {
+    font-family: var(--serif-cn);
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .fee-incl h4 .en {
+    font-family: var(--serif-en); font-style: italic; font-weight: 400;
+    font-size: 12px; color: var(--mute); margin-left: 6px;
+  }
+  .fee-incl ul { list-style: none; font-size: 14px; line-height: 1.5; }
+  .fee-incl li { padding: 6px 0 6px 22px; position: relative; color: #444; }
+  .fee-incl .yes li::before { content: '✓'; position: absolute; left: 0; color: var(--jade); font-weight: 700; }
+  .fee-incl .no  li::before { content: '✕'; position: absolute; left: 0; color: #b06a57; }
+  .fee-notes {
+    grid-column: 1 / -1;
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .fee-note {
+    flex: 1 1 240px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--bronze);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: #444;
+    line-height: 1.55;
+  }
+  .fee-note strong { font-family: var(--serif-cn); color: var(--bronze-d); }
 </style>
 </head>
 <body>
@@ -986,19 +1114,21 @@
 <nav class="topnav">
   <div class="topnav-inner">
     <div class="brand">
-      <svg class="bell-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M32 14 C20 14, 16 26, 16 38 L48 38 C48 26, 44 14, 32 14 Z M32 14 L32 10 M28 42 L36 42 L36 46 L28 46 Z M30 48 L34 48 L34 52 L30 52 Z" />
+      <svg class="bell-icon" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+        <path d="M32 12 C34 24, 40 30, 52 32 C40 34, 34 40, 32 52 C30 40, 24 34, 12 32 C24 30, 30 24, 32 12 Z" />
       </svg>
-      钟 · 声 · <span class="accent">人</span>
+      灵境 · <span class="accent">工坊</span>
     </div>
     <ul class="nav-links">
-      <li><a href="#journey">旅程</a></li>
-      <li><a href="#thread">钟线</a></li>
-      <li><a href="#pillars">四支柱</a></li>
-      <li><a href="#atmosphere">气场</a></li>
+      <li><a href="#journey">日程</a></li>
+      <li><a href="#thread">理念</a></li>
+      <li><a href="#pillars">特色</a></li>
+      <li><a href="#atmosphere">参访</a></li>
+      <li><a href="#fees">费用</a></li>
       <li><a href="#materials">资料</a></li>
-      <li><a href="#showcase">Showcase</a></li>
-      <li><a href="opening-lecture.html" style="color: var(--bronze-d); font-weight: 500;">🎓 Opening</a></li>
+      <li><a href="#showcase">结课</a></li>
+      <li><a href="courses.html" style="color: var(--bronze-d); font-weight: 500;">📚 三天 AI 课</a></li>
+      <li><a href="opening-lecture.html" style="color: var(--bronze-d); font-weight: 500;">🎓 Lecture</a></li>
     </ul>
   </div>
 </nav>
@@ -1006,12 +1136,13 @@
 <!-- =================== Right-side TOC (desktop only) =================== -->
 <ul class="toc" id="toc">
   <li><a href="#hero"      data-label="开篇 Hero"></a></li>
-  <li><a href="#journey"   data-label="十二天 Journey"></a></li>
-  <li><a href="#thread"    data-label="钟的线索 Bell Thread"></a></li>
-  <li><a href="#pillars"   data-label="四支柱 Pillars"></a></li>
-  <li><a href="#atmosphere" data-label="北京气场 Atmosphere"></a></li>
+  <li><a href="#journey"   data-label="十天日程 Schedule"></a></li>
+  <li><a href="#thread"    data-label="创作理念 Concept"></a></li>
+  <li><a href="#pillars"   data-label="四大特色 Features"></a></li>
+  <li><a href="#atmosphere" data-label="企业参访 Visits"></a></li>
+  <li><a href="#fees"      data-label="费用说明 Fees"></a></li>
   <li><a href="#materials" data-label="资料 Materials"></a></li>
-  <li><a href="#showcase"  data-label="路演 Showcase"></a></li>
+  <li><a href="#showcase"  data-label="结课展示 Showcase"></a></li>
 </ul>
 
 <!-- =================== HERO =================== -->
@@ -1024,37 +1155,37 @@
   </div>
 
   <div class="hero-inner">
-    <div class="eyebrow">CUC × Irish Undergraduates · Beijing · 2026</div>
+    <div class="eyebrow">Faculty of International Media · CUC · Beijing · 2026</div>
 
     <h1>
       <span class="l1">A bell,</span>
-      <span class="l2">a slider,</span>
-      <span class="l3">a new voice.</span>
+      <span class="l2">a prompt,</span>
+      <span class="l3">a finished work.</span>
     </h1>
 
     <div class="hero-cn">
-      一口钟<span class="sep">·</span>一根滑块<span class="sep">·</span>一个新声音
+      灵境工坊<span class="sep">·</span>Miracle Craft Workshop
     </div>
 
     <p class="hero-tagline">
-      Twelve Irish undergraduates spend two weeks in Beijing — listening to a
-      600-year-old bell, walking the northern endpoint of an 800-year-old urban
-      axis, sitting inside two of China's most influential AI companies, and
-      turning all of it into music they composed with AI and a page their
-      friends back home can <em>touch</em>.
+      A 10-day AIGC application training in Beijing for international students.
+      Record a 600-year-old bell at Dazhongsi, research it with LLMs, turn it
+      into AI-composed music and an interactive page — visiting Future Education
+      Group and the 798 Art District along the way — and present the whole chain as one
+      finished Capstone.
     </p>
     <p class="hero-tagline cn">
-      十二位爱尔兰本科生用两周时间，把六百年前的钟声、八百年的中轴线、
-      与两家中国 AI 公司的现场，变成自己用 AI 创作的音乐，
-      与一张他们爱尔兰朋友能"触摸"的页面。
+      面向国际学生的 10 天 AIGC 应用实践培训。在大钟寺录下六百年的钟声，
+      用 LLM 做文化研究，化为 AI 音乐与可交互页面；途中走访未来教育与 798 艺术区，
+      最终把整条线索做成一件 Capstone 作品。
     </p>
 
     <div class="stats">
-      <div class="stat"><div class="n">12</div><div class="label">Days<span class="cn">天</span></div></div>
-      <div class="stat"><div class="n">4</div><div class="label">Venues<span class="cn">场所</span></div></div>
-      <div class="stat"><div class="n">3</div><div class="label">AI Days<span class="cn">AI 课</span></div></div>
-      <div class="stat"><div class="n">4</div><div class="label">Capstones<span class="cn">毕业作品</span></div></div>
-      <div class="stat"><div class="n">5</div><div class="label">Awards<span class="cn">奖项</span></div></div>
+      <div class="stat"><div class="n">10</div><div class="label">Days<span class="cn">天</span></div></div>
+      <div class="stat"><div class="n">3</div><div class="label">AIGC Tracks<span class="cn">生成方向</span></div></div>
+      <div class="stat"><div class="n">2</div><div class="label">Site Visits<span class="cn">企业/艺术参访</span></div></div>
+      <div class="stat"><div class="n">≤30</div><div class="label">Seats<span class="cn">招生规模</span></div></div>
+      <div class="stat"><div class="n"><span style="font-size:0.5em;vertical-align:super;">¥</span>5,500</div><div class="label">Per Person<span class="cn">每人全程</span></div></div>
     </div>
   </div>
 
@@ -1067,33 +1198,63 @@
 <!-- =================== JOURNEY =================== -->
 <section id="journey">
   <div class="container">
-    <div class="eyebrow">The 12-day Arc</div>
-    <h2 class="section-title">十二天旅程<span class="en">Two weeks, two halves: Input then Creation.</span></h2>
+    <div class="eyebrow">The 10-day Arc · 全程北京</div>
+    <h2 class="section-title">十天日程<span class="en">A bell becomes research, music, a page you can touch.</span></h2>
     <p class="section-lead">
-      Week 1 is for collecting — bells, drums, AI products, ideas, surprises.
-      Week 2 is for building — research becomes music, music becomes a page
-      strangers can touch.<br />
-      第一周收集素材，第二周把素材变成作品。
+      One thread runs through it: a 600-year-old bell. Record it at Dazhongsi,
+      research it with LLMs, turn it into AI-composed music, then into an
+      interactive page — and present the whole chain as a Capstone. Company
+      visits and the AIGC modules feed that pipeline at every step.<br />
+      一条线索贯穿全程——一口六百年的钟。大钟寺录钟 → LLM 文化研究 →
+      AI 音乐 → 交互可视化 → Capstone 整合作品。企业参访与各 AIGC 模块为这条流水线供给。
     </p>
 
-    <div class="week-banner">Week 1 — INPUT · 输入</div>
+    <div class="week-banner">Days 1–5 — INPUT & CRAFT · 采集与创作</div>
     <div class="timeline">
-      <div class="t-row"><div class="t-day">D1 · Sun</div><div class="t-content"><h3>抵达 + 欢迎晚宴</h3><div class="en">Arrival & welcome dinner</div></div></div>
-      <div class="t-row"><div class="t-day">D2 · Mon</div><div class="t-content"><h3>开课式 + 院长讲座</h3><div class="en">Opening: Communication, Culture, and AI · Dean Jin</div></div></div>
-      <div class="t-row featured"><div class="t-day">D3 · Tue</div><div class="t-content"><h3>百度 AI 数字人 参观</h3><div class="en">Baidu — content / generative AI</div></div></div>
-      <div class="t-row"><div class="t-day">D4 · Wed</div><div class="t-content"><h3>故宫 + 798 文化日</h3><div class="en">Forbidden City + 798 Art District</div></div></div>
-      <div class="t-row featured"><div class="t-day">D5 · Thu</div><div class="t-content"><h3>小米 AI 超级工坊 参观</h3><div class="en">Xiaomi — interaction / hardware AI</div></div></div>
-      <div class="t-row"><div class="t-day">D6 · Fri</div><div class="t-content"><h3>Bridge Day · 桥接日</h3><div class="en">Task-card debrief + Hutong walk</div></div></div>
-      <div class="t-row featured"><div class="t-day">D7 · Sat</div><div class="t-content"><h3>钟主题一日游：大钟寺 + 钟鼓楼</h3><div class="en">Bell-Theme Day — sacred bell → civic drum → Central Axis</div></div></div>
+      <div class="t-row"><div class="t-day">DAY 1</div><div class="t-content"><div class="slots">
+        <div class="t-slot"><span class="ap">AM</span><div><span class="ttl">开班仪式 + 破冰活动</span><span class="en">Opening ceremony · "Telling the story of my country"</span></div></div>
+        <div class="t-slot"><span class="ap">PM</span><div><span class="ttl">讲座：AIGC 基础认知 + 行业落地案例</span><span class="en">Lecture · AIGC basics + industry cases</span></div></div>
+      </div></div></div>
+      <div class="t-row featured"><div class="t-day">DAY 2</div><div class="t-content"><div class="slots">
+        <div class="t-slot"><span class="ap">AM</span><div><span class="ttl">钟主题日·大钟寺<span class="visit-tag">Visit</span></span><span class="en">Dazhongsi — sacred bell, Yongle Bell, "one bell two tones", recording</span></div></div>
+        <div class="t-slot"><span class="ap">PM</span><div><span class="ttl">钟鼓楼·登钟楼俯瞰中轴线<span class="visit-tag">Visit</span></span><span class="en">Bell-and-Drum Towers · civic bell → Central Axis (UNESCO)</span></div></div>
+      </div></div></div>
+      <div class="t-row featured"><div class="t-day">DAY 3</div><div class="t-content"><div class="slots">
+        <div class="t-slot"><span class="ap">AM</span><div><span class="ttl">AI 课 ①　文本 · LLM 文化研究</span><span class="en">Prompt Gym · 5 progressive exercises</span></div></div>
+        <div class="t-slot"><span class="ap">PM</span><div><span class="ttl">跨模型研究 + 文化简报撰写</span><span class="en">Cross-model research → Cultural Concept Brief</span></div></div>
+      </div></div></div>
+      <div class="t-row featured"><div class="t-day">DAY 4</div><div class="t-content"><div class="slots">
+        <div class="t-slot"><span class="ap">AM</span><div><span class="ttl">AI 课 ②　音频 · AI 音乐创作</span><span class="en">AI music "One Day in Old Beijing" from the bell recordings</span></div></div>
+        <div class="t-slot"><span class="ap">PM</span><div><span class="ttl">自由活动 / 城市探索</span><span class="en">Free time · self-guided city exploration</span></div></div>
+      </div></div></div>
+      <div class="t-row featured"><div class="t-day">DAY 5</div><div class="t-content"><div class="slots">
+        <div class="t-slot"><span class="ap">AM</span><div><span class="ttl">AI 课 ③　视频 · 交互可视化</span><span class="en">Gemini interactive visualizer + video · bell→ink ripples, drum→grid</span></div></div>
+        <div class="t-slot"><span class="ap">PM</span><div><span class="ttl">参访：未来教育集团<span class="visit-tag">Visit</span></span><span class="en">Site visit · Future Education Group</span></div></div>
+      </div></div></div>
     </div>
 
-    <div class="week-banner" style="margin-top: 40px;">Week 2 — CREATION · 创作</div>
+    <div class="week-banner" style="margin-top: 40px;">Days 6–10 — INTEGRATE & SHOWCASE · 整合与展示</div>
     <div class="timeline">
-      <div class="t-row featured"><div class="t-day">D8 · Sun</div><div class="t-content"><h3>AI 课 Day 1：LLM 文化研究</h3><div class="en">Prompt Gym · 5 progressive exercises</div></div></div>
-      <div class="t-row featured"><div class="t-day">D9 · Mon</div><div class="t-content"><h3>AI 课 Day 2：AI 音乐创作</h3><div class="en">From bell recordings to a 60–120s composition</div></div></div>
-      <div class="t-row featured"><div class="t-day">D10 · Tue</div><div class="t-content"><h3>AI 课 Day 3：Gemini 交互可视化</h3><div class="en">Vibe-coded interactive HTML in a browser</div></div></div>
-      <div class="t-row"><div class="t-day">D11 · Wed</div><div class="t-content"><h3>Capstone Polish + 排练</h3><div class="en">Cross-cultural critique &amp; dress rehearsal</div></div></div>
-      <div class="t-row featured"><div class="t-day">D12 · Thu</div><div class="t-content"><h3>Showcase + 颁奖 + 告别晚宴</h3><div class="en">Public showcase &amp; awards by dimension</div></div></div>
+      <div class="t-row"><div class="t-day">DAY 6</div><div class="t-content"><div class="slots">
+        <div class="t-slot"><span class="ap">AM</span><div><span class="ttl">AI 课复盘 + Capstone 选题</span><span class="en">Course recap + choose the Capstone concept</span></div></div>
+        <div class="t-slot"><span class="ap">PM</span><div><span class="ttl">自由活动 / 城市探索</span><span class="en">Free time · self-guided city exploration</span></div></div>
+      </div></div></div>
+      <div class="t-row"><div class="t-day">DAY 7</div><div class="t-content"><div class="slots">
+        <div class="t-slot"><span class="ap">AM</span><div><span class="ttl">小组工作流设计（一）+ 版权与伦理讨论</span><span class="en">Group workflow design · part 1 + copyright & ethics</span></div></div>
+        <div class="t-slot"><span class="ap">PM</span><div><span class="ttl">小组工作流设计（二）</span><span class="en">Group AIGC workflow design · part 2</span></div></div>
+      </div></div></div>
+      <div class="t-row featured"><div class="t-day">DAY 8</div><div class="t-content"><div class="slots">
+        <div class="t-slot"><span class="ap">AM</span><div><span class="ttl">Capstone 项目创作（钟主题整合）</span><span class="en">Capstone build · brief + music + visualizer integrated</span></div></div>
+        <div class="t-slot"><span class="ap">PM</span><div><span class="ttl">参访：798 艺术区<span class="visit-tag">Visit</span></span><span class="en">Site visit · 798 Art District</span></div></div>
+      </div></div></div>
+      <div class="t-row"><div class="t-day">DAY 9</div><div class="t-content"><div class="slots">
+        <div class="t-slot"><span class="ap">AM</span><div><span class="ttl">项目完善 + 排练</span><span class="en">Capstone polish & dress rehearsal</span></div></div>
+        <div class="t-slot"><span class="ap">PM</span><div><span class="ttl">自由活动</span><span class="en">Free time</span></div></div>
+      </div></div></div>
+      <div class="t-row featured"><div class="t-day">DAY 10</div><div class="t-content"><div class="slots">
+        <div class="t-slot"><span class="ap">AM</span><div><span class="ttl">Capstone Showcase + 颁奖 + 结课仪式</span><span class="en">Showcase · awards by dimension · closing ceremony</span></div></div>
+        <div class="t-slot"><span class="ap">PM</span><div><span class="ttl">返程</span><span class="en">Departure</span></div></div>
+      </div></div></div>
     </div>
   </div>
 </section>
@@ -1104,7 +1265,7 @@
 <section id="thread">
   <div class="container">
     <div class="eyebrow">The Concept · 核心线索</div>
-    <h2 class="section-title">钟的线索<span class="en">One thread runs through the whole tour.</span></h2>
+    <h2 class="section-title">钟的线索<span class="en">One thread runs through the whole program.</span></h2>
 
     <div class="thread-layout">
       <div class="thread-img img-wrap duotone" data-fallback-label="A bronze bell · 一口铜钟">
@@ -1116,11 +1277,14 @@
 
       <div class="thread-content">
         <p class="section-lead">
-          A bell rung in 1420 becomes a recording in a student's phone, becomes a
-          sound in an AI-composed track, becomes a ripple on a webpage someone in
-          Dublin can scroll through. Same vibration, four media.<br />
-          1420 年响起的一口钟，变成手机里的一段录音，变成 AI 写出的一段音乐，
-          变成都柏林某个人在网页上滚出的一圈涟漪。同一次震动，四种媒介。
+          The Yongle Bell, cast around 1420, becomes a recording in a phone,
+          becomes a verified cultural brief, becomes a track an AI composed,
+          becomes a page strangers can scroll through. Same vibration, many
+          media — and each AIGC module the students learn is one more way to
+          carry it forward.<br />
+          铸于 1420 年前后的永乐大钟，变成手机里的录音、可核查的文化简报、
+          AI 写出的音乐、陌生人能滚动的页面。同一次震动，多种媒介——
+          学员学到的每个 AIGC 模块，都是把它再传递下去的一种方式。
         </p>
 
         <div class="thread-flow">
@@ -1128,27 +1292,27 @@
             <div class="ico">钟</div>
             <h4>博物馆现场</h4>
             <div class="en">In the museum</div>
-            <p>Record the bronze bell at Dazhongsi and the drum at Gulou.</p>
+            <p>Record the Yongle Bell at Dazhongsi and the drums at Gulou (Day 2).</p>
           </div>
           <div class="thread-arrow">→</div>
           <div class="thread-card">
             <div class="ico">研</div>
             <h4>LLM 研究</h4>
             <div class="en">Research with LLMs</div>
-            <p>Distill the bell's story into a Cultural Concept Brief.</p>
+            <p>Distill the bell's story into a verified Cultural Concept Brief (Day 3).</p>
           </div>
           <div class="thread-arrow">→</div>
           <div class="thread-card">
             <div class="ico">乐</div>
             <h4>音乐 + 交互</h4>
             <div class="en">AI music + interactive page</div>
-            <p>The bell becomes a track; the track becomes a page you can touch.</p>
+            <p>The bell becomes a track, then a page you can touch (Days 4–5 → Capstone).</p>
           </div>
         </div>
 
         <blockquote class="thread-pull">
-          "Sacred bell at dawn. Civic bell at dusk. Stand on the Bell Tower at sunset
-          and look south down 7.8 km of imperial axis."
+          "Sacred bell at dawn, civic bell at dusk. Stand on the Bell Tower and
+          look south down the imperial Central Axis."
           <span class="cn">「晨听寺院钟，暮俯城市轴。」</span>
         </blockquote>
       </div>
@@ -1161,93 +1325,75 @@
 <!-- =================== PILLARS =================== -->
 <section id="pillars">
   <div class="container">
-    <div class="eyebrow">Four Pillars · 四支柱</div>
-    <h2 class="section-title">四块基石<span class="en">What the program is built on.</span></h2>
+    <div class="eyebrow">Four Features · 四大特色</div>
+    <h2 class="section-title">工作坊四大特色<span class="en">What makes this workshop different.</span></h2>
     <p class="section-lead">
-      Four interlocking modules. Field visits feed the AI workshop. The AI
-      workshop feeds the Capstone. Nothing is decoration.<br />
-      四块互锁的模块：现场素材喂工作坊，工作坊喂毕业作品。每一块都对下游有用。
+      The 2026 "Miracle Craft Workshop" is built for international friends — to
+      deepen knowledge of cultural relics and museums while mastering AIGC, and
+      to add new value to traditional culture.<br />
+      2026"灵境工坊"为国际友人打造：在增进文博认知的同时掌握 AIGC 应用，
+      为传统文博注入新的价值。
     </p>
 
     <div class="pillar-grid">
 
       <div class="pillar">
-        <div class="pillar-img img-wrap" data-fallback-label="Bell · 钟">
-          <img src="https://images.unsplash.com/photo-1545569310-a2ce5f30f5ce?w=900&q=80&auto=format&fit=crop"
-               alt="Chinese temple architecture and bell"
-               loading="lazy"
-               onerror="this.onerror=null; this.src='https://picsum.photos/seed/temple-bell/900/506';" />
-        </div>
-        <div class="pillar-body">
-          <div class="num">01 / Field</div>
-          <h3>钟主题一日游</h3>
-          <div class="en">The Bell-Theme Day</div>
-          <p>D7. Morning at Dazhongsi (the 46.5-ton Yongle Bell, the *one bell, two tones* phenomenon). Afternoon at the Bell-and-Drum Towers — the UNESCO-listed northern endpoint of Beijing's Central Axis.</p>
-          <ul>
-            <li>Record bell &amp; drum sounds (≥ 30 s each)</li>
-            <li>4-part task card: Record / Observe / Distill / Connect</li>
-            <li>Feeds Day 1 LLM research next morning</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="pillar">
-        <div class="pillar-img img-wrap" data-fallback-label="AI in industry · AI 与产业">
-          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80&auto=format&fit=crop"
-               alt="Circuit board representing AI technology"
-               loading="lazy"
-               onerror="this.onerror=null; this.src='https://picsum.photos/seed/ai-industry/900/506';" />
-        </div>
-        <div class="pillar-body">
-          <div class="num">02 / Industry</div>
-          <h3>AI 企业参观</h3>
-          <div class="en">Baidu + Xiaomi</div>
-          <p>Two contrasting visits. Baidu (D3) for generative AI — Wenxin LLM, Xiling digital humans. Xiaomi (D5) for embodied AI — HyperOS, smart home, SU7. Content vs interaction.</p>
-          <ul>
-            <li>Bilingual task cards per company</li>
-            <li>Wenxin joins the Day-1 LLM comparison</li>
-            <li>Xiling digital human can narrate a Capstone</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="pillar">
-        <div class="pillar-img img-wrap" data-fallback-label="Workshop · 工作坊">
+        <div class="pillar-img img-wrap" data-fallback-label="Hands-on · 动手实践">
           <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=80&auto=format&fit=crop"
-               alt="Students collaborating with laptops"
+               alt="Students collaborating hands-on with laptops"
                loading="lazy"
-               onerror="this.onerror=null; this.src='https://picsum.photos/seed/workshop-studio/900/506';" />
+               onerror="this.onerror=null; this.src='https://picsum.photos/seed/handson-studio/900/506';" />
         </div>
         <div class="pillar-body">
-          <div class="num">03 / Studio</div>
-          <h3>3 天 AI 课程</h3>
-          <div class="en">Three days, one pipeline</div>
-          <p>Each day's output is the next day's input. Text becomes music; music becomes an interactive page. No prior coding or music training required.</p>
-          <ul>
-            <li><strong>D8 · Text:</strong> 5-exercise Prompt Gym</li>
-            <li><strong>D9 · Audio:</strong> 60–120 s AI composition using real bell samples</li>
-            <li><strong>D10 · Visual:</strong> Gemini-built interactive visualizer</li>
-          </ul>
+          <div class="num">01 / Practice</div>
+          <h3>沉浸式实践学习</h3>
+          <div class="en">Immersive practical learning</div>
+          <p>Say goodbye to dry theory. A "workshop" model built on hands-on practice — under mentor guidance, you experience the full creative process from concept to finished product through carefully designed projects.</p>
         </div>
       </div>
 
       <div class="pillar">
-        <div class="pillar-img img-wrap" data-fallback-label="Showcase · 路演">
-          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=900&q=80&auto=format&fit=crop"
-               alt="Stage spotlights at a presentation venue"
+        <div class="pillar-img img-wrap" data-fallback-label="Global tools · 国际化">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80&auto=format&fit=crop"
+               alt="Global network of connections"
                loading="lazy"
-               onerror="this.onerror=null; this.src='https://picsum.photos/seed/showcase-stage/900/506';" />
+               onerror="this.onerror=null; this.src='https://picsum.photos/seed/global-network/900/506';" />
         </div>
         <div class="pillar-body">
-          <div class="num">04 / Capstone</div>
-          <h3>毕业作品 + Showcase</h3>
-          <div class="en">A single interlocking work</div>
-          <p>Each team submits one integrated piece: Cultural Brief + AI Music + Interactive Visualizer + Prompt Log. Graded across four dimensions: depth, craft, communication, surprise.</p>
-          <ul>
-            <li>Public showcase on D12</li>
-            <li>Awards by dimension (no single winner)</li>
-            <li>Anti-pattern red lines apply</li>
-          </ul>
+          <div class="num">02 / International</div>
+          <h3>国际化课程体系</h3>
+          <div class="en">International curriculum system</div>
+          <p>Designed for learners from diverse cultures, covering text generation, music creation and video production. We focus on mainstream AIGC tools used worldwide — so your skills travel with you.</p>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-img img-wrap" data-fallback-label="Beginner to expert · 入门到精通">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=80&auto=format&fit=crop"
+               alt="Steps rising upward"
+               loading="lazy"
+               onerror="this.onerror=null; this.src='https://picsum.photos/seed/beginner-expert/900/506';" />
+        </div>
+        <div class="pillar-body">
+          <div class="num">03 / Progression</div>
+          <h3>从入门到精通</h3>
+          <div class="en">From beginner to expert</div>
+          <p>From mastering the core craft of "prompt alchemy" to completing a complex, comprehensive project — you can rapidly raise your AIGC application level in just one week.</p>
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-img img-wrap" data-fallback-label="Community · 共创社群">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80&auto=format&fit=crop"
+               alt="A diverse community gathered together"
+               loading="lazy"
+               onerror="this.onerror=null; this.src='https://picsum.photos/seed/creator-community/900/506';" />
+        </div>
+        <div class="pillar-body">
+          <div class="num">04 / Community</div>
+          <h3>灵感共创社群</h3>
+          <div class="en">Inspiration creation community</div>
+          <p>"Miracle Craft Workshop" builds a vibrant global community of creators. Exchange ideas with peers from around the world, spark inspiration, collaborate — and keep the momentum to learn and grow.</p>
         </div>
       </div>
 
@@ -1258,37 +1404,37 @@
 <!-- =================== ATMOSPHERE STRIP =================== -->
 <section id="atmosphere">
   <div class="atmos-grid">
-    <div class="atmos-tile img-wrap" data-fallback-label="Forbidden City">
-      <img src="https://images.unsplash.com/photo-1584032318089-3a06d36a04cc?w=900&q=80&auto=format&fit=crop"
-           alt="Forbidden City rooftops in Beijing"
+    <div class="atmos-tile img-wrap" data-fallback-label="Dazhongsi Bell">
+      <img src="https://images.unsplash.com/photo-1545569310-a2ce5f30f5ce?w=900&q=80&auto=format&fit=crop"
+           alt="Ancient Chinese temple bell"
            loading="lazy"
-           onerror="this.onerror=null; this.src='https://picsum.photos/seed/forbidden-city/900/1125';" />
+           onerror="this.onerror=null; this.src='https://picsum.photos/seed/dazhongsi-bell/900/1125';" />
       <div class="overlay">
-        <div class="label">D4 · Culture Day</div>
-        <h4>故宫</h4>
-        <div class="en">The Forbidden City</div>
+        <div class="label">Day 2 · Bell-Theme Day</div>
+        <h4>大钟寺 · 钟鼓楼</h4>
+        <div class="en">Dazhongsi + Bell-and-Drum Towers</div>
       </div>
     </div>
-    <div class="atmos-tile img-wrap" data-fallback-label="Hutong streets">
-      <img src="https://images.unsplash.com/photo-1576697010413-c1f6b9e1c7d8?w=900&q=80&auto=format&fit=crop"
-           alt="Traditional Beijing hutong street"
+    <div class="atmos-tile img-wrap" data-fallback-label="Future Education">
+      <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&q=80&auto=format&fit=crop"
+           alt="A bright modern learning and education space"
            loading="lazy"
-           onerror="this.onerror=null; this.src='https://picsum.photos/seed/beijing-hutong/900/1125';" />
+           onerror="this.onerror=null; this.src='https://picsum.photos/seed/future-education/900/1125';" />
       <div class="overlay">
-        <div class="label">D6 · Bridge Day</div>
-        <h4>胡同</h4>
-        <div class="en">The Hutong walk</div>
+        <div class="label">Day 5 · Site Visit</div>
+        <h4>未来教育集团</h4>
+        <div class="en">Future Education Group</div>
       </div>
     </div>
-    <div class="atmos-tile img-wrap" data-fallback-label="Calligraphy">
-      <img src="https://images.unsplash.com/photo-1604154434321-58fbb04edbeb?w=900&q=80&auto=format&fit=crop"
-           alt="Chinese ink calligraphy"
+    <div class="atmos-tile img-wrap" data-fallback-label="798 Art District">
+      <img src="https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=900&q=80&auto=format&fit=crop"
+           alt="Contemporary art district gallery space"
            loading="lazy"
-           onerror="this.onerror=null; this.src='https://picsum.photos/seed/ink-calligraphy/900/1125';" />
+           onerror="this.onerror=null; this.src='https://picsum.photos/seed/798-art/900/1125';" />
       <div class="overlay">
-        <div class="label">A visual register</div>
-        <h4>水墨</h4>
-        <div class="en">Ink-wash aesthetic for Day 3</div>
+        <div class="label">Day 8 · Site Visit</div>
+        <h4>798 艺术区</h4>
+        <div class="en">798 Art District</div>
       </div>
     </div>
   </div>
@@ -1296,16 +1442,65 @@
 
 <div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 16, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
 
+<!-- =================== FEES / LOGISTICS =================== -->
+<section id="fees">
+  <div class="container">
+    <div class="eyebrow">Fees & Notes · 费用与说明</div>
+    <h2 class="section-title">费用与说明<span class="en">One flat rate, clearly scoped.</span></h2>
+    <p class="section-lead">
+      A single per-person price covers everything on the ground in Beijing.
+      International travel, insurance and meals are arranged separately.<br />
+      单一人均价格覆盖落地后的全部安排；国际交通、保险与餐费另行安排。
+    </p>
+
+    <div class="fee-grid">
+      <div class="fee-price">
+        <div class="big"><span class="cur">¥</span>5,500</div>
+        <div class="per">PER PERSON · 10 DAYS · 每人 / 全程十天</div>
+        <div class="rate">≈ <span>¥550</span> / day · 单人每天 550 元</div>
+      </div>
+
+      <div class="fee-incl">
+        <div class="yes">
+          <h4>费用包含 <span class="en">Included</span></h4>
+          <ul>
+            <li>落地后住宿 · Accommodation after arrival</li>
+            <li>本地交通 · Local transportation</li>
+            <li>上课与学习 · Classes & study</li>
+            <li>文化参访 · Cultural visits</li>
+          </ul>
+        </div>
+        <div class="no">
+          <h4>费用不含 <span class="en">Not included</span></h4>
+          <ul>
+            <li>国际交通 · International transport</li>
+            <li>保险 · Insurance</li>
+            <li>餐费 · Meals</li>
+          </ul>
+        </div>
+
+        <div class="fee-notes">
+          <div class="fee-note"><strong>招生规模</strong><br />Group size capped at <strong>30 participants</strong>. 人数规模不超过 30 人。</div>
+          <div class="fee-note"><strong>带队优惠</strong><br />For groups over 15, one team leader's fee can be waived. 团队超过 15 人，可免一位带队老师的费用。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 2, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
 <!-- =================== MATERIALS =================== -->
 <section id="materials">
   <div class="container">
     <div class="eyebrow">Project Documents · 项目资料</div>
     <h2 class="section-title">资料索引<span class="en">Everything in the workspace.</span></h2>
     <p class="section-lead">
-      All program materials live in the CUC Obsidian vault. The summary below
+      All working documents live in the CUC Obsidian vault. The index below
       mirrors the folder structure: Plans (strategy), Courses (teaching),
       Materials (handouts &amp; templates).<br />
-      下方目录与 Obsidian 仓库三个文件夹一一对应。
+      下方目录与 Obsidian 仓库三个文件夹一一对应；日程编号以本页 10 天方案为准。<br />
+      <em style="color: var(--mute);">Day numbers in the docs follow the 10-day schedule shown on this page.</em>
     </p>
 
     <div class="mat-grid">
@@ -1313,28 +1508,28 @@
       <div class="mat-col">
         <h3>Plans<span class="en">战略层</span></h3>
         <div class="mat-item">
-          <div class="name">2 周日程 v3 <code>Curriculum-Outline-v3.md</code></div>
-          <div class="desc">12 天主排期 · 可压缩至 10 / 扩展至 14 · 含关键依赖图</div>
+          <div class="name">课程大纲 v3 <code>Curriculum-Outline-v3.md</code></div>
+          <div class="desc">内部备课大纲（含依赖图）· 对外日程以官方 10 天方案为准</div>
         </div>
         <div class="mat-item">
           <div class="name">钟主题日整合 <code>Bell-Theme-Day-Integration.md</code></div>
           <div class="desc">大钟寺 + 钟鼓楼一日游 · 任务卡 · Day 1/2/3 衔接</div>
         </div>
         <div class="mat-item">
-          <div class="name">企业参观整合 <code>AI-Company-Visits-Integration.md</code></div>
-          <div class="desc">小米 + 百度 · 内容生成 vs 人机交互 · 各自任务卡</div>
+          <div class="name">参访整合 <code>AI-Company-Visits-Integration.md</code></div>
+          <div class="desc">未来教育 / 798 · 各自任务卡 + 课程衔接</div>
         </div>
         <div class="mat-item">
           <div class="name">项目预算 <code>Project-Budget.md</code></div>
-          <div class="desc">精简 / 标准 / 充裕三档 · 标准档约 ¥170,500</div>
+          <div class="desc">内部成本测算 · 对外报价以官方方案 ¥5,500/人（10 天）为准</div>
         </div>
       </div>
 
       <div class="mat-col">
         <h3>Courses<span class="en">教学层</span></h3>
         <div class="mat-item">
-          <div class="name">3 天 AI 课总览 <code>3-Day-AI-Course.md</code></div>
-          <div class="desc">Day 1 文本 → Day 2 音乐 → Day 3 可视化 · 每天产出喂下一天</div>
+          <div class="name">3 天 AI 课总览 <a href="courses.html">→ 课程详情页</a> · <code>3-Day-AI-Course.md</code></div>
+          <div class="desc">Day 1 文本 → Day 2 音乐 → Day 3 可视化 · 每天产出喂下一天 · 15 道练习全文</div>
         </div>
         <div class="mat-item">
           <div class="name">Day 1 Prompt Gym <code>Day-1-Prompt-Gym.md</code></div>
@@ -1353,8 +1548,8 @@
           <div class="desc">4 维 × 4 级 · 红线扣分 · 提交清单 · 反模式</div>
         </div>
         <div class="mat-item">
-          <div class="name">🎓 D2 开场讲座（金院长）<a href="opening-lecture.html">→ 幻灯片</a> · <a href="opening-lecture.pdf">→ PDF</a></div>
-          <div class="desc">Communication, Culture, and Artificial Intelligence · 20 张 · 全英文 · 学术正式</div>
+          <div class="name">🎓 开场讲座（参考资产）<a href="opening-lecture.html">→ 幻灯片</a> · <a href="opening-lecture.pdf">→ PDF</a></div>
+          <div class="desc">Communication, Culture, and Artificial Intelligence · 20 张 · 全英文 · 可作 D1 讲座素材</div>
         </div>
       </div>
 
@@ -1366,15 +1561,15 @@
         </div>
         <div class="mat-item">
           <div class="name">学员行前包 <code>Pre-Arrival-Pack.md</code></div>
-          <div class="desc">英文 · 12 天速览 · 装箱清单 · 10 句活命中文</div>
+          <div class="desc">英文 · 10 天速览 · 装箱清单 · 10 句活命中文</div>
         </div>
         <div class="mat-item">
           <div class="name">对接邮件模板 <code>Outreach-Email-Templates.md</code></div>
-          <div class="desc">大钟寺 / 钟鼓楼 / 百度 / 小米 · 含 T-8/6/4/2/3 周时间线</div>
+          <div class="desc">大钟寺 / 钟鼓楼 / 未来教育 / 798 · 含周次时间线</div>
         </div>
         <div class="mat-item">
           <div class="name">Showcase 节目单 + 邀请函 <code>Showcase-Day-Program.md</code></div>
-          <div class="desc">D12 全天流程 · 评委组成 · 双语邀请卡</div>
+          <div class="desc">D10 展示流程 · 评委组成 · 双语邀请卡</div>
         </div>
         <div class="mat-item">
           <div class="name">结业报告模板 <code>Project-Closing-Report-Template.md</code></div>
@@ -1391,43 +1586,43 @@
 <!-- =================== SHOWCASE =================== -->
 <section id="showcase">
   <div class="container">
-    <div class="eyebrow">D12 · The Public Night</div>
-    <h2 class="section-title">Showcase 之夜<span class="en">What happens on Day 12.</span></h2>
+    <div class="eyebrow">Day 10 · The Capstone Showcase</div>
+    <h2 class="section-title">Capstone 展示之日<span class="en">A bell from 1420, music from a model, a page you can touch.</span></h2>
 
     <div class="show-hero">
-      <div class="show-img img-wrap" data-fallback-label="Stage · 舞台">
-        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80&auto=format&fit=crop"
-             alt="Audience at a presentation event"
+      <div class="show-img img-wrap" data-fallback-label="Showcase · 展示">
+        <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&q=80&auto=format&fit=crop"
+             alt="Students presenting to an audience"
              loading="lazy"
-             onerror="this.onerror=null; this.src='https://picsum.photos/seed/showcase-audience/1200/900';" />
+             onerror="this.onerror=null; this.src='https://picsum.photos/seed/group-presentation/1200/900';" />
       </div>
       <p class="section-lead" style="margin: 0;">
-        Four teams. Eight minutes each. A bell from 1420, music from a model,
-        a page you can touch. Awards by dimension, not by ranking. Then dinner.<br />
-        四组学员 · 每组 8 分钟展示 + 4 分钟问答 · 五项分维度奖项 · 然后是晚宴。
+        Each team presents one interlocking Capstone — Cultural Brief + AI Music +
+        Interactive Visualizer + Prompt Log — built from the bell they recorded on
+        Day 2. Eight minutes each, awards by dimension (not by ranking), closing
+        ceremony, then departure.<br />
+        每组展示一件互锁的 Capstone：文化简报 + AI 音乐 + 交互可视化 + Prompt 日志，
+        全部源自 D2 录下的那口钟。每组 8 分钟，分维度颁奖（非排名），结课仪式，
+        随后返程。
       </p>
     </div>
 
     <div class="show-grid">
 
       <div class="show-card">
-        <h4>下午流程</h4>
+        <h4>每组 8 分钟 + 4 分钟问答 · Per team</h4>
         <ul class="schedule-list">
-          <li><time>13:30</time><span>签到 + 茶歇 + 海报展览</span></li>
-          <li><time>14:00</time><span>CUC + 爱方代表致辞</span></li>
-          <li><time>14:20</time><span>项目纪录短片（3 min）</span></li>
-          <li><time>14:30</time><span>第一轮路演 · Group 1 &amp; 2</span></li>
-          <li><time>15:30</time><span>茶歇 + 现场互玩交互作品</span></li>
-          <li><time>15:50</time><span>第二轮路演 · Group 3 &amp; 4</span></li>
-          <li><time>16:50</time><span>评议 + 观众投票</span></li>
-          <li><time>17:10</time><span>颁奖 + 签合作意向</span></li>
-          <li><time>17:45</time><span>合影 · 闭幕</span></li>
-          <li><time>18:30</time><span>告别晚宴</span></li>
+          <li><time>0:00</time><span>The hook — 放音乐 + 启动 visualizer，不解释</span></li>
+          <li><time>1:00</time><span>文化讲解 — 选了什么钟、为什么</span></li>
+          <li><time>3:00</time><span>AI craft — demo 最得意的一段 prompt 迭代</span></li>
+          <li><time>5:00</time><span>Live interaction — 邀观众操作 visualizer</span></li>
+          <li><time>7:00</time><span>One takeaway — 一句话带走</span></li>
+          <li><time>Q&amp;A</time><span>评委 + 观众提问（4 min）</span></li>
         </ul>
       </div>
 
       <div class="show-card">
-        <h4>五项分维度奖</h4>
+        <h4>五项分维度奖 · Awards by dimension</h4>
         <div class="awards">
           <div class="award"><div class="zh">🔔 钟鸣奖</div><div class="en">The Bell Ringer — Overall</div></div>
           <div class="award"><div class="zh">🌿 静观奖</div><div class="en">The Quiet Insight — Depth</div></div>
@@ -1436,10 +1631,9 @@
           <div class="award"><div class="zh">✨ 惊喜奖</div><div class="en">The Surprise — Originality</div></div>
         </div>
         <p style="margin-top: 20px; font-size: 13px; color: #555; line-height: 1.7;">
-          The Bridge award is decided by Irish friends invited from outside the
-          program — the ultimate live test of cross-cultural communication.
-          <br /><br />
-          桥梁奖由项目外的爱尔兰朋友现场投票决定，是跨文化沟通的活体检验。
+          The Bridge award is decided by guests invited from outside the program —
+          a live test of whether the work crosses cultures.<br /><br />
+          桥梁奖由项目外受邀的嘉宾现场投票决定，是跨文化沟通的活体检验。
         </p>
       </div>
 
@@ -1451,34 +1645,36 @@
 <footer>
   <div class="foot-inner">
     <div>
-      <div class="foot-brand">钟 · 声 · <span class="accent">人</span></div>
+      <div class="foot-brand">灵境 · <span class="accent">工坊</span></div>
       <p>
-        AI × Chinese Traditional Culture · International Communication.<br />
-        A study tour designed by the CUC AI Lab for Irish undergraduates.
+        Miracle Craft Workshop · AIGC Application Training.<br />
+        A 10-day program for international students, hosted in Beijing.
       </p>
       <p style="margin-top: 12px; opacity: 0.6;">
-        中国传媒大学 AI Lab · 爱尔兰本科生游学项目 · 2026
+        中国传媒大学国际传媒教育学院（境外学生事务中心）· 2026
       </p>
     </div>
     <div>
       <h4>Quick Links</h4>
       <ul>
-        <li><a href="#journey">12-Day Journey</a></li>
-        <li><a href="#thread">The Bell Thread</a></li>
-        <li><a href="#pillars">Four Pillars</a></li>
+        <li><a href="#journey">10-Day Schedule</a></li>
+        <li><a href="#thread">The Concept</a></li>
+        <li><a href="#pillars">Four Features</a></li>
+        <li><a href="#fees">Fees & Notes</a></li>
         <li><a href="#materials">Documents</a></li>
-        <li><a href="#showcase">Showcase</a></li>
-        <li><a href="opening-lecture.html">🎓 Opening Address</a></li>
+        <li><a href="#showcase">Closing Day</a></li>
+        <li><a href="courses.html">📚 Three-Day AI Course</a></li>
+        <li><a href="opening-lecture.html">🎓 Opening Lecture</a></li>
       </ul>
     </div>
     <div>
       <h4>Contact</h4>
       <p>Communication University of China<br />
-        AI Lab · Project Office<br />
-        Beijing · 北京</p>
+        Faculty of International Media<br />
+        International Student Affairs Center · Beijing</p>
       <p style="margin-top: 12px; opacity: 0.55;">[ contact details TBD ]</p>
       <p style="margin-top: 18px; opacity: 0.5; font-size: 11px;">
-        Photos: Unsplash. Will be replaced with project field-photography.
+        Photos: Unsplash placeholders — to be replaced with program photography.
       </p>
     </div>
   </div>
@@ -1520,7 +1716,7 @@
   });
 
   // ===== Active section tracking (for nav + TOC) =====
-  const sections = ['hero', 'journey', 'thread', 'pillars', 'atmosphere', 'materials', 'showcase']
+  const sections = ['hero', 'journey', 'thread', 'pillars', 'atmosphere', 'fees', 'materials', 'showcase']
     .map((id) => document.getElementById(id))
     .filter(Boolean);
   const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
@@ -1579,8 +1775,9 @@
     else if (e.key === '2') document.getElementById('thread')?.scrollIntoView({ behavior: 'smooth' });
     else if (e.key === '3') document.getElementById('pillars')?.scrollIntoView({ behavior: 'smooth' });
     else if (e.key === '4') document.getElementById('atmosphere')?.scrollIntoView({ behavior: 'smooth' });
-    else if (e.key === '5') document.getElementById('materials')?.scrollIntoView({ behavior: 'smooth' });
-    else if (e.key === '6') document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '5') document.getElementById('fees')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '6') document.getElementById('materials')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '7') document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' });
   });
 </script>
 

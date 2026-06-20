@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#1A1A1A" />
+<meta name="robots" content="index, follow" />
+
+<title>三天 AI 课 · Three-Day AI Course | 灵境工坊 Miracle Craft Workshop · CUC</title>
+<meta name="description" content="The three core AI modules of the Miracle Craft Workshop (Days 3–5): Text & LLM cultural research (Prompt Gym), AI music composition, and a Gemini-generated interactive visualizer. Each day's output feeds the next — 15 copy-pasteable exercises, hour-by-hour schedules, deliverables and teaching notes." />
+<meta name="author" content="Faculty of International Media, CUC" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="灵境工坊 · Miracle Craft Workshop" />
+<meta property="og:title" content="三天 AI 课 · Text → Music → Interactive · Miracle Craft Workshop" />
+<meta property="og:description" content="Days 3–5 of the AIGC training: LLM cultural research → AI music → Gemini interactive visualizer. Each day's output feeds the next." />
+<meta property="og:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80&auto=format&fit=crop" />
+<meta property="og:locale" content="zh_CN" />
+
+<!-- Inline SVG favicon — matches index -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23FAF6F0'/><path d='M32 12 C34 24, 40 30, 52 32 C40 34, 34 40, 32 52 C30 40, 24 34, 12 32 C24 30, 30 24, 32 12 Z' fill='%23B08D57'/></svg>" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;800&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============ Reset & Base (shared with index.html) ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
+
+  :root {
+    --ink:      #1A1A1A;
+    --ink-2:    #2C2724;
+    --paper:    #FAF6F0;
+    --paper-2:  #F2EBDE;
+    --paper-3:  #ECE2D0;
+    --bronze:   #B08D57;
+    --bronze-d: #8C6D3F;
+    --bronze-l: #C9AB7C;
+    --jade:     #5B8C7E;
+    --jade-d:   #436B5F;
+    --mute:     #8B847B;
+    --line:     #D9D2C4;
+
+    --serif-en: "Cormorant Garamond", "Georgia", serif;
+    --serif-cn: "Noto Serif SC", "Songti SC", "STSong", serif;
+    --sans-en:  "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --sans-cn:  "Noto Sans SC", "PingFang SC", "Heiti SC", sans-serif;
+    --mono:     ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+    --w-max: 1180px;
+    --pad-x: clamp(20px, 5vw, 64px);
+
+    --shadow-soft: 0 12px 30px -10px rgba(0, 0, 0, 0.12);
+    --shadow-medium: 0 22px 50px -18px rgba(0, 0, 0, 0.18);
+  }
+
+  body {
+    font-family: var(--sans-en), var(--sans-cn);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  /* paper grain */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* ============ Scroll progress ============ */
+  .progress {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: linear-gradient(90deg, var(--bronze), var(--bronze-l));
+    width: 0%;
+    z-index: 100;
+    transition: width 0.1s linear;
+  }
+
+  /* ============ Top Nav ============ */
+  .topnav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 246, 240, 0.85);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    border-bottom: 1px solid var(--line);
+  }
+  .topnav-inner {
+    max-width: var(--w-max);
+    margin: 0 auto;
+    padding: 14px var(--pad-x);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    font-family: var(--serif-cn);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .brand .bell-icon { width: 22px; height: 22px; display: inline-block; color: var(--bronze); }
+  .brand .accent { color: var(--bronze); }
+  .nav-links {
+    display: flex; gap: clamp(12px, 2vw, 24px);
+    font-size: 13px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.72;
+    transition: opacity 0.2s, color 0.2s;
+    position: relative;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--bronze-d); }
+  .nav-links a.active { opacity: 1; color: var(--bronze-d); }
+  .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 50%;
+    transform: translateX(-50%);
+    width: 4px; height: 4px;
+    background: var(--bronze);
+    border-radius: 50%;
+  }
+  .nav-links a.home-link { color: var(--bronze-d); font-weight: 500; opacity: 1; }
+  @media (max-width: 760px) {
+    .nav-links li.opt { display: none; }
+  }
+
+  /* ============ Right-side TOC ============ */
+  .toc {
+    position: fixed;
+    right: 24px; top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    list-style: none;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .toc li { position: relative; }
+  .toc a {
+    display: block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--bronze);
+    background: transparent;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+  .toc a:hover { background: var(--bronze-l); transform: scale(1.25); }
+  .toc a.active { background: var(--bronze); transform: scale(1.4); }
+  .toc a::after {
+    content: attr(data-label);
+    position: absolute;
+    right: 18px; top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--bronze-d);
+    background: rgba(250, 246, 240, 0.95);
+    padding: 4px 10px;
+    border-radius: 100px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .toc a:hover::after { opacity: 1; }
+  @media (max-width: 1080px) { .toc { display: none; } }
+
+  /* ============ Back to top ============ */
+  .back-top {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 40;
+    width: 44px; height: 44px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none; border-radius: 50%;
+    cursor: pointer;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s, transform 0.25s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    box-shadow: var(--shadow-medium);
+  }
+  .back-top.show { opacity: 1; pointer-events: auto; }
+  .back-top:hover { background: var(--bronze-d); transform: translateY(-2px); }
+
+  /* ============ Layout helpers ============ */
+  section { padding: clamp(56px, 8vw, 108px) var(--pad-x); position: relative; z-index: 2; }
+  .container { max-width: var(--w-max); margin: 0 auto; }
+
+  .eyebrow {
+    font-family: var(--sans-en);
+    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--bronze-d);
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-family: var(--serif-cn);
+    font-weight: 800;
+    font-size: clamp(28px, 4.5vw, 42px);
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+  .section-title .en {
+    display: block;
+    font-family: var(--serif-en);
+    font-weight: 500; font-style: italic;
+    font-size: 0.55em;
+    color: var(--mute);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+  .section-lead {
+    font-size: clamp(15px, 1.5vw, 17px);
+    color: #444;
+    max-width: 680px;
+    margin-bottom: 40px;
+  }
+
+  /* ============ Dividers ============ */
+  .divider { height: 60px; position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; }
+  .divider svg { height: 18px; width: auto; opacity: 0.35; }
+
+  /* ============ Hero ============ */
+  .hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex; align-items: center;
+    padding: clamp(96px, 16vw, 168px) var(--pad-x) clamp(64px, 10vw, 120px);
+    overflow: hidden;
+  }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .hero-bg img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: sepia(0.25) saturate(0.85) brightness(0.5) contrast(1.05);
+    animation: heroZoom 30s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+  .hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at center, rgba(26,26,26,0.4), rgba(26,26,26,0.78) 70%),
+      linear-gradient(180deg, rgba(26,26,26,0.25), rgba(26,26,26,0.65));
+  }
+  .hero::before {
+    content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--bronze) 30%, var(--bronze) 70%, transparent);
+    opacity: 0.35; z-index: 1;
+  }
+  .hero-inner { max-width: var(--w-max); margin: 0 auto; position: relative; z-index: 2; color: var(--paper); }
+  .hero .eyebrow { color: var(--bronze-l); animation: fadeUp 1.1s ease 0.1s both; }
+  .hero h1 {
+    font-family: var(--serif-en);
+    font-weight: 500; font-style: italic;
+    font-size: clamp(40px, 7.5vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    margin-bottom: 22px;
+    color: var(--paper);
+  }
+  .hero h1 span { display: block; animation: fadeUp 1.1s ease both; }
+  .hero h1 .l1 { color: var(--paper); animation-delay: 0.25s; }
+  .hero h1 .l2 { color: var(--bronze); animation-delay: 0.4s; }
+  .hero h1 .l3 { color: var(--bronze-l); animation-delay: 0.55s; }
+  .hero-cn {
+    font-family: var(--serif-cn);
+    font-weight: 600;
+    font-size: clamp(20px, 3vw, 32px);
+    letter-spacing: 0.08em;
+    margin-bottom: 30px;
+    color: var(--paper);
+    animation: fadeUp 1.1s ease 0.7s both;
+  }
+  .hero-cn .sep { color: var(--bronze); margin: 0 0.25em; }
+  .hero-tagline {
+    max-width: 620px;
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 1.75;
+    color: rgba(250, 246, 240, 0.82);
+    margin-bottom: 14px;
+    animation: fadeUp 1.1s ease 0.85s both;
+  }
+  .hero-tagline.cn { font-family: var(--sans-cn); color: rgba(250, 246, 240, 0.55); margin-bottom: 48px; animation-delay: 0.95s; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: clamp(16px, 3vw, 36px);
+    padding-top: 36px;
+    border-top: 1px solid rgba(176, 141, 87, 0.4);
+    animation: fadeUp 1.1s ease 1.1s both;
+  }
+  .stat .n { font-family: var(--serif-en); font-weight: 600; font-size: clamp(32px, 5vw, 50px); line-height: 1; color: var(--bronze-l); }
+  .stat .label { font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250, 246, 240, 0.7); margin-top: 8px; }
+  .stat .label .cn { display: block; font-size: 11px; letter-spacing: 0.08em; text-transform: none; color: rgba(250, 246, 240, 0.5); margin-top: 4px; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ============ Spine (Day1→2→3 flow) ============ */
+  #spine { background: var(--paper-2); }
+  .spine-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 14px; align-items: stretch;
+    margin: 36px 0 12px;
+  }
+  @media (max-width: 820px) {
+    .spine-flow { grid-template-columns: 1fr; }
+    .spine-arrow { transform: rotate(90deg); margin: 2px auto; }
+  }
+  .spine-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 22px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .spine-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+  .spine-card .ico { font-family: var(--serif-cn); font-size: 34px; font-weight: 600; color: var(--bronze); line-height: 1; margin-bottom: 12px; }
+  .spine-card .day { font-family: var(--serif-en); font-style: italic; font-size: 13px; color: var(--bronze-d); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .spine-card h4 { font-family: var(--serif-cn); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .spine-card .en { font-family: var(--serif-en); font-style: italic; color: var(--mute); font-size: 13px; margin-bottom: 12px; }
+  .spine-card .out { font-size: 12.5px; color: #555; line-height: 1.5; border-top: 1px dashed var(--line); padding-top: 12px; }
+  .spine-card .out b { color: var(--jade-d); font-weight: 600; }
+  .spine-arrow { align-self: center; color: var(--bronze); font-size: 20px; line-height: 1; }
+  .spine-note {
+    border-left: 3px solid var(--bronze);
+    padding: 16px 22px;
+    margin-top: 26px;
+    background: var(--paper);
+    font-family: var(--serif-en);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+    border-radius: 0 4px 4px 0;
+  }
+  .spine-note .cn { display: block; font-family: var(--serif-cn); font-style: normal; color: var(--mute); font-size: 13px; margin-top: 8px; }
+
+  /* ============ Course band (section intro) ============ */
+  .course[data-course="text"]   { background: var(--paper); }
+  .course[data-course="music"]  { background: var(--paper-2); }
+  .course[data-course="visual"] { background: var(--paper); }
+
+  .course-band { display: grid; grid-template-columns: auto 1fr; gap: clamp(20px, 4vw, 44px); align-items: start; }
+  @media (max-width: 680px) { .course-band { grid-template-columns: 1fr; } }
+  .course-num {
+    font-family: var(--serif-en);
+    font-weight: 300;
+    font-size: clamp(72px, 12vw, 150px);
+    line-height: 0.8;
+    color: var(--bronze);
+    opacity: 0.85;
+  }
+  .course-meta .tag {
+    display: inline-block;
+    font-family: var(--sans-en);
+    font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--bronze-d);
+    border: 1px solid var(--bronze);
+    border-radius: 100px;
+    padding: 5px 14px;
+    margin-bottom: 14px;
+  }
+  .course-meta h2 { font-family: var(--serif-cn); font-weight: 800; font-size: clamp(26px, 4vw, 38px); line-height: 1.2; margin-bottom: 6px; }
+  .course-meta h2 .en { display: block; font-family: var(--serif-en); font-style: italic; font-weight: 500; font-size: 0.5em; color: var(--mute); margin-top: 6px; }
+  .course-meta .lead { font-size: 15.5px; color: #444; max-width: 640px; margin: 14px 0 0; line-height: 1.7; }
+
+  .deliver-pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 22px;
+    background: var(--paper-3);
+    border-left: 3px solid var(--jade);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 18px;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  .deliver-pill b { font-family: var(--serif-cn); color: var(--jade-d); }
+
+  /* ============ Two-column: objectives | tools ============ */
+  .cols { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 4vw, 48px); margin-top: 44px; align-items: start; }
+  @media (max-width: 820px) { .cols { grid-template-columns: 1fr; } }
+
+  .block-title {
+    font-family: var(--serif-cn);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--bronze-d);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bronze);
+  }
+  .block-title .en { font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: 13px; color: var(--mute); margin-left: 8px; }
+
+  .obj-list { list-style: none; }
+  .obj-list li { position: relative; padding: 9px 0 9px 26px; font-size: 14.5px; color: #3c3c3c; line-height: 1.55; border-bottom: 1px dashed var(--line); }
+  .obj-list li:last-child { border-bottom: none; }
+  .obj-list li::before { content: '✦'; position: absolute; left: 0; top: 9px; color: var(--bronze); font-size: 12px; }
+  .obj-list li .en { display: block; font-family: var(--serif-en); font-style: italic; color: var(--mute); font-size: 13px; }
+
+  /* tool table */
+  .tool-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .tool-table th {
+    text-align: left;
+    font-family: var(--sans-en);
+    font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--bronze-d);
+    padding: 8px 10px; border-bottom: 1px solid var(--bronze);
+  }
+  .tool-table td { padding: 10px; border-bottom: 1px dashed var(--line); color: #3c3c3c; vertical-align: top; line-height: 1.45; }
+  .tool-table tr:last-child td { border-bottom: none; }
+  .tool-table .cat { font-family: var(--sans-cn); font-weight: 500; color: var(--ink); white-space: nowrap; }
+  .tool-table .name b { color: var(--bronze-d); }
+
+  /* ============ Schedule strip ============ */
+  .sched {
+    margin-top: 44px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 16px;
+    padding: clamp(24px, 4vw, 36px);
+    box-shadow: var(--shadow-medium);
+  }
+  .sched h3 { font-family: var(--serif-en); font-style: italic; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bronze-l); margin-bottom: 18px; }
+  .sched-list { list-style: none; font-size: 14px; }
+  .sched-list li {
+    display: grid; grid-template-columns: 116px 1fr; gap: 16px;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(250,246,240,0.12);
+    line-height: 1.5;
+    align-items: baseline;
+  }
+  .sched-list li:last-child { border-bottom: none; }
+  .sched-list time { font-family: var(--serif-en); font-style: italic; font-size: 13px; color: var(--bronze-l); white-space: nowrap; }
+  .sched-list .lab { color: rgba(250,246,240,0.9); }
+  .sched-list .lab b { color: var(--paper); font-weight: 600; }
+
+  /* ============ Exercises ============ */
+  .ex-head-line { display: flex; align-items: baseline; gap: 14px; margin: 52px 0 22px; }
+  .ex-head-line .k { font-family: var(--sans-en); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bronze-d); }
+  .ex-head-line .ln { flex: 1; height: 1px; background: var(--line); }
+
+  .ex-list { display: grid; gap: 22px; }
+  .ex {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: clamp(22px, 3vw, 30px);
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .course[data-course="music"] .ex { background: var(--paper); }
+  .ex:hover { box-shadow: var(--shadow-soft); transform: translateY(-2px); }
+  .ex-top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+  .ex-no {
+    font-family: var(--serif-en); font-style: italic; font-weight: 600;
+    font-size: 14px; color: var(--bronze);
+    letter-spacing: 0.05em;
+  }
+  .ex h4 { font-family: var(--serif-cn); font-weight: 700; font-size: 19px; line-height: 1.3; flex: 1; min-width: 220px; }
+  .ex h4 .en { display: block; font-family: var(--serif-en); font-style: italic; font-weight: 500; font-size: 0.72em; color: var(--mute); margin-top: 2px; }
+  .ex .time {
+    font-family: var(--sans-en);
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--jade-d);
+    background: rgba(91, 140, 126, 0.12);
+    border-radius: 100px;
+    padding: 4px 12px;
+    white-space: nowrap;
+  }
+  .ex .goal { font-size: 14.5px; color: #3c3c3c; line-height: 1.6; margin: 10px 0 4px; }
+  .ex .goal b { font-family: var(--serif-cn); color: var(--bronze-d); }
+
+  /* copy-paste prompt box */
+  .prompt-box {
+    position: relative;
+    background: var(--ink-2);
+    color: #EDE6D8;
+    border-radius: 10px;
+    padding: 18px 18px 18px 20px;
+    margin: 16px 0;
+    border-left: 3px solid var(--bronze);
+    overflow: hidden;
+  }
+  .prompt-box .plabel {
+    display: block;
+    font-family: var(--sans-en);
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--bronze-l);
+    margin-bottom: 10px;
+  }
+  .prompt-box pre {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #EDE6D8;
+  }
+  .prompt-box.alt { border-left-color: var(--jade); }
+
+  .ex-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 8px; }
+  @media (max-width: 640px) { .ex-grid { grid-template-columns: 1fr; } }
+  .ex-cell .h {
+    font-family: var(--sans-en);
+    font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--bronze-d);
+    margin-bottom: 8px;
+  }
+  .ex-cell .deliver { font-size: 13.5px; color: #3c3c3c; line-height: 1.55; }
+  .ex-cell ol { margin: 0; padding-left: 18px; font-size: 13.5px; color: #3c3c3c; line-height: 1.5; }
+  .ex-cell ol li { margin-bottom: 5px; }
+
+  .teach {
+    margin-top: 16px;
+    background: var(--paper-2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #4a4a4a;
+    line-height: 1.55;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .course[data-course="music"] .teach { background: var(--paper-3); }
+  .teach .star { color: var(--bronze); flex-shrink: 0; font-size: 14px; line-height: 1.4; }
+  .teach b { font-family: var(--serif-cn); color: var(--bronze-d); }
+
+  /* mini-table inside exercises (interaction options etc.) */
+  .mini-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 8px 0; }
+  .mini-table td { padding: 7px 10px; border-bottom: 1px dashed var(--line); vertical-align: top; line-height: 1.45; color: #3c3c3c; }
+  .mini-table tr:last-child td { border-bottom: none; }
+  .mini-table td:first-child { font-family: var(--sans-cn); font-weight: 500; white-space: nowrap; color: var(--ink); }
+  .mini-table .en { font-family: var(--mono); font-size: 11.5px; color: var(--bronze-d); }
+
+  /* ============ Shared elements (teams / assessment / risks) ============ */
+  #shared { background: var(--ink); color: var(--paper); }
+  #shared .eyebrow { color: var(--bronze-l); }
+  #shared .section-title { color: var(--paper); }
+  #shared .section-title .en { color: rgba(250,246,240,0.6); }
+  #shared .section-lead { color: rgba(250,246,240,0.72); }
+  .shared-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 26px; margin-top: 16px; }
+  .shared-card {
+    background: rgba(250,246,240,0.04);
+    border: 1px solid rgba(176,141,87,0.3);
+    border-radius: 16px;
+    padding: 28px 26px;
+  }
+  .shared-card h3 { font-family: var(--serif-cn); font-weight: 700; font-size: 18px; color: var(--bronze-l); margin-bottom: 4px; }
+  .shared-card h3 .en { display: block; font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: 0.7em; color: rgba(250,246,240,0.55); margin-top: 2px; }
+  .shared-card p, .shared-card li { font-size: 13.5px; color: rgba(250,246,240,0.78); line-height: 1.6; }
+  .shared-card ul { list-style: none; margin-top: 14px; }
+  .shared-card ul li { padding: 7px 0 7px 20px; position: relative; border-bottom: 1px dashed rgba(250,246,240,0.12); }
+  .shared-card ul li:last-child { border-bottom: none; }
+  .shared-card ul li::before { content: '·'; position: absolute; left: 4px; color: var(--bronze-l); font-weight: 700; font-size: 18px; top: 4px; }
+
+  /* assessment bars */
+  .assess { margin-top: 14px; }
+  .assess-row { margin-bottom: 14px; }
+  .assess-row .top { display: flex; justify-content: space-between; font-size: 13.5px; margin-bottom: 6px; }
+  .assess-row .top .zh { color: var(--paper); }
+  .assess-row .top .pct { font-family: var(--serif-en); font-style: italic; color: var(--bronze-l); }
+  .assess-row .bar { height: 6px; background: rgba(250,246,240,0.1); border-radius: 100px; overflow: hidden; }
+  .assess-row .bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--bronze), var(--bronze-l)); border-radius: 100px; }
+  .assess-row .en { font-family: var(--serif-en); font-style: italic; font-size: 12px; color: rgba(250,246,240,0.5); margin-top: 4px; display: block; }
+
+  /* ============ Footer ============ */
+  footer { background: var(--ink); color: var(--paper); padding: 64px var(--pad-x) 40px; position: relative; z-index: 2; border-top: 1px solid rgba(250,246,240,0.1); }
+  .foot-inner { max-width: var(--w-max); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+  @media (max-width: 700px) { .foot-inner { grid-template-columns: 1fr; gap: 24px; } }
+  footer h4 { font-family: var(--serif-en); font-style: italic; font-weight: 500; font-size: 14px; color: var(--bronze); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; }
+  footer p, footer li { font-size: 13px; line-height: 1.7; color: rgba(250, 246, 240, 0.72); }
+  footer ul { list-style: none; }
+  footer a { color: rgba(250, 246, 240, 0.72); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--bronze-l); }
+  .foot-brand { font-family: var(--serif-cn); font-weight: 800; font-size: 20px; color: var(--paper); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .foot-brand .accent { color: var(--bronze); }
+  .foot-bottom { max-width: var(--w-max); margin: 44px auto 0; padding-top: 24px; border-top: 1px solid rgba(250, 246, 240, 0.15); font-size: 12px; color: rgba(250, 246, 240, 0.45); text-align: center; letter-spacing: 0.05em; }
+
+  /* ============ Reveal on scroll ============ */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+  @media print {
+    .topnav, .progress, .toc, .back-top, footer { display: none; }
+    body { background: white; } body::before { display: none; }
+    section { page-break-inside: avoid; padding: 30px; }
+    .ex, .sched, .shared-card { page-break-inside: avoid; }
+    .prompt-box { background: #f4efe6; color: #1A1A1A; }
+    .prompt-box pre, .prompt-box .plabel { color: #1A1A1A; }
+    .hero-bg img { filter: none; opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- =================== NAV =================== -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="index.html">
+      <svg class="bell-icon" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+        <path d="M32 12 C34 24, 40 30, 52 32 C40 34, 34 40, 32 52 C30 40, 24 34, 12 32 C24 30, 30 24, 32 12 Z" />
+      </svg>
+      灵境 · <span class="accent">工坊</span>
+    </a>
+    <ul class="nav-links">
+      <li class="opt"><a href="index.html#journey">日程</a></li>
+      <li><a href="#spine">主线</a></li>
+      <li><a href="#text">文本</a></li>
+      <li><a href="#music">音乐</a></li>
+      <li><a href="#visual">交互</a></li>
+      <li class="opt"><a href="#shared">通用</a></li>
+      <li><a href="index.html" class="home-link">← 总览</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- =================== Right-side TOC =================== -->
+<ul class="toc" id="toc">
+  <li><a href="#hero"   data-label="开篇 Overview"></a></li>
+  <li><a href="#spine"  data-label="三天主线 Spine"></a></li>
+  <li><a href="#text"   data-label="Day 1 · 文本 Text"></a></li>
+  <li><a href="#music"  data-label="Day 2 · 音乐 Music"></a></li>
+  <li><a href="#visual" data-label="Day 3 · 交互 Visual"></a></li>
+  <li><a href="#shared" data-label="通用要素 Shared"></a></li>
+</ul>
+
+<!-- =================== HERO =================== -->
+<header class="hero" id="hero">
+  <div class="hero-bg img-wrap" data-fallback-label="Text · Music · Interactive">
+    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=2200&q=85&auto=format&fit=crop"
+         alt="Abstract circuitry and light representing generative AI"
+         loading="eager"
+         onerror="this.onerror=null; this.src='https://picsum.photos/seed/ai-course-hero/2200/1400';" />
+  </div>
+
+  <div class="hero-inner">
+    <div class="eyebrow">Days 3–5 · The Three Core AI Modules · 三天 AI 授课</div>
+    <h1>
+      <span class="l1">Text becomes</span>
+      <span class="l2">music becomes</span>
+      <span class="l3">a page you touch.</span>
+    </h1>
+    <div class="hero-cn">文本<span class="sep">→</span>音乐<span class="sep">→</span>交互可视化</div>
+
+    <p class="hero-tagline">
+      Three days, three modalities, one chain. Day 1 turns a recorded temple bell
+      into a verified cultural brief with LLMs; Day 2 turns that brief into an
+      AI-composed track; Day 3 turns the track into an interactive page built by
+      describing it to Gemini. Each day's output is the next day's raw material.
+    </p>
+    <p class="hero-tagline cn">
+      三天、三种模态、一条线索。Day 1 用 LLM 把录下的钟声做成可核查的文化简报；
+      Day 2 把简报变成 AI 音乐；Day 3 用自然语言对 Gemini 描述，把音乐变成可交互页面。
+      每一天的产出，都是下一天的原料。
+    </p>
+
+    <div class="stats">
+      <div class="stat"><div class="n">3</div><div class="label">Days<span class="cn">天 / D3–D5</span></div></div>
+      <div class="stat"><div class="n">15</div><div class="label">Exercises<span class="cn">循序练习</span></div></div>
+      <div class="stat"><div class="n">18h</div><div class="label">Studio Time<span class="cn">课堂工坊</span></div></div>
+      <div class="stat"><div class="n">3</div><div class="label">Deliverables<span class="cn">可交付作品</span></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 2, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
+<!-- =================== SPINE =================== -->
+<section id="spine">
+  <div class="container">
+    <div class="eyebrow">The Course Spine · 课程主线</div>
+    <h2 class="section-title">每一天喂下一天<span class="en">Each day's output is the next day's input.</span></h2>
+    <p class="section-lead">
+      The three AI days are not three separate workshops — they are one pipeline.
+      Material comes from the Day 2 bell-theme museum visit; the finished chain is
+      integrated into the Capstone on Day 8 and presented on Day 10.<br />
+      这三天不是三个独立工作坊，而是一条流水线。素材来自 D2 大钟寺钟主题日；
+      成品在 D8 整合为 Capstone，D10 展示。
+    </p>
+
+    <div class="spine-flow">
+      <div class="spine-card">
+        <div class="ico">文</div>
+        <div class="day">Day 1 · D3</div>
+        <h4>文本 · LLM 研究</h4>
+        <div class="en">Text &amp; cultural research</div>
+        <div class="out">产出 <b>Cultural Concept Brief</b>（文化研究简报）— 含声音 &amp; 视觉关键词</div>
+      </div>
+      <div class="spine-arrow">→</div>
+      <div class="spine-card">
+        <div class="ico">乐</div>
+        <div class="day">Day 2 · D4</div>
+        <h4>音频 · AI 音乐</h4>
+        <div class="en">AI music composition</div>
+        <div class="out">产出 <b>60–120s 音乐作品</b> + Music Card（真实钟声 × AI 乐）</div>
+      </div>
+      <div class="spine-arrow">→</div>
+      <div class="spine-card">
+        <div class="ico">境</div>
+        <div class="day">Day 3 · D5</div>
+        <h4>视觉 · 交互可视化</h4>
+        <div class="en">Interactive visualizer</div>
+        <div class="out">产出 <b>可交互 HTML 页面</b> + 公开 URL + Prompt 日志</div>
+      </div>
+    </div>
+
+    <blockquote class="spine-note">
+      "By Day 3, every team holds one complete <em>Chinese Culture × AI</em> piece —
+      research, sound and interaction, all from the same bell."
+      <span class="cn">三天结束，每组拥有一件完整的「中国文化 × AI」小作品——研究、声音、交互，全部源自同一口钟。</span>
+    </blockquote>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 16, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
+<!-- =================== COURSE 1 — TEXT =================== -->
+<section id="text" class="course" data-course="text">
+  <div class="container">
+
+    <div class="course-band">
+      <div class="course-num">Ⅰ</div>
+      <div class="course-meta">
+        <span class="tag">Day 1 · D3 · Text · 文本模型</span>
+        <h2>文本模型与文化研究<span class="en">Text Models &amp; Cultural Research — the Prompt Gym</span></h2>
+        <p class="lead">
+          The students meet large language models as collaborators, not oracles.
+          They compare Chinese and Western models on a Chinese-culture topic, learn
+          prompt craft through five escalating drills built entirely on bell-theme
+          material, and fact-check everything. The day's product seeds Day 2.<br />
+          学员把大语言模型当作协作者而非神谕。围绕钟主题素材，用五道循序练习掌握提示工程，
+          对比中西模型并核查事实。当天产出喂给 Day 2。
+        </p>
+        <div class="deliver-pill"><b>当天产出 / Deliverable</b> — Cultural Concept Brief（800–1200 词，英文）：选题 · 钩子 · 核查事实 · 声音关键词 · 视觉关键词 · 一处 AI 出错点</div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="block-title">学习目标 <span class="en">Learning objectives</span></div>
+        <ul class="obj-list">
+          <li>理解 LLM 的工作方式与局限<span class="en">Understand how LLMs work and where they fail</span></li>
+          <li>掌握提示工程基础：角色 · 上下文 · 约束 · 迭代<span class="en">Master role, context, constraint &amp; iteration</span></li>
+          <li>对比中国与西方 LLM 在「中国文化」题上的差异<span class="en">Compare CN vs Western LLMs on Chinese topics</span></li>
+          <li>学会对 AI 输出做事实核查<span class="en">Fact-check AI output against sources</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="block-title">工具 <span class="en">Tools</span></div>
+        <table class="tool-table">
+          <thead><tr><th>类别</th><th>工具</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">中国 LLM</td><td class="name"><b>豆包 Doubao</b> · 混元 Hunyuan · 智谱清言 · Kimi（接受英文 prompt）</td></tr>
+            <tr><td class="cat">国际对照</td><td class="name">Claude · ChatGPT · Gemini（作「外部视角」对照）</td></tr>
+            <tr><td class="cat">检索增强</td><td class="name">Perplexity · 豆包联网搜索（验证事实）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sched">
+      <h3>当天流程 · Hour-by-hour（约 6 小时）</h3>
+      <ul class="sched-list">
+        <li><time>09:00–10:00</time><span class="lab"><b>讲座</b> — What is an LLM, and why does it hallucinate?</span></li>
+        <li><time>10:00–11:00</time><span class="lab"><b>Live demo</b> — 同一问题问 3 个模型，对比答案</span></li>
+        <li><time>11:00–12:00</time><span class="lab"><b>Workshop 1 · Prompt Gym</b> — 5 道循序渐进练习（见下）</span></li>
+        <li><time>13:30–15:00</time><span class="lab"><b>Workshop 2</b> — 选题 + 初轮 research（每组 1 个中国文化主题）</span></li>
+        <li><time>15:00–16:30</time><span class="lab"><b>Workshop 3</b> — 跨模型对比 + 事实核查</span></li>
+        <li><time>16:30–17:00</time><span class="lab"><b>提交</b> — Cultural Concept Brief（800–1200 词，英文）</span></li>
+      </ul>
+    </div>
+
+    <div class="ex-head-line"><span class="k">Prompt Gym · 5 道循序练习</span><span class="ln"></span></div>
+    <div class="ex-list">
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 1</span> <h4>Three Voices, One Question<span class="en">三个嗓音，同一个问题</span></h4></div>
+          <span class="time">15 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 意识到「AI 答案」不是一个答案：不同模型有不同声音。把同一个问题原样发给三个模型，不修改。</p>
+        <div class="prompt-box"><span class="plabel">Paste into 豆包 · 文心一言 · Claude</span><pre>What is the cultural significance of the Yongle Great Bell at Dazhongsi?</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">一张 3 列表：每个模型的 3 个答案要点 + 1 个让你意外的细节。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>哪个答案最「中国」？哪个最「西方」？为什么？</li><li>三者在哪里互相矛盾？谁对？怎么知道？</li><li>只能引用一个给爱尔兰朋友，你选哪个？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 默认 AI 是单一权威是危险的；多模型对比本身就是事实核查。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 2</span> <h4>Putting the LLM in Robes<span class="en">给 AI 穿上戏服</span></h4></div>
+          <span class="time">15 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 理解 role / persona prompting 如何改变回答的风格与深度。在同一对话窗口依次发两个 prompt。</p>
+        <div class="prompt-box"><span class="plabel">Prompt A · 赤裸版</span><pre>Tell me about bianzhong.</pre></div>
+        <div class="prompt-box alt"><span class="plabel">Prompt B · 穿戏服版</span><pre>Act as a Chinese bronze-age music historian writing for a curious 20-year-old Irish undergraduate who has never been to China and has just visited Dazhongsi this morning. Same question: tell me about bianzhong. Use vivid sensory language. Limit to 150 words.</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">两段答案并列，用荧光笔标出 3 个差异。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>B 版多出了什么？少了什么？</li><li>「20 岁爱尔兰学生」让 AI 怎么变了？</li><li>若改成「10 岁中国小孩」会怎样？先猜再试。</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — persona 不是表演，是<b>约束</b>：它告诉模型哪些词不能用、哪些细节要给。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 3</span> <h4>The Cage<span class="en">把模型关进笼子</span></h4></div>
+          <span class="time">20 min · 3–5 轮</span>
+        </div>
+        <p class="goal"><b>目标</b> — 学会用显式约束逼出可用输出，并体会 AI 不情愿被约束的「反弹」。</p>
+        <div class="prompt-box"><span class="plabel">Paste into 豆包</span><pre>Describe the Yongle Great Bell. Output MUST satisfy ALL of:
+1. Exactly 100 words (count them).
+2. Contain at least 3 sensory details (sound, touch, sight, smell, weight).
+3. End with one open question for the reader.
+4. Do NOT use the words "ancient", "treasure", "magnificent".
+5. Mention at least one number with units.
+6. Write in second person ("you").</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">最终通过版 + 失败版的「违规清单」（哪轮违反哪条）。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>哪条约束 AI 最容易违反？</li><li>被指出违反时 AI 如何反应？道歉 / 强行解释 / 真改？</li><li>如果你是 AI，会偷懒砍哪条？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 字数 / 禁用词 / 结构 是最常被忽略却最强的「作品塑形器」。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 4</span> <h4>Show, Don't Tell<span class="en">给两个例子，让 AI 学</span></h4></div>
+          <span class="time">15 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 理解 few-shot prompting：用例子比用规则更有效。把整段复制到 Claude（few-shot 效果最好）。</p>
+        <div class="prompt-box"><span class="plabel">Paste into Claude — full block</span><pre>I will give you two examples of a "Cultural Concept Brief" format,
+then I want you to write a third one in the same style.
+
+EXAMPLE 1:
+TOPIC: The Yongle Great Bell
+WHY THIS MATTERS: A 46-ton sutra-covered Ming-dynasty bell that
+  still rings for two minutes after a single strike — an acoustic
+  marvel hiding in plain sight in Beijing.
+ONE FACT: Its surface bears around 230,000 Buddhist sutra characters.
+ONE SENSORY DETAIL: The decay is so long you start to forget when
+  the strike happened.
+HOOK FOR IRISH STUDENTS: It's older than Trinity College Dublin.
+ONE THING AI MIGHT GET WRONG: The exact weight (sources vary
+  between 42 and 47 tons).
+
+EXAMPLE 2:
+TOPIC: One Bell, Two Tones (一钟双音)
+WHY THIS MATTERS: A 2500-year-old acoustic invention — strike
+  the front of a bianzhong bell and you get one note; strike
+  the side and you get a different one, usually a minor third up.
+ONE FACT: The Marquis Yi of Zeng tomb (433 BCE) had 65 of these.
+ONE SENSORY DETAIL: The tonal shift sounds almost like a single
+  bell answering itself.
+HOOK FOR IRISH STUDENTS: Imagine if a church bell could sing harmony
+  with itself.
+ONE THING AI MIGHT GET WRONG: Claiming it was understood in the West
+  before the 1970s — it wasn't.
+
+NOW YOUR TURN. TOPIC: The 25 Night-Watch Drums at Gulou.
+Same format. Be concrete.</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">AI 输出 + 你的 4 项打分（准确性 / 风格匹配 / hook 力 / 可信度，各 1–5）。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>AI 学会格式了吗？哪项最像？哪项跑偏？</li><li>例子里哪个「形状」帮助最大？</li><li>只给 1 个例子会更差还是相似？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 写规则费力又不准；<b>给例子</b>是更高带宽的指令。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 5 · 高潮</span> <h4>The Mirror<span class="en">镜子练习 — critique then rewrite</span></h4></div>
+          <span class="time">20 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 体验 self-critique loop：让 AI 当自己的评论员。在 Ex.4 的 brief 之后连发两个 prompt。</p>
+        <div class="prompt-box"><span class="plabel">Prompt A · 批评</span><pre>Now critique this brief from the perspective of an Irish undergraduate who has never been to China. What would feel alien, wrong, patronizing, or boring to them? Be specific and merciless. List 5 problems.</pre></div>
+        <div class="prompt-box alt"><span class="plabel">Prompt B · 修改</span><pre>Now rewrite the brief addressing your own 5 critiques. Show me only the rewrite, not commentary.</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">三版并列（原始 / 批评清单 / 重写）+ 一句话评价。<b>这个重写版就是 Cultural Concept Brief 初稿，直接喂给 Day 2。</b></div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>AI 的「自我批评」真诚还是表演？</li><li>重写版在哪更好？在哪更糟？</li><li>这个循环还能用在哪些非课程场景？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点 · 关键</b> — AI 最强用法之一：<b>让它扮演两个角色互相挑战。</b>不要跳过 Ex.5，这是整堂课的 AHA moment。</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 2, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
+<!-- =================== COURSE 2 — MUSIC =================== -->
+<section id="music" class="course" data-course="music">
+  <div class="container">
+
+    <div class="course-band">
+      <div class="course-num">Ⅱ</div>
+      <div class="course-meta">
+        <span class="tag">Day 2 · D4 · Audio · AI 音乐</span>
+        <h2>AI 音乐创作<span class="en">AI Music Creation — from brief to a finished track</span></h2>
+        <p class="lead">
+          With no music-production background assumed, students learn music-prompt
+          grammar, fold the real bell recording from the museum into AI-generated
+          sound, and build a structured 60–120-second piece driven by Day 1's brief.
+          The closing question seeds Day 3.<br />
+          不预设音乐基础。学员掌握音乐 prompt 语法，把博物馆录下的真实钟声融进 AI 生成的音乐，
+          以 Day 1 简报为驱动做出有结构的 60–120 秒作品。收尾问题埋下 Day 3 的种子。
+        </p>
+        <div class="deliver-pill"><b>当天产出 / Deliverable</b> — 60–120s 音频（.mp3 / .wav）+ Music Card：标题 · 结构图 · prompt 链（≥5 轮）· 灵感来源（指向 Day 1 brief）</div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="block-title">学习目标 <span class="en">Learning objectives</span></div>
+        <ul class="obj-list">
+          <li>掌握音乐 prompt 语法：流派 · 乐器 · 情绪 · 结构 · BPM<span class="en">Master music-prompt grammar</span></li>
+          <li>理解 AI 音乐模型的「风格融合」能力<span class="en">Understand style fusion</span></li>
+          <li>用 Day 1 的 Cultural Brief 驱动创作<span class="en">Drive composition from Day 1's brief</span></li>
+          <li>把真实钟声采样融进生成音乐<span class="en">Anchor AI sound with a real recording</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="block-title">工具 <span class="en">Tools</span></div>
+        <table class="tool-table">
+          <thead><tr><th>类别</th><th>工具</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">主力（中国）</td><td class="name"><b>海绵音乐</b> · 天工 SkyMusic（支持中国乐器）</td></tr>
+            <tr><td class="cat">主力（国际）</td><td class="name"><b>Suno</b> · Udio（质量稳）</td></tr>
+            <tr><td class="cat">后期</td><td class="name">Audacity · CapCut（剪辑、淡入淡出）</td></tr>
+            <tr><td class="cat">乐器词库</td><td class="name">古筝 · 二胡 · 笛 · 琵琶 · 编钟 · 箫（课前发讲义）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sched">
+      <h3>当天流程 · Hour-by-hour（全天 6 小时）</h3>
+      <ul class="sched-list">
+        <li><time>09:00–10:00</time><span class="lab"><b>讲座</b> — How AI generates music（diffusion + sequence models 浅讲）</span></li>
+        <li><time>10:00–11:00</time><span class="lab"><b>Demo</b> — 关键词库：中国传统音阶、乐器、情绪词</span></li>
+        <li><time>11:00–12:00</time><span class="lab"><b>Workshop 1 · Prompt to Sound</b> — 每人生成 3 段 30 秒片段</span></li>
+        <li><time>13:30–15:00</time><span class="lab"><b>Workshop 2</b> — 把 Day 1 brief 转成 music prompt → 60–120s 作品</span></li>
+        <li><time>15:00–16:30</time><span class="lab"><b>Workshop 3</b> — 迭代 + 剪辑 + 起英文标题</span></li>
+        <li><time>16:30–17:00</time><span class="lab"><b>内部试听</b> + peer feedback</span></li>
+      </ul>
+    </div>
+
+    <div class="ex-head-line"><span class="k">AI Music Workshop · 5 道循序练习</span><span class="ln"></span></div>
+    <div class="ex-list">
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 1</span> <h4>Listen Like an AI<span class="en">像 AI 一样听歌</span></h4></div>
+          <span class="time">20 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 学会反向拆解一首歌为 AI 可消化的 prompt 元素。教师播 3 段参考音乐（30s/段，各 2 遍），学员仅听、禁止搜歌名。</p>
+        <table class="mini-table">
+          <tr><td>参考 1</td><td>编钟独奏（如曾侯乙编钟复刻演奏）</td></tr>
+          <tr><td>参考 2</td><td>古筝 + 笛子的现代国风（如《典籍里的中国》主题音乐）</td></tr>
+          <tr><td>参考 3</td><td>中西融合电子</td></tr>
+        </table>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">每段填 5 列表：Genre · Instruments · Mood · Tempo · One word.</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>哪段最难拆？为什么？</li><li>把「不喜欢」翻译成可避免的 prompt 词。</li><li>三段的「中国感」共同点，能用英文说清吗？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — AI 不懂「中国风」这种模糊词；它懂 <code>pentatonic + guzheng + slow + reverb</code>。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 2</span> <h4>First Generation<span class="en">第一次生成</span></h4></div>
+          <span class="time">30 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 在海绵 / Suno 做出第一段可听的中国风音乐，体会 prompt → output 的距离。用 starter 生成后，改至少 3 个变量重生成，共 4 版。</p>
+        <div class="prompt-box"><span class="plabel">Starter · 海绵 / Suno</span><pre>A 30-second instrumental piece.
+- Genre: traditional Chinese instrumental, slow tempo
+- Instruments: solo guzheng, faint dizi flute in background
+- Mood: contemplative, vast, slightly melancholic
+- Tempo: 60 BPM
+- No vocals</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">4 个音频 + 调参日志（改了什么 / 听感变化 / 喜欢哪点）。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>哪个参数改动让你「啊？！」？</li><li>AI 给的 v1 与你想象差多远？</li><li>prompt 在哪被 AI 误解了？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 音乐 prompt 是<b>预算</b>：你写多少细节，AI 就帮你定多少；不写则随机。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 3 · wow point</span> <h4>Voice of the Yongle Bell<span class="en">让钟开口</span></h4></div>
+          <span class="time">60 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 把昨天的真实钟声录音（≥10s）作为锚点，融进 AI 生成的音乐。</p>
+        <div class="prompt-box"><span class="plabel">路径 A · 海绵 / Suno 直接参考</span><pre>A 60-second contemplative piece inspired by the bronze temple bell
+sound in the uploaded reference. Open with a single bell strike
+(slow attack, long 20-second decay). Layer in pentatonic guzheng
+arpeggios at second 15. Add a soft dizi flute at second 30. Return
+to a final bell strike at second 50, fading to silence by 60.
+Tempo 55 BPM. Mood: vast, reverent.
+[Reference attached: Yongle Bell recording]</pre></div>
+        <p class="goal"><b>路径 B</b>（不接受参考音频则手工拼接）：AI 生成 50s 无钟纯乐 → Audacity/CapCut 把真实钟声剪入首尾 → 调整淡入淡出各 2 秒。</p>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">1 段 60s 整合作品（真实钟 + AI 乐）+ 50 字英文 liner notes。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>真实钟声出现时，音乐「换味儿」了吗？</li><li>AI 乐器和真实钟的混响匹配吗？</li><li>能听出「哪 10 秒是真的」吗？意味着什么？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — AI 时代「真」与「生成」的边界会模糊，但<b>一段经过手的真录音</b>仍是作品的灵魂。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 4</span> <h4>Capstone Track<span class="en">推到终稿</span></h4></div>
+          <span class="time">90 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 完成正式提交物：60–120s、可放进 Capstone 的音乐。基于 Ex.3 + Day 1 Brief 做一次「加结构」的升级。</p>
+        <div class="prompt-box alt"><span class="plabel">结构模板 · 任选其一或自定义</span><pre>A. 起–承–转–合（4 段，每段 15–30 秒）
+B. ABA（钟主题 → 对比段 → 钟主题回归）
+C. 时间线叙事（晨钟 → 日常 → 暮钟）
+
+要求：时长 60–120s · 至少 1 处结构转折 · 至少 1 段真实采样 · 双语标题</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver"><code>music-final.mp3</code> + <code>music-card.md</code>（标题 / 结构图 / prompt 链 ≥5 轮 / 灵感来源）。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>结构转折在第几秒？听众能感觉到吗？</li><li>只保留 30 秒，你留哪 30 秒？</li><li>这段音乐能脱开钟的故事独立成立吗？应不应该？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 作品需要<b>形状</b>（structure），不只是氛围。AI 不会自动给你形状，你得设计。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 5</span> <h4>Critique &amp; Polish<span class="en">互评与定稿</span></h4></div>
+          <span class="time">60 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 用同学的耳朵当镜子做最后打磨。两轮听：盲听（不看作品名，写 3 句反馈）→ 带 brief 听（先 30 秒讲选题再放）。</p>
+        <div class="prompt-box"><span class="plabel">反馈卡 · 每位听众填一张/组</span><pre>听完盲听版后第一感受：______（1 句）
+2 个最强时刻（时间戳）：____ / ____
+1 个最弱时刻（时间戳）：____
+听完 brief 后，你的感受变了吗？怎么变的？
+一句话建议：______</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">定稿音频（覆盖 Ex.4）+ Critique Notes 回收。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>盲听 vs 听 brief 差别最大的一组说明了什么？</li><li>最有用 / 最没用的反馈各是什么？</li><li>你的 polish 改了音还是改了结构？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>收尾 · 埋点</b> — 每人一句话上交：「如果再加一种声音，我会加 ___。」<b>这个「再加」就是 Day 3 可视化交互的起点。</b></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 16, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
+<!-- =================== COURSE 3 — VISUAL =================== -->
+<section id="visual" class="course" data-course="visual">
+  <div class="container">
+
+    <div class="course-band">
+      <div class="course-num">Ⅲ</div>
+      <div class="course-meta">
+        <span class="tag">Day 3 · D5 · Visual + UX · 交互可视化</span>
+        <h2>用 Gemini 做音乐可视化<span class="en">Interactive Music Visualizer with Gemini — generative UI</span></h2>
+        <p class="lead">
+          The radical idea: students never write code. They describe what they want
+          in natural language and Gemini generates runnable HTML/JS; the student
+          only iterates the prompt and the aesthetics. They load Day 2's audio, make
+          it react to sound, add one interaction, restyle it as Chinese ink-wash, and
+          ship it to a public URL.<br />
+          核心思路：学员不写代码——用自然语言对 Gemini 描述想要的交互，Gemini 直接生成可运行 HTML，
+          学员只迭代 prompt 与审美。加载 Day 2 音频 → 让画面对声音反应 → 加一种交互 → 改成水墨风 → 发布公开链接。
+        </p>
+        <div class="deliver-pill"><b>当天产出 / Deliverable</b> — 可在浏览器打开的交互页面 + 公开 URL + 30s 演示视频 + Prompt 日志（≥5 轮迭代）</div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="block-title">学习目标 <span class="en">Learning objectives</span></div>
+        <ul class="obj-list">
+          <li>掌握生成式 UI 编程范式：描述 → 预览 → 迭代<span class="en">Describe → preview → iterate</span></li>
+          <li>把「模糊审美意图」翻译成结构化技术 prompt<span class="en">Translate aesthetic intent into structured prompts</span></li>
+          <li>理解 AI 生成代码的边界与调试方法<span class="en">Understand limits &amp; debugging of AI code</span></li>
+          <li>设计至少一种交互：鼠标 / 键盘 / 麦克风 / 摄像头<span class="en">Design at least one interaction</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="block-title">工具 <span class="en">Tools</span></div>
+        <table class="tool-table">
+          <thead><tr><th>类别</th><th>工具</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">主力</td><td class="name"><b>Google AI Studio</b> — Build / Canvas（Gemini 生成可预览 HTML，免安装）</td></tr>
+            <tr><td class="cat">备选主力</td><td class="name">Gemini App + Canvas（更易上手，适合非技术学员）</td></tr>
+            <tr><td class="cat">大陆备选</td><td class="name">豆包 AI 编程 · 通义千问 Artifacts · Trae</td></tr>
+            <tr><td class="cat">部署</td><td class="name">Gemini share · Netlify Drop · GitHub Pages · p5 Web Editor</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sched">
+      <h3>当天流程 · Hour-by-hour（全天 6 小时）</h3>
+      <ul class="sched-list">
+        <li><time>09:00–09:45</time><span class="lab"><b>讲座</b> — Generative UI：用语言「画」出交互页面（含 Gemini Canvas 演示）</span></li>
+        <li><time>09:45–10:30</time><span class="lab"><b>Live demo</b> — 1 个 prompt 让 Gemini 生成「音频反应的水墨粒子」页面（15 分钟内）</span></li>
+        <li><time>10:30–12:00</time><span class="lab"><b>Workshop 1</b> — 上传 Day 2 音频，用 starter prompt 跑通第一版</span></li>
+        <li><time>13:30–15:00</time><span class="lab"><b>Workshop 2</b> — 加入一种交互</span></li>
+        <li><time>15:00–16:00</time><span class="lab"><b>Workshop 3</b> — 美学迭代：用中国文化关键词反复改 prompt</span></li>
+        <li><time>16:00–17:00</time><span class="lab"><b>导出 HTML → 部署 → 内部 Demo</b></span></li>
+      </ul>
+    </div>
+
+    <div class="ex-head-line"><span class="k">Gemini Visualizer Workshop · 5 道循序练习</span><span class="ln"></span></div>
+    <div class="ex-list">
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 1</span> <h4>Hello Canvas<span class="en">第一段不写代码的代码</span></h4></div>
+          <span class="time">15 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 感受自然语言 → 可运行 HTML 的瞬间，建立信心。</p>
+        <div class="prompt-box"><span class="plabel">Gemini Canvas — first prompt</span><pre>Build a single-file HTML page with one centered black circle on a
+white background. When I click anywhere, the circle should bounce
+once (scale up to 1.5x and back). Use vanilla JS, no libraries.
+Make it elegant and minimal.</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">1 个能跑的 HTML 页面 + 截图。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>第一次「看到代码运行」是什么感觉？</li><li>Gemini 多给了 / 少给了什么？</li><li>这段代码你看得懂吗？需要看得懂吗？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — vibe coding 范式下「看不懂代码」不是失败——<b>能描述、能验证</b>才是新技能。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 2</span> <h4>Audio Lives in the Page<span class="en">让声音住进页面</span></h4></div>
+          <span class="time">30 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 把 Day 2 的音乐塞进页面，让画面对声音有反应。在 Ex.1 基础上迭代（保留同一对话）。失败时把报错直接粘回 Gemini，不要自己 debug。</p>
+        <div class="prompt-box"><span class="plabel">Iterate in the same chat</span><pre>Now make this page load an audio file (let me pick a local .mp3).
+Show a small play/pause button.
+Use the Web Audio API to do a real-time FFT.
+Make the circle's SIZE react to the bass (low frequencies):
+big bass = big circle.
+Keep it elegant. Single HTML file.</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">能加载音频 + 圆圈随低音脉动的页面 + 30s 屏幕录制。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>圆圈的反应「听上去对吗」？延迟 / 过激 / 麻木？</li><li>最多用几轮 prompt 才跑通？</li><li>Gemini 哪一次给的代码错了？错在哪？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — <b>bug = 沟通失败</b>。粘报错是最高效的「再描述」。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 3</span> <h4>Add One Interaction<span class="en">加一个交互</span></h4></div>
+          <span class="time">60 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 从「被动反应」变「主动可玩」，体会交互设计。每人选 <b>1 种</b>交互加入（不要贪多）。</p>
+        <table class="mini-table">
+          <tr><td>鼠标</td><td class="en">"When I move the mouse, the circle follows my cursor with a 0.3s lag."</td></tr>
+          <tr><td>键盘</td><td class="en">"When I press SPACE, trigger an extra bell-like visual flash."</td></tr>
+          <tr><td>麦克风</td><td class="en">"When I make a sound into the mic, a smaller circle appears and pulses with my voice."</td></tr>
+          <tr><td>滚轮</td><td class="en">"Mouse-wheel up = warmer color tone; down = cooler tone."</td></tr>
+          <tr><td>摄像头</td><td class="en">"When my face moves left/right (webcam), the circle shifts left/right."</td></tr>
+        </table>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">含一种交互的页面 + 30s 带交互演示视频。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>你的交互「用一次就够」还是「想再用一次」？</li><li>交互改变了观众听音乐的方式吗？</li><li>给产品经理看，他会怎么改？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 好的交互<b>让人想再做一次</b>。没有这个的交互只是装饰。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 4</span> <h4>Style as Culture<span class="en">风格即文化</span></h4></div>
+          <span class="time">60 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 把视觉从「通用酷炫」改成「中国文化叙事」。继续迭代，加入下面至少 3 项。</p>
+        <div class="prompt-box alt"><span class="plabel">Apply at least 3 of these</span><pre>Apply the following visual treatment:
+1. Background: warm rice-paper cream (#FAF6F0), not pure white
+2. Main visual: replace the circle with concentric ink-wash brush
+   strokes (sumi-e style); B&W with one accent color (jade green
+   #5B8C7E OR temple bronze #B08D57 — your call)
+3. Add a faint vertical line down the center of the page —
+   the Beijing Central Axis
+4. Use a Chinese serif font for any text (Noto Serif SC via Google Fonts)
+5. When the bass hits, the ink strokes should SPLATTER outward like
+   actual ink, then settle
+6. Add subtle paper-grain texture overlay (very low opacity)</pre></div>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">视觉升级后的页面 + Prompt Log（保留所有迭代历史）。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>这些视觉元素真的「中国」吗？还是只是符号？</li><li>你删掉了哪个 AI 给的元素？为什么？</li><li>不懂中国文化的观众能感觉到「水墨」吗？</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 风格不是装饰——风格是<b>告诉观众「用什么眼睛看」</b>的元数据。</div></div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-top">
+          <div><span class="ex-no">Exercise 5</span> <h4>Ship It<span class="en">发布</span></h4></div>
+          <span class="time">60 min</span>
+        </div>
+        <p class="goal"><b>目标</b> — 让作品有公开链接，可以发给爱尔兰朋友打开。选一条部署路径。</p>
+        <table class="mini-table">
+          <tr><td>A. Gemini share</td><td>最简单 — 复制 Gemini Canvas 的 share link</td></tr>
+          <tr><td>B. Netlify Drop</td><td>简单 — 把 index.html 拖到 app.netlify.com/drop</td></tr>
+          <tr><td>C. GitHub Pages</td><td>中等 — 建 repo → push → Settings → Pages</td></tr>
+          <tr><td>D. p5 Web Editor</td><td>简单 — 粘代码 → Share button</td></tr>
+        </table>
+        <div class="ex-grid">
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">✅ 公开 URL · ✅ <code>demo.mp4</code>（30s）· ✅ <code>prompt-log.md</code>（≥5 轮）· ✅ <code>index.html</code> 备份。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>移动端打开效果如何？需要响应式吗？</li><li>给群外的爱尔兰朋友发链接，他会怎么反应？</li><li>加 1 件事就完美，会是什么？（D9 Polish 用）</li></ol></div>
+        </div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 作品<b>只有公开了才算存在</b>。私有链接 = 没做过。收尾后宣布 D9 Polish + D10 Showcase 排期。</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 2, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
+
+<!-- =================== SHARED ELEMENTS =================== -->
+<section id="shared">
+  <div class="container">
+    <div class="eyebrow">Across the Three Days · 跨三天统一要素</div>
+    <h2 class="section-title">通用要素<span class="en">Teams, assessment, materials, and what can go wrong.</span></h2>
+    <p class="section-lead">
+      The same teams, rubric and material kit carry across all three days so the
+      work accumulates into one Capstone.<br />
+      同一组、同一评估、同一物料包贯穿三天，作品累积成一件 Capstone。
+    </p>
+
+    <div class="shared-grid">
+
+      <div class="shared-card">
+        <h3>分组 &amp; 评估<span class="en">Teams &amp; assessment</span></h3>
+        <p>建议 <b style="color:var(--bronze-l)">2–3 人/组</b>：1 偏研究 · 1 偏审美 ·（1 偏技术）。三天保持同一组，便于作品累积。</p>
+        <div class="assess">
+          <div class="assess-row"><div class="top"><span class="zh">Cultural depth 文化理解</span><span class="pct">30%</span></div><div class="bar"><span style="width:30%"></span></div><span class="en">Sincerity &amp; accuracy of cultural understanding</span></div>
+          <div class="assess-row"><div class="top"><span class="zh">AI craft 提示与迭代</span><span class="pct">30%</span></div><div class="bar"><span style="width:30%"></span></div><span class="en">Quality of prompting &amp; iteration</span></div>
+          <div class="assess-row"><div class="top"><span class="zh">Communication 可懂度</span><span class="pct">25%</span></div><div class="bar"><span style="width:25%"></span></div><span class="en">Can an Irish audience follow it?</span></div>
+          <div class="assess-row"><div class="top"><span class="zh">Surprise 惊喜 / 原创</span><span class="pct">15%</span></div><div class="bar"><span style="width:15%"></span></div><span class="en">Originality &amp; delight</span></div>
+        </div>
+      </div>
+
+      <div class="shared-card">
+        <h3>必备物料<span class="en">Required materials</span></h3>
+        <ul>
+          <li>教室稳定 WiFi（带宽测试，能跑 Suno）</li>
+          <li>学员账号：豆包 · Suno/海绵 · Google + Gemini · GitHub（课前注册并登一次）</li>
+          <li>中国乐器术语 cheat sheet（中英对照）</li>
+          <li>中国传统色卡 + 字体包（Day 3 用）</li>
+          <li>Day 3 starter code 仓库</li>
+          <li>移动硬盘 / 共享盘，集中收作品</li>
+        </ul>
+      </div>
+
+      <div class="shared-card">
+        <h3>风险与备案<span class="en">Risks &amp; backups</span></h3>
+        <ul>
+          <li><b style="color:var(--bronze-l)">Gemini 大陆访问</b> — 由项目方负责教室级网络方案；课程组按「可用」假设排课</li>
+          <li><b style="color:var(--bronze-l)">生成额度不足</b> — 课前 1 周批量充值 ≥200 个/组；备 2 个平台</li>
+          <li><b style="color:var(--bronze-l)">学员无编程基础</b> — 已用 Gemini 生成式 UI 解决</li>
+          <li><b style="color:var(--bronze-l)">Google 账号注册受限</b> — 课前邮件指引提前注册登录</li>
+          <li><b style="color:var(--bronze-l)">设备性能差</b> — Gemini 生成的是浏览器页面，最低配也能跑</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="foot-inner">
+    <div>
+      <div class="foot-brand">灵境 · <span class="accent">工坊</span></div>
+      <p>
+        Miracle Craft Workshop · The Three-Day AI Course (Days 3–5).<br />
+        Text → Music → Interactive, one chain from a single bell.
+      </p>
+      <p style="margin-top: 12px; opacity: 0.6;">
+        中国传媒大学国际传媒教育学院（境外学生事务中心）· 2026
+      </p>
+    </div>
+    <div>
+      <h4>On This Page</h4>
+      <ul>
+        <li><a href="#spine">课程主线 Spine</a></li>
+        <li><a href="#text">Ⅰ 文本 · Prompt Gym</a></li>
+        <li><a href="#music">Ⅱ 音乐 · AI Music</a></li>
+        <li><a href="#visual">Ⅲ 交互 · Gemini</a></li>
+        <li><a href="#shared">通用要素 Shared</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="index.html">← 项目总览 Home</a></li>
+        <li><a href="index.html#journey">10-Day Schedule</a></li>
+        <li><a href="index.html#showcase">Capstone Showcase</a></li>
+        <li><a href="opening-lecture.html">🎓 Opening Lecture</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    © 2026 CUC AI Lab · Three days, three modalities, one bell. · Press <kbd style="background: rgba(250,246,240,0.1); padding: 1px 6px; border-radius: 3px; font-family: ui-monospace, monospace;">G</kbd> top · <kbd style="background: rgba(250,246,240,0.1); padding: 1px 6px; border-radius: 3px; font-family: ui-monospace, monospace;">1–3</kbd> jump to a course
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+<script>
+  // ===== Scroll progress bar =====
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = scrolled + '%';
+  }
+
+  // ===== Back-to-top =====
+  const backTop = document.getElementById('backTop');
+  function updateBackTop() {
+    if (window.scrollY > 600) backTop.classList.add('show');
+    else backTop.classList.remove('show');
+  }
+  backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ===== Active section tracking (nav + TOC) =====
+  const sections = ['hero', 'spine', 'text', 'music', 'visual', 'shared']
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+  const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+  const tocAnchors = document.querySelectorAll('.toc a');
+  function updateActive() {
+    const scrollPos = window.scrollY + window.innerHeight * 0.35;
+    let activeId = sections[0]?.id;
+    for (const s of sections) { if (s.offsetTop <= scrollPos) activeId = s.id; }
+    navAnchors.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + activeId));
+    tocAnchors.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + activeId));
+  }
+
+  // ===== Reveal on scroll =====
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+    { threshold: 0.08, rootMargin: '0px 0px -50px 0px' }
+  );
+  document.querySelectorAll('section, .spine-card, .ex, .shared-card, .sched').forEach((el) => {
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+
+  // ===== Master scroll handler =====
+  function onScroll() { updateProgress(); updateBackTop(); updateActive(); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ===== Keyboard shortcuts =====
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'g' || e.key === 'G') window.scrollTo({ top: 0, behavior: 'smooth' });
+    else if (e.key === 'b' || e.key === 'B') window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    else if (e.key === '1') document.getElementById('text')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '2') document.getElementById('music')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '3') document.getElementById('visual')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '0') document.getElementById('spine')?.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
