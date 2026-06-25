@@ -6,15 +6,15 @@
 <meta name="theme-color" content="#1A1A1A" />
 <meta name="robots" content="index, follow" />
 
-<title>三天 AI 课 · Three-Day AI Course | 灵境工坊 Miracle Craft Workshop · CUC</title>
-<meta name="description" content="The three core AI modules of the Miracle Craft Workshop (Days 3–5): Text & LLM cultural research (Prompt Gym), AI music composition, and a Gemini-generated interactive visualizer. Each day's output feeds the next — 15 copy-pasteable exercises, hour-by-hour schedules, deliverables and teaching notes." />
+<title>三模块 AI 课 · Three-Module AI Course | 灵境工坊 Miracle Craft Workshop · CUC</title>
+<meta name="description" content="The three core AI modules of the Miracle Craft Workshop: a 3D bianzhong & a cultural-creative merch set, AI music composition, and a Gemini-generated interactive visualizer. Each module's output feeds the next — 15 copy-pasteable exercises, hour-by-hour schedules, deliverables and teaching notes." />
 <meta name="author" content="Faculty of International Media, CUC" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="灵境工坊 · Miracle Craft Workshop" />
-<meta property="og:title" content="三天 AI 课 · Text → Music → Interactive · Miracle Craft Workshop" />
-<meta property="og:description" content="Days 3–5 of the AIGC training: LLM cultural research → AI music → Gemini interactive visualizer. Each day's output feeds the next." />
+<meta property="og:title" content="三模块 AI 课 · 3D → Music → Interactive · Miracle Craft Workshop" />
+<meta property="og:description" content="Three AIGC modules around one bell: 3D bianzhong &amp; cultural merch → AI music → Gemini interactive visualizer. Each module's output feeds the next." />
 <meta property="og:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80&auto=format&fit=crop" />
 <meta property="og:locale" content="zh_CN" />
 
@@ -315,7 +315,7 @@
   .spine-flow {
     display: grid;
     grid-template-columns: 1fr auto 1fr auto 1fr;
-    gap: 14px; align-items: stretch;
+    gap: 12px; align-items: stretch;
     margin: 36px 0 12px;
   }
   @media (max-width: 820px) {
@@ -352,6 +352,7 @@
   .spine-note .cn { display: block; font-family: var(--serif-cn); font-style: normal; color: var(--mute); font-size: 13px; margin-top: 8px; }
 
   /* ============ Course band (section intro) ============ */
+  .course[data-course="product"] { background: var(--paper); }
   .course[data-course="text"]   { background: var(--paper); }
   .course[data-course="music"]  { background: var(--paper-2); }
   .course[data-course="visual"] { background: var(--paper); }
@@ -525,6 +526,70 @@
   .ex-cell ol { margin: 0; padding-left: 18px; font-size: 13.5px; color: #3c3c3c; line-height: 1.5; }
   .ex-cell ol li { margin-bottom: 5px; }
 
+  /* step-by-step procedure inside an exercise */
+  .steps { margin: 16px 0 4px; background: var(--paper-2); border-radius: 10px; padding: 14px 18px; }
+  .course[data-course="music"] .steps { background: var(--paper-3); }
+  .steps .h { font-family: var(--sans-en); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bronze-d); margin-bottom: 10px; }
+  .steps ol { margin: 0; padding-left: 20px; font-size: 13.5px; color: #3c3c3c; line-height: 1.55; }
+  .steps ol li { margin-bottom: 6px; }
+  .steps ol li:last-child { margin-bottom: 0; }
+  .steps ol li b { color: var(--bronze-d); }
+  .steps ol li code { font-family: var(--mono); font-size: 12px; color: var(--bronze-d); }
+
+  /* ===== production-process strip (real images) ===== */
+  .process { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 20px 0 8px; }
+  @media (max-width: 900px) { .process { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .process { grid-template-columns: repeat(2, 1fr); } }
+  .pcard { position: relative; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: transform .25s, box-shadow .25s; }
+  .pcard:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); }
+  .pcard img.pthumb { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; background: var(--paper-3); }
+  .pcard .pno { position: absolute; top: 8px; left: 8px; width: 24px; height: 24px; border-radius: 50%; background: var(--bronze); color: var(--paper); font-family: var(--serif-en); font-style: italic; font-size: 13px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+  .pcard .pbody { padding: 12px 14px 14px; flex: 1; display: flex; flex-direction: column; }
+  .pcard h5 { font-family: var(--serif-cn); font-weight: 700; font-size: 15px; line-height: 1.25; margin-bottom: 5px; }
+  .pcard h5 .en { display: block; font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: 12px; color: var(--mute); margin-top: 1px; }
+  .pcard p { font-size: 12.5px; color: #555; line-height: 1.5; }
+  .pcard .cred { font-size: 9.5px; color: var(--mute); margin-top: auto; padding-top: 8px; line-height: 1.35; opacity: .8; }
+
+  /* ===== lecture + live-demo block ===== */
+  .demo { margin: 30px 0 8px; background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--jade); border-radius: 0 14px 14px 0; padding: clamp(20px, 3vw, 30px); }
+  .demo .dh { font-family: var(--serif-cn); font-weight: 700; font-size: 19px; color: var(--jade-d); margin-bottom: 3px; }
+  .demo .dh .en { font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: 13px; color: var(--mute); margin-left: 8px; }
+  .demo .dsub { font-size: 12.5px; letter-spacing: .04em; color: var(--mute); margin-bottom: 18px; }
+  .demo-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: clamp(20px, 3vw, 32px); align-items: start; }
+  @media (max-width: 760px) { .demo-grid { grid-template-columns: 1fr; } }
+  .demo ol.beats { margin: 0; padding-left: 4px; list-style: none; counter-reset: beat; }
+  .demo ol.beats li { position: relative; padding: 0 0 14px 30px; font-size: 14px; line-height: 1.6; color: #3c3c3c; }
+  .demo ol.beats li::before { counter-increment: beat; content: counter(beat); position: absolute; left: 0; top: 1px; width: 20px; height: 20px; border-radius: 50%; background: var(--jade); color: var(--paper); font-family: var(--serif-en); font-style: italic; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+  .demo ol.beats li:last-child { padding-bottom: 0; }
+  .demo ol.beats li b { font-family: var(--serif-cn); color: var(--bronze-d); }
+  .demo ol.beats li .say { display: block; font-style: italic; color: var(--jade-d); font-size: 13px; margin-top: 3px; }
+  .demo figure { margin: 0; }
+  .demo figure img { width: 100%; border-radius: 10px; border: 1px solid var(--line); display: block; }
+  .demo figure figcaption { font-size: 11px; color: var(--mute); margin-top: 7px; line-height: 1.45; }
+
+  /* ===== hand-off (receives -> this -> hands off) ===== */
+  .handoff { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 12px; align-items: stretch; margin: 18px 0 8px; }
+  @media (max-width: 760px) { .handoff { grid-template-columns: 1fr; } .handoff .ho-arrow { transform: rotate(90deg); margin: 0 auto; } }
+  .ho-col { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .ho-col.ho-this { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .ho-h { font-family: var(--sans-en); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--bronze-d); margin-bottom: 9px; }
+  .ho-col.ho-this .ho-h { color: var(--bronze-l); }
+  .ho-col ul { list-style: none; margin: 0; }
+  .ho-col li, .ho-col p { font-size: 13px; line-height: 1.55; color: #3c3c3c; padding: 2px 0; }
+  .ho-col.ho-this p { color: rgba(250,246,240,.9); font-size: 14px; }
+  .ho-col code { font-family: var(--mono); font-size: 12px; color: var(--bronze-d); }
+  .ho-col.ho-this code { color: var(--bronze-l); }
+  .ho-arrow { align-self: center; color: var(--bronze); font-size: 22px; }
+
+  /* ===== effect-recipe grid + samples note ===== */
+  .recipes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 16px 0 4px; }
+  @media (max-width: 760px) { .recipes { grid-template-columns: 1fr; } }
+  .recipes .prompt-box { margin: 0; }
+  .recipes .prompt-box pre { white-space: pre-wrap; }
+  .samplenote { margin-top: 16px; background: var(--paper-2); border-left: 3px solid var(--jade); border-radius: 0 10px 10px 0; padding: 14px 18px; font-size: 13.5px; line-height: 1.65; color: #3c3c3c; }
+  .samplenote b { font-family: var(--serif-cn); color: var(--jade-d); }
+  .samplenote code { font-family: var(--mono); font-size: 12px; color: var(--bronze-d); }
+
   .teach {
     margin-top: 16px;
     background: var(--paper-2);
@@ -624,7 +689,7 @@
     <ul class="nav-links">
       <li class="opt"><a href="index.html#journey">日程</a></li>
       <li><a href="#spine">主线</a></li>
-      <li><a href="#text">文本</a></li>
+      <li><a href="#product">3D编钟</a></li>
       <li><a href="#music">音乐</a></li>
       <li><a href="#visual">交互</a></li>
       <li class="opt"><a href="#shared">通用</a></li>
@@ -635,12 +700,12 @@
 
 <!-- =================== Right-side TOC =================== -->
 <ul class="toc" id="toc">
-  <li><a href="#hero"   data-label="开篇 Overview"></a></li>
-  <li><a href="#spine"  data-label="三天主线 Spine"></a></li>
-  <li><a href="#text"   data-label="Day 1 · 文本 Text"></a></li>
-  <li><a href="#music"  data-label="Day 2 · 音乐 Music"></a></li>
-  <li><a href="#visual" data-label="Day 3 · 交互 Visual"></a></li>
-  <li><a href="#shared" data-label="通用要素 Shared"></a></li>
+  <li><a href="#hero"    data-label="开篇 Overview"></a></li>
+  <li><a href="#spine"   data-label="三模块主线 Spine"></a></li>
+  <li><a href="#product" data-label="Day 1 · 三维编钟 3D &amp; 文创"></a></li>
+  <li><a href="#music"   data-label="Day 2 · 音乐 Music"></a></li>
+  <li><a href="#visual"  data-label="Day 3 · 交互 Visual"></a></li>
+  <li><a href="#shared"  data-label="通用要素 Shared"></a></li>
 </ul>
 
 <!-- =================== HERO =================== -->
@@ -653,30 +718,31 @@
   </div>
 
   <div class="hero-inner">
-    <div class="eyebrow">Days 3–5 · The Three Core AI Modules · 三天 AI 授课</div>
+    <div class="eyebrow">The Three Core AI Modules · 三大 AI 模块 · 围绕一口钟</div>
     <h1>
-      <span class="l1">Text becomes</span>
-      <span class="l2">music becomes</span>
-      <span class="l3">a page you touch.</span>
+      <span class="l1">A bell becomes a 3D model,</span>
+      <span class="l2">a sound, an interaction —</span>
+      <span class="l3">and a thing you hold.</span>
     </h1>
-    <div class="hero-cn">文本<span class="sep">→</span>音乐<span class="sep">→</span>交互可视化</div>
+    <div class="hero-cn">三维IP<span class="sep">→</span>音乐<span class="sep">→</span>交互</div>
 
     <p class="hero-tagline">
-      Three days, three modalities, one chain. Day 1 turns a recorded temple bell
-      into a verified cultural brief with LLMs; Day 2 turns that brief into an
-      AI-composed track; Day 3 turns the track into an interactive page built by
-      describing it to Gemini. Each day's output is the next day's raw material.
+      Three modules, one chain, one bell. Day 1 turns the bronze bell into an
+      faithful 3D model of a single chime bell and a full cultural-creative merch set you can print
+      and hold; Day 2 gives that bell a theme song with AI music, anchored by the
+      real recording; Day 3 turns it into an interactive page — built by describing
+      it to Gemini — that loads the 3D bell and the music. Each module's output is the next one's raw material.
     </p>
     <p class="hero-tagline cn">
-      三天、三种模态、一条线索。Day 1 用 LLM 把录下的钟声做成可核查的文化简报；
-      Day 2 把简报变成 AI 音乐；Day 3 用自然语言对 Gemini 描述，把音乐变成可交互页面。
-      每一天的产出，都是下一天的原料。
+      三个模块、一条线索、一口钟。Day 1 把一只青铜钟数字复刻成一个 3D 编钟（单钟）、并做成一整套文创周边（可打印、可拿在手里）；
+      Day 2 用 AI 音乐给编钟配一首主题曲、用真实钟声锚定；Day 3 用自然语言对 Gemini 描述，
+      做成载入 3D 编钟与音乐的可交互页面。每个模块的产出，都是下一个模块的原料。
     </p>
 
     <div class="stats">
-      <div class="stat"><div class="n">3</div><div class="label">Days<span class="cn">天 / D3–D5</span></div></div>
+      <div class="stat"><div class="n">3</div><div class="label">Modules<span class="cn">AI 模块</span></div></div>
       <div class="stat"><div class="n">15</div><div class="label">Exercises<span class="cn">循序练习</span></div></div>
-      <div class="stat"><div class="n">18h</div><div class="label">Studio Time<span class="cn">课堂工坊</span></div></div>
+      <div class="stat"><div class="n">9h</div><div class="label">Studio Time<span class="cn">课堂工坊</span></div></div>
       <div class="stat"><div class="n">3</div><div class="label">Deliverables<span class="cn">可交付作品</span></div></div>
     </div>
   </div>
@@ -690,25 +756,25 @@
     <div class="eyebrow">The Course Spine · 课程主线</div>
     <h2 class="section-title">每一天喂下一天<span class="en">Each day's output is the next day's input.</span></h2>
     <p class="section-lead">
-      The three AI days are not three separate workshops — they are one pipeline.
-      Material comes from the Day 2 bell-theme museum visit; the finished chain is
+      The three AI modules are not separate workshops — they are one pipeline.
+      Material comes from the bell-theme museum visit; the finished chain is
       integrated into the Capstone on Day 8 and presented on Day 10.<br />
-      这三天不是三个独立工作坊，而是一条流水线。素材来自 D2 大钟寺钟主题日；
+      这三个模块不是三个独立工作坊，而是一条流水线。素材来自大钟寺钟主题日；
       成品在 D8 整合为 Capstone，D10 展示。
     </p>
 
     <div class="spine-flow">
       <div class="spine-card">
-        <div class="ico">文</div>
-        <div class="day">Day 1 · D3</div>
-        <h4>文本 · LLM 研究</h4>
-        <div class="en">Text &amp; cultural research</div>
-        <div class="out">产出 <b>Cultural Concept Brief</b>（文化研究简报）— 含声音 &amp; 视觉关键词</div>
+        <div class="ico">形</div>
+        <div class="day">Day 1</div>
+        <h4>三维编钟 · 文创周边</h4>
+        <div class="en">3D bell &amp; cultural merch</div>
+        <div class="out">产出 <b>3D 编钟（单钟）模型</b>（<b>.glb</b>）+ 整套文创周边 + 实体打印</div>
       </div>
       <div class="spine-arrow">→</div>
       <div class="spine-card">
         <div class="ico">乐</div>
-        <div class="day">Day 2 · D4</div>
+        <div class="day">Day 2</div>
         <h4>音频 · AI 音乐</h4>
         <div class="en">AI music composition</div>
         <div class="out">产出 <b>60–120s 音乐作品</b> + Music Card（真实钟声 × AI 乐）</div>
@@ -716,41 +782,44 @@
       <div class="spine-arrow">→</div>
       <div class="spine-card">
         <div class="ico">境</div>
-        <div class="day">Day 3 · D5</div>
+        <div class="day">Day 3</div>
         <h4>视觉 · 交互可视化</h4>
         <div class="en">Interactive visualizer</div>
-        <div class="out">产出 <b>可交互 HTML 页面</b> + 公开 URL + Prompt 日志</div>
+        <div class="out">产出 <b>可交互 HTML 页面</b>（载入 Day 1 的 3D 编钟 × Day 2 音乐）+ 公开 URL</div>
       </div>
     </div>
 
     <blockquote class="spine-note">
       "By Day 3, every team holds one complete <em>Chinese Culture × AI</em> piece —
-      research, sound and interaction, all from the same bell."
-      <span class="cn">三天结束，每组拥有一件完整的「中国文化 × AI」小作品——研究、声音、交互，全部源自同一口钟。</span>
+      a 3D bell, a sound and an interaction, all from the same bell."
+      <span class="cn">三个模块走完，每组拥有一件完整的「中国文化 × AI」小作品——三维编钟、声音、交互，全部源自同一口钟。</span>
     </blockquote>
   </div>
 </section>
 
 <div class="divider"><svg viewBox="0 0 300 18" xmlns="http://www.w3.org/2000/svg"><path d="M0 9 Q 50 16, 100 9 T 200 9 T 300 9" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>
 
-<!-- =================== COURSE 1 — TEXT =================== -->
-<section id="text" class="course" data-course="text">
+<!-- =================== COURSE Ⅰ — 3D / IP =================== -->
+<section id="product" class="course" data-course="product">
   <div class="container">
 
     <div class="course-band">
       <div class="course-num">Ⅰ</div>
       <div class="course-meta">
-        <span class="tag">Day 1 · D3 · Text · 文本模型</span>
-        <h2>文本模型与文化研究<span class="en">Text Models &amp; Cultural Research — the Prompt Gym</span></h2>
+        <span class="tag">Day 1 · 3D &amp; 文创 · 三维编钟与文创周边</span>
+        <h2>三维编钟与文创周边<span class="en">3D Bianzhong &amp; a Cultural-Creative Merch Set — from a bell to a shelf of products</span></h2>
         <p class="lead">
-          The students meet large language models as collaborators, not oracles.
-          They compare Chinese and Western models on a Chinese-culture topic, learn
-          prompt craft through five escalating drills built entirely on bell-theme
-          material, and fact-check everything. The day's product seeds Day 2.<br />
-          学员把大语言模型当作协作者而非神谕。围绕钟主题素材，用五道循序练习掌握提示工程，
-          对比中西模型并核查事实。当天产出喂给 Day 2。
+          The chain starts with a thing you can hold. Students digitally recreate a single
+          bronze chime bell (one bell, not the full rack) as a real 3D model with
+          text/image-to-3D AI (no modelling skills assumed), render a turntable, then design a complete 文创 (cultural-creative)
+          merch set around it — a desk ornament, a blind box, a fridge magnet, a
+          bookmark and more — and 3D-print one piece. The exported model is handed to
+          Day 3, where the bell spins and reacts to the team's music.<br />
+          这条线从「一个能拿在手里的东西」开始。学员用「文/图生 3D」把<b>一只</b>青铜编钟（单钟，而非整架）数字复刻成一个真正的
+          3D 模型（不预设建模基础），渲染转盘，再围绕它设计一整套文创周边——摆件、盲盒、冰箱贴、
+          书签……并打印一件实体。导出的模型交给 Day 3——让编钟随本组音乐旋转、共振。
         </p>
-        <div class="deliver-pill"><b>当天产出 / Deliverable</b> — Cultural Concept Brief（800–1200 词，英文）：选题 · 钩子 · 核查事实 · 声音关键词 · 视觉关键词 · 一处 AI 出错点</div>
+        <div class="deliver-pill"><b>当天产出 / Deliverable</b> — 1 个 3D 编钟（<b>单钟</b>）模型（<code>.glb</code>）+ 360° 转盘渲染 + 一整套编钟文创周边（≥4 件样机：摆件 / 盲盒 / 冰箱贴 / 书签…）+ 1 件实体打印 / <code>.stl</code> + 文创系列 one-pager（导出的 <code>.glb</code> 供 Day 3 复用）</div>
       </div>
     </div>
 
@@ -758,10 +827,11 @@
       <div>
         <div class="block-title">学习目标 <span class="en">Learning objectives</span></div>
         <ul class="obj-list">
-          <li>理解 LLM 的工作方式与局限<span class="en">Understand how LLMs work and where they fail</span></li>
-          <li>掌握提示工程基础：角色 · 上下文 · 约束 · 迭代<span class="en">Master role, context, constraint &amp; iteration</span></li>
-          <li>对比中国与西方 LLM 在「中国文化」题上的差异<span class="en">Compare CN vs Western LLMs on Chinese topics</span></li>
-          <li>学会对 AI 输出做事实核查<span class="en">Fact-check AI output against sources</span></li>
+          <li>用参考图把<b>一只</b>编钟（单钟）复刻成一个 3D 模型<span class="en">Recreate a single bell as a 3D model from references</span></li>
+          <li>掌握「文 / 图生 3D」工作流：参考图 → 网格 → 贴图<span class="en">Master the text/image-to-3D pipeline</span></li>
+          <li>学会看懂并清理 AI 生成网格（比例 · 拓扑 · 打印适配）<span class="en">Read &amp; clean AI meshes for print</span></li>
+          <li>围绕编钟设计一套连贯的文创周边（统一视觉 + 多个载体）<span class="en">Design a coherent cultural-creative merch line</span></li>
+          <li>导出 <code>.glb</code> 资产，供 Day 3 交互可视化复用<span class="en">Export a .glb to reuse in the Day-3 visualizer</span></li>
         </ul>
       </div>
       <div>
@@ -769,134 +839,181 @@
         <table class="tool-table">
           <thead><tr><th>类别</th><th>工具</th></tr></thead>
           <tbody>
-            <tr><td class="cat">中国 LLM</td><td class="name"><b>豆包 Doubao</b> · 混元 Hunyuan · 智谱清言 · Kimi（接受英文 prompt）</td></tr>
-            <tr><td class="cat">国际对照</td><td class="name">Claude · ChatGPT · Gemini（作「外部视角」对照）</td></tr>
-            <tr><td class="cat">检索增强</td><td class="name">Perplexity · 豆包联网搜索（验证事实）</td></tr>
+            <tr><td class="cat">参考 / 概念图</td><td class="name"><b>即梦 Jimeng</b> · 豆包·图像 · Nano Banana（Gemini 图像）— 生成编钟多角度参考</td></tr>
+            <tr><td class="cat">文/图生 3D</td><td class="name"><b>腾讯混元 3D Hunyuan3D</b> · Tripo（Tripo3D）· Meshy · Rodin（Hyper3D）</td></tr>
+            <tr><td class="cat">看模/修模</td><td class="name">工具内置 remesh / simplify · 在线 GLB Viewer · Blender（可选）</td></tr>
+            <tr><td class="cat">文创/排版</td><td class="name">即梦 · Canva · Photoshop（贴图到摆件 / 盲盒 / 冰箱贴 / 书签样机）</td></tr>
+            <tr><td class="cat">打印</td><td class="name">FDM / 树脂打印机 + 切片（Bambu Studio · Cura）；无机器则交 STL + 渲染</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
     <div class="sched">
-      <h3>当天流程 · Hour-by-hour（约 6 小时）</h3>
+      <h3>当天流程 · Hour-by-hour（约 3 小时）</h3>
       <ul class="sched-list">
-        <li><time>09:00–10:00</time><span class="lab"><b>讲座</b> — What is an LLM, and why does it hallucinate?</span></li>
-        <li><time>10:00–11:00</time><span class="lab"><b>Live demo</b> — 同一问题问 3 个模型，对比答案</span></li>
-        <li><time>11:00–12:00</time><span class="lab"><b>Workshop 1 · Prompt Gym</b> — 5 道循序渐进练习（见下）</span></li>
-        <li><time>13:30–15:00</time><span class="lab"><b>Workshop 2</b> — 选题 + 初轮 research（每组 1 个中国文化主题）</span></li>
-        <li><time>15:00–16:30</time><span class="lab"><b>Workshop 3</b> — 跨模型对比 + 事实核查</span></li>
-        <li><time>16:30–17:00</time><span class="lab"><b>提交</b> — Cultural Concept Brief（800–1200 词，英文）</span></li>
+        <li><time>09:00–09:25</time><span class="lab"><b>讲座 + Demo</b> — 从文物到文创 +「一张编钟照片 → 3D」现场演示</span></li>
+        <li><time>09:25–10:05</time><span class="lab"><b>Workshop 1</b> — 练习 1–2（看清单钟 + 图生 3D）</span></li>
+        <li><time>10:05–10:40</time><span class="lab"><b>Workshop 2</b> — 练习 3（清网格 + 360° 转盘；打印后台排队）</span></li>
+        <li><time>10:40–11:25</time><span class="lab"><b>Workshop 3</b> — 练习 4（整套文创周边样机）</span></li>
+        <li><time>11:25–11:55</time><span class="lab"><b>收尾</b> — 练习 5（导出 <code>.glb</code> / <code>.stl</code> + 交接 Day 3 + 轮流取件）</span></li>
+        <li><time>11:55–12:00</time><span class="lab"><b>内部展示</b></span></li>
       </ul>
     </div>
 
-    <div class="ex-head-line"><span class="k">Prompt Gym · 5 道循序练习</span><span class="ln"></span></div>
+    <div class="ex-head-line"><span class="k">生产流程 · Production process</span><span class="ln"></span></div>
+    <div class="process">
+      <div class="pcard"><span class="pno">1</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Bell_%28zhong%29%2C_China%2C_Zhou_dynasty%2C_1000-256_BC%2C_bronze_-_Fitchburg_Art_Museum_-_DSC08966.JPG" alt="单只青铜编钟" loading="lazy"><div class="pbody"><h5>选一只编钟参考<span class="en">Pick one bell</span></h5><p>挑一只真实编钟（单钟），多角度收集参考图。</p><span class="cred">© Daderot · CC0 · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">2</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Two_Tone_Set-bells_of_Marquis_Yi_of_Zeng_%2810166053074%29.jpg" alt="编钟表面细节" loading="lazy"><div class="pbody"><h5>读懂形制<span class="en">Read its form</span></h5><p>钮·枚·鼓部·纹饰·铭文——决定文创取舍。</p><span class="cred">© Gary Todd · CC0 · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">3</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Wireframe_3D_Model_by_Camille_Kleinman.jpg" alt="3D 网格示意" loading="lazy"><div class="pbody"><h5>图生 3D 网格<span class="en">Image → 3D mesh</span></h5><p>正面参考喂给混元3D/Tripo，生成可旋转网格。</p><span class="cred">© Camille Kleinman · CC BY-SA 4.0 · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">4</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Burke_Museum_Gift_Shop.jpg" alt="博物馆文创商店" loading="lazy"><div class="pbody"><h5>一整套文创周边<span class="en">A merch set</span></h5><p>统一视觉，做摆件/盲盒/冰箱贴/书签等 ≥4 件。</p><span class="cred">© Richard N Horne · CC BY-SA 4.0 · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">5</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Printing_with_a_3D_printer_at_Makers_Party_Bangalore_2013_11.JPG" alt="3D 打印机在打印" loading="lazy"><div class="pbody"><h5>实体打印<span class="en">3D print</span></h5><p>导出 STL 切片打印一件；GLB 交给交互课。</p><span class="cred">© Subhashish Panigrahi · CC BY-SA 3.0 · Wikimedia</span></div></div>
+    </div>
+
+    <div class="demo">
+      <div class="dh">讲座 + Demo · 从文物到文创<span class="en">Lecture + live demo</span></div>
+      <div class="dsub">09:00–09:25 · 约 25 分钟 · 教师演示</div>
+      <div class="demo-grid">
+        <ol class="beats">
+          <li><b>一张图看懂编钟</b> — 展示曾侯乙编钟全套，讲「一钟双音」与礼乐意义。<span class="say">「这是一整架 65 件；今天我们只复刻其中<b>一只</b>。」</span></li>
+          <li><b>从文物到文创</b> — 抛 3 个真实博物馆文创案例（故宫胶带 · 三星堆盲盒 · 国博雪糕），问：「它们为什么让人想买？」</li>
+          <li><b>现场出 3D（约 5 分钟）</b> — 拿一张单钟正面照上传混元3D，单图生成，转一圈让学生看 AI 如何「脑补」背面。</li>
+          <li><b>抛出今日任务</b> — 复刻一只 3D 编钟 → 一整套文创 → 打印一件，并把 <code>.glb</code> 交给后天交互课。</li>
+        </ol>
+        <figure><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/CN_-_Hubei_-_Wuhan_-_Hubei_Provincial_Museum_-_Chime_bells.JPG" alt="曾侯乙编钟全套" loading="lazy"><figcaption>曾侯乙编钟（全套）· 湖北省博物馆 — 演示用：今天只复刻其中<b>一只</b>。© MonsieurRoi · CC BY-SA 3.0 · Wikimedia</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="ex-head-line"><span class="k">3D 编钟 &amp; 文创 Workshop · 5 道循序练习</span><span class="ln"></span></div>
     <div class="ex-list">
 
       <div class="ex">
         <div class="ex-top">
-          <div><span class="ex-no">Exercise 1</span> <h4>Three Voices, One Question<span class="en">三个嗓音，同一个问题</span></h4></div>
+          <div><span class="ex-no">Exercise 1</span> <h4>Know the Bell<span class="en">先把编钟看清楚</span></h4></div>
           <span class="time">15 min</span>
         </div>
-        <p class="goal"><b>目标</b> — 意识到「AI 答案」不是一个答案：不同模型有不同声音。把同一个问题原样发给三个模型，不修改。</p>
-        <div class="prompt-box"><span class="plabel">Paste into 豆包 · 文心一言 · Claude</span><pre>What is the cultural significance of the Yongle Great Bell at Dazhongsi?</pre></div>
+        <p class="goal"><b>目标</b> — 复刻前先认识形制。不碰 AI：挑<b>一只</b>真实编钟（单钟），记录关键特征（钮 · 枚 · 鼓部 · 纹饰 · 铭文 · 青铜锈色），收集多角度参考图；写一句「文创定位」（给谁 · 什么场景 · 什么调性）。</p>
+        <div class="prompt-box"><span class="plabel">可选 · 即梦 / 豆包·图像 生成参考图</span><pre>A clean reference sheet of a SINGLE ancient Chinese bronze chime bell
+(one bell, not the full rack): accurate proportions, front and side views, the
+bronze-green patina, the raised studs (mei) and inscriptions visible.
+Neutral studio background, even lighting, photographic reference style.</pre></div>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>找 1–2 张博物馆<b>单只编钟</b>（不是整架）的清晰正面照，作主参考。</li>
+          <li>对照片列特征：钮 · 枚（凸点）· 鼓部 · 纹饰 · 铭文 · 青铜锈色。</li>
+          <li>写一句「文创定位」：给谁 · 什么场景 · 什么调性。</li>
+          <li>（可选）用即梦按上方 prompt 生成一张干净正侧参考补充。</li>
+        </ol></div>
         <div class="ex-grid">
-          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">一张 3 列表：每个模型的 3 个答案要点 + 1 个让你意外的细节。</div></div>
-          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>哪个答案最「中国」？哪个最「西方」？为什么？</li><li>三者在哪里互相矛盾？谁对？怎么知道？</li><li>只能引用一个给爱尔兰朋友，你选哪个？</li></ol></div>
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">编钟特征清单 + 多角度参考图 + 一句文创定位。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>编钟最有辨识度的 3 个特征是什么？</li><li>哪些细节拿来做文创最好用？</li><li>你的文创给谁、放在什么场景？</li></ol></div>
         </div>
-        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 默认 AI 是单一权威是危险的；多模型对比本身就是事实核查。</div></div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 文创不是把文物贴在杯子上——<b>先读懂形制与气质</b>，才知道留什么、舍什么。</div></div>
       </div>
 
       <div class="ex">
         <div class="ex-top">
-          <div><span class="ex-no">Exercise 2</span> <h4>Putting the LLM in Robes<span class="en">给 AI 穿上戏服</span></h4></div>
-          <span class="time">15 min</span>
+          <div><span class="ex-no">Exercise 2</span> <h4>One Photo → A 3D Bell<span class="en">一张照片出 3D 编钟</span></h4></div>
+          <span class="time">25 min</span>
         </div>
-        <p class="goal"><b>目标</b> — 理解 role / persona prompting 如何改变回答的风格与深度。在同一对话窗口依次发两个 prompt。</p>
-        <div class="prompt-box"><span class="plabel">Prompt A · 赤裸版</span><pre>Tell me about bianzhong.</pre></div>
-        <div class="prompt-box alt"><span class="plabel">Prompt B · 穿戏服版</span><pre>Act as a Chinese bronze-age music historian writing for a curious 20-year-old Irish undergraduate who has never been to China and has just visited Dazhongsi this morning. Same question: tell me about bianzhong. Use vivid sensory language. Limit to 150 words.</pre></div>
+        <p class="goal"><b>目标</b> — 体验「图生 3D」：参考图 → 可旋转的 3D 编钟网格。把 Ex.1 的正面参考上传到混元3D / Tripo，先单图生成，背面穿帮再补三视图。</p>
+        <div class="prompt-box"><span class="plabel">Hunyuan3D / Tripo — image-to-3D</span><pre>Upload: your front-view single-bell reference image.
+Mode: single image → 3D.  Symmetry: on.  Generate texture: on.
+Polycount: medium.  Then preview the turntable.
+If the curved bell body or rim looks wrong, switch to multi-view
+and upload front + side + back.</pre></div>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>打开混元3D / Tripo，选「单图生 3D」。</li>
+          <li>上传 Ex.1 的<b>单钟</b>正面参考；开「对称」「生成贴图」，polycount 选 medium。</li>
+          <li>生成后转一圈，重点看钟体弧面 · 口部 · 钮。</li>
+          <li>穿帮就切「多视图」，补正 / 侧 / 背三张重生成。</li>
+        </ol></div>
         <div class="ex-grid">
-          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">两段答案并列，用荧光笔标出 3 个差异。</div></div>
-          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>B 版多出了什么？少了什么？</li><li>「20 岁爱尔兰学生」让 AI 怎么变了？</li><li>若改成「10 岁中国小孩」会怎样？先猜再试。</li></ol></div>
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">1 个可在浏览器旋转的 3D 编钟模型 + 3 个角度截图。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>钟体弧面 / 口部 / 钮 复刻准吗？哪里穿帮？</li><li>模型和真实编钟差在哪？</li><li>给一张图 vs 给三视图，差别有多大？</li></ol></div>
         </div>
-        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — persona 不是表演，是<b>约束</b>：它告诉模型哪些词不能用、哪些细节要给。</div></div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 图生 3D 是<b>「猜立体」</b>：参考越多，AI 猜得越准。三视图 + 比例参照 &gt; 单图。</div></div>
       </div>
 
       <div class="ex">
         <div class="ex-top">
-          <div><span class="ex-no">Exercise 3</span> <h4>The Cage<span class="en">把模型关进笼子</span></h4></div>
-          <span class="time">20 min · 3–5 轮</span>
+          <div><span class="ex-no">Exercise 3 · wow point</span> <h4>Clean It &amp; Spin It<span class="en">修一下，转起来</span></h4></div>
+          <span class="time">30 min</span>
         </div>
-        <p class="goal"><b>目标</b> — 学会用显式约束逼出可用输出，并体会 AI 不情愿被约束的「反弹」。</p>
-        <div class="prompt-box"><span class="plabel">Paste into 豆包</span><pre>Describe the Yongle Great Bell. Output MUST satisfy ALL of:
-1. Exactly 100 words (count them).
-2. Contain at least 3 sensory details (sound, touch, sight, smell, weight).
-3. End with one open question for the reader.
-4. Do NOT use the words "ancient", "treasure", "magnificent".
-5. Mention at least one number with units.
-6. Write in second person ("you").</pre></div>
+        <p class="goal"><b>目标</b> — 学会看 AI 网格的毛病、最小化处理，导出干净 <code>.glb</code>，做一个 360° 转盘渲染。不必会建模——会「看出哪不对、并描述出来」即可。</p>
+        <table class="mini-table">
+          <tr><td>网格糊 / 多余面</td><td class="en">use the tool's "remesh / simplify / auto-retopo"</td></tr>
+          <tr><td>比例不对</td><td class="en">rescale, or regenerate with a clearer view</td></tr>
+          <tr><td>悬空 / 站不稳</td><td class="en">add a small round base or stand under the bell</td></tr>
+          <tr><td>颜色发灰</td><td class="en">re-bake the bronze texture, or tweak after export</td></tr>
+        </table>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>用工具内置 <code>remesh / simplify</code> 清掉多余面与糊面。</li>
+          <li>检查比例与站立，必要时加一个小底座 / 支架。</li>
+          <li>重新烘焙青铜贴图，或导出后再调色。</li>
+          <li>导出 <code>model.glb</code>（交 Day 3）。</li>
+          <li>录一段 10–15s 的 360° 转盘视频。</li>
+        </ol></div>
         <div class="ex-grid">
-          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">最终通过版 + 失败版的「违规清单」（哪轮违反哪条）。</div></div>
-          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>哪条约束 AI 最容易违反？</li><li>被指出违反时 AI 如何反应？道歉 / 强行解释 / 真改？</li><li>如果你是 AI，会偷懒砍哪条？</li></ol></div>
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver"><code>model.glb</code>（交 Day 3）+ 360° 转盘视频 <code>turntable.mp4</code>（10–15s）。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>哪个毛病最难修？</li><li>简化网格后「丢」了什么细节？值不值？</li><li>转起来之后，编钟比静态图更有质感吗？</li></ol></div>
         </div>
-        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 字数 / 禁用词 / 结构 是最常被忽略却最强的「作品塑形器」。</div></div>
+        <div class="teach"><span class="star">✦</span><div><b>埋点 · 关键</b> — 这个 <code>model.glb</code> 就是 <b>Day 3 交互可视化的主角</b>——到时候让编钟随你的音乐旋转、共振。别丢。</div></div>
       </div>
 
       <div class="ex">
         <div class="ex-top">
-          <div><span class="ex-no">Exercise 4</span> <h4>Show, Don't Tell<span class="en">给两个例子，让 AI 学</span></h4></div>
-          <span class="time">15 min</span>
+          <div><span class="ex-no">Exercise 4</span> <h4>The 文创 Shelf<span class="en">做一整套文创周边</span></h4></div>
+          <span class="time">40 min</span>
         </div>
-        <p class="goal"><b>目标</b> — 理解 few-shot prompting：用例子比用规则更有效。把整段复制到 Claude（few-shot 效果最好）。</p>
-        <div class="prompt-box"><span class="plabel">Paste into Claude — full block</span><pre>I will give you two examples of a "Cultural Concept Brief" format,
-then I want you to write a third one in the same style.
-
-EXAMPLE 1:
-TOPIC: The Yongle Great Bell
-WHY THIS MATTERS: A 46-ton sutra-covered Ming-dynasty bell that
-  still rings for two minutes after a single strike — an acoustic
-  marvel hiding in plain sight in Beijing.
-ONE FACT: Its surface bears around 230,000 Buddhist sutra characters.
-ONE SENSORY DETAIL: The decay is so long you start to forget when
-  the strike happened.
-HOOK FOR IRISH STUDENTS: It's older than Trinity College Dublin.
-ONE THING AI MIGHT GET WRONG: The exact weight (sources vary
-  between 42 and 47 tons).
-
-EXAMPLE 2:
-TOPIC: One Bell, Two Tones (一钟双音)
-WHY THIS MATTERS: A 2500-year-old acoustic invention — strike
-  the front of a bianzhong bell and you get one note; strike
-  the side and you get a different one, usually a minor third up.
-ONE FACT: The Marquis Yi of Zeng tomb (433 BCE) had 65 of these.
-ONE SENSORY DETAIL: The tonal shift sounds almost like a single
-  bell answering itself.
-HOOK FOR IRISH STUDENTS: Imagine if a church bell could sing harmony
-  with itself.
-ONE THING AI MIGHT GET WRONG: Claiming it was understood in the West
-  before the 1970s — it wasn't.
-
-NOW YOUR TURN. TOPIC: The 25 Night-Watch Drums at Gulou.
-Same format. Be concrete.</pre></div>
+        <p class="goal"><b>目标</b> — 把 3D 编钟变成<b>一整套文创周边</b>。选至少 <b>4 种</b>载体，统一一套视觉系统（配色 · 纹样 · 系列 logo），做贴图样机。</p>
+        <table class="mini-table">
+          <tr><td>桌面摆件</td><td class="en">a miniature bell on a wood / acrylic base</td></tr>
+          <tr><td>盲盒</td><td class="en">a bell-series figure + a packaging box</td></tr>
+          <tr><td>冰箱贴 / 徽章</td><td class="en">bell silhouette + the bronze pattern</td></tr>
+          <tr><td>书签 / 胶带</td><td class="en">the bell's ornament flattened into a graphic</td></tr>
+          <tr><td>香插 / 茶宠</td><td class="en">a bell-shaped functional desk object</td></tr>
+          <tr><td>帆布袋 / 明信片</td><td class="en">a repeatable bell pattern</td></tr>
+        </table>
+        <div class="prompt-box alt"><span class="plabel">即梦 / Canva — product set mockup</span><pre>A coordinated cultural-creative product set based on a bronze bianzhong:
+a miniature bell desk ornament on a wood base; a blind-box package
+(top logo "编钟 · 礼乐"); a fridge magnet; a bookmark. One visual system —
+bronze-green palette + the bell's stud/inscription pattern. Studio
+product photos, soft shadow, museum-shop e-commerce style.</pre></div>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>先定视觉系统：主色（青铜绿 + 暖金）· 一个纹样（取自枚 / 铭文）· 系列名 + logo。</li>
+          <li>选 ≥4 种载体（摆件 / 盲盒 / 冰箱贴 / 书签 / 香插 / 帆布袋…）。</li>
+          <li>用即梦 / Canva 按上方 prompt 逐件出贴图样机，保持同一视觉系统。</li>
+          <li>拼一张「系列合影」，配系列名与一句 slogan。</li>
+        </ol></div>
         <div class="ex-grid">
-          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">AI 输出 + 你的 4 项打分（准确性 / 风格匹配 / hook 力 / 可信度，各 1–5）。</div></div>
-          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>AI 学会格式了吗？哪项最像？哪项跑偏？</li><li>例子里哪个「形状」帮助最大？</li><li>只给 1 个例子会更差还是相似？</li></ol></div>
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">≥4 件文创周边样机 + 1 张「系列合影」+ 系列名 &amp; 一句 slogan。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>这套周边「成系列」吗？靠什么统一（色 / 纹 / 形）？</li><li>哪件最想买？哪件最有「博物馆文创」味儿？</li><li>还能延展出什么意想不到的单品？</li></ol></div>
         </div>
-        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 写规则费力又不准；<b>给例子</b>是更高带宽的指令。</div></div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 文创的关键是<b>「成套的系统」</b>：统一的视觉语言，让单品变成一个系列。</div></div>
       </div>
 
       <div class="ex">
         <div class="ex-top">
-          <div><span class="ex-no">Exercise 5 · 高潮</span> <h4>The Mirror<span class="en">镜子练习 — critique then rewrite</span></h4></div>
-          <span class="time">20 min</span>
+          <div><span class="ex-no">Exercise 5 · 高潮</span> <h4>Make It Real &amp; Hand It Over<span class="en">打印实体 + 交接给交互课</span></h4></div>
+          <span class="time">30 min</span>
         </div>
-        <p class="goal"><b>目标</b> — 体验 self-critique loop：让 AI 当自己的评论员。在 Ex.4 的 brief 之后连发两个 prompt。</p>
-        <div class="prompt-box"><span class="plabel">Prompt A · 批评</span><pre>Now critique this brief from the perspective of an Irish undergraduate who has never been to China. What would feel alien, wrong, patronizing, or boring to them? Be specific and merciless. List 5 problems.</pre></div>
-        <div class="prompt-box alt"><span class="plabel">Prompt B · 修改</span><pre>Now rewrite the brief addressing your own 5 critiques. Show me only the rewrite, not commentary.</pre></div>
+        <p class="goal"><b>目标</b> — 导出可打印的 <code>.stl</code>，切片并（轮流）打印一件（如编钟摆件）；同时把 <code>.glb</code> 正式交接给 Day 3 交互课。</p>
+        <table class="mini-table">
+          <tr><td>A · 有打印机</td><td>导出 STL → 切片（加底座 / 支撑，填充 10–20%）→ 轮流打印一件编钟摆件，课后取</td></tr>
+          <tr><td>B · 无打印机</td><td>导出 STL + 高质量渲染图，组成「可打印包」；附在线打印服务报价截图</td></tr>
+        </table>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>导出 <code>model.stl</code>。</li>
+          <li>切片（Bambu / Cura）：加底座 + 支撑，填充 10–20%，预览无悬空。</li>
+          <li>轮流打印一件编钟摆件（课后取）；无打印机则交「STL + 渲染 + 报价截图」。</li>
+          <li>把 <code>model.glb</code> 正式交给交互组（Day 3）。</li>
+          <li>汇总成文创系列 one-pager（单钟 + 整套周边 + 团队）。</li>
+        </ol></div>
         <div class="ex-grid">
-          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">三版并列（原始 / 批评清单 / 重写）+ 一句话评价。<b>这个重写版就是 Cultural Concept Brief 初稿，直接喂给 Day 2。</b></div></div>
-          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>AI 的「自我批评」真诚还是表演？</li><li>重写版在哪更好？在哪更糟？</li><li>这个循环还能用在哪些非课程场景？</li></ol></div>
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">✅ <code>model.stl</code> · ✅ <code>model.glb</code>（交 Day 3）· ✅ 实体打印件或渲染图 · ✅ 文创系列 <code>one-pager</code>（编钟 + 整套周边 + 团队）。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>实体摆件拿在手里 vs 屏幕上，感觉差在哪？</li><li>若打印失败，问题在模型还是切片？</li><li>这套文创能进博物馆礼品店吗？还差什么？</li></ol></div>
         </div>
-        <div class="teach"><span class="star">✦</span><div><b>教学点 · 关键</b> — AI 最强用法之一：<b>让它扮演两个角色互相挑战。</b>不要跳过 Ex.5，这是整堂课的 AHA moment。</div></div>
+        <div class="teach"><span class="star">✦</span><div><b>收尾 · 埋点</b> — 你完整走了一遍博物馆文创的生产线：<b>读形 → 复刻 3D → 整套周边 → 实体</b>。把 <code>model.glb</code> 交给交互组——编钟即将<b>随音乐起舞</b>（Day 3）。</div></div>
       </div>
 
     </div>
@@ -912,17 +1029,17 @@ Same format. Be concrete.</pre></div>
     <div class="course-band">
       <div class="course-num">Ⅱ</div>
       <div class="course-meta">
-        <span class="tag">Day 2 · D4 · Audio · AI 音乐</span>
-        <h2>AI 音乐创作<span class="en">AI Music Creation — from brief to a finished track</span></h2>
+        <span class="tag">Day 2 · Audio · AI 音乐</span>
+        <h2>AI 音乐创作<span class="en">AI Music Creation — from a bell to a finished track</span></h2>
         <p class="lead">
           With no music-production background assumed, students learn music-prompt
           grammar, fold the real bell recording from the museum into AI-generated
-          sound, and build a structured 60–120-second piece driven by Day 1's brief.
-          The closing question seeds Day 3.<br />
+          sound, and build a 60–120-second theme song for the team's 编钟,
+          anchored by the real bell. The closing question seeds Day 3.<br />
           不预设音乐基础。学员掌握音乐 prompt 语法，把博物馆录下的真实钟声融进 AI 生成的音乐，
-          以 Day 1 简报为驱动做出有结构的 60–120 秒作品。收尾问题埋下 Day 3 的种子。
+          给编钟配一首主题曲、用真实钟声锚定，做出有结构的 60–120 秒作品。收尾问题埋下 Day 3 的种子。
         </p>
-        <div class="deliver-pill"><b>当天产出 / Deliverable</b> — 60–120s 音频（.mp3 / .wav）+ Music Card：标题 · 结构图 · prompt 链（≥5 轮）· 灵感来源（指向 Day 1 brief）</div>
+        <div class="deliver-pill"><b>当天产出 / Deliverable</b> — 60–120s 音频（.mp3 / .wav）+ Music Card：标题 · 结构图 · prompt 链（≥5 轮）· 灵感来源（钟主题 / Day 1 的 3D 编钟）</div>
       </div>
     </div>
 
@@ -932,7 +1049,7 @@ Same format. Be concrete.</pre></div>
         <ul class="obj-list">
           <li>掌握音乐 prompt 语法：流派 · 乐器 · 情绪 · 结构 · BPM<span class="en">Master music-prompt grammar</span></li>
           <li>理解 AI 音乐模型的「风格融合」能力<span class="en">Understand style fusion</span></li>
-          <li>用 Day 1 的 Cultural Brief 驱动创作<span class="en">Drive composition from Day 1's brief</span></li>
+          <li>用钟主题与 3D 编钟驱动创作<span class="en">Drive it from the bell theme &amp; your 3D bell</span></li>
           <li>把真实钟声采样融进生成音乐<span class="en">Anchor AI sound with a real recording</span></li>
         </ul>
       </div>
@@ -951,15 +1068,37 @@ Same format. Be concrete.</pre></div>
     </div>
 
     <div class="sched">
-      <h3>当天流程 · Hour-by-hour（全天 6 小时）</h3>
+      <h3>当天流程 · Hour-by-hour（约 3 小时）</h3>
       <ul class="sched-list">
-        <li><time>09:00–10:00</time><span class="lab"><b>讲座</b> — How AI generates music（diffusion + sequence models 浅讲）</span></li>
-        <li><time>10:00–11:00</time><span class="lab"><b>Demo</b> — 关键词库：中国传统音阶、乐器、情绪词</span></li>
-        <li><time>11:00–12:00</time><span class="lab"><b>Workshop 1 · Prompt to Sound</b> — 每人生成 3 段 30 秒片段</span></li>
-        <li><time>13:30–15:00</time><span class="lab"><b>Workshop 2</b> — 把 Day 1 brief 转成 music prompt → 60–120s 作品</span></li>
-        <li><time>15:00–16:30</time><span class="lab"><b>Workshop 3</b> — 迭代 + 剪辑 + 起英文标题</span></li>
-        <li><time>16:30–17:00</time><span class="lab"><b>内部试听</b> + peer feedback</span></li>
+        <li><time>09:00–09:20</time><span class="lab"><b>讲座 + Demo</b> — AI 如何生成音乐 + 中国乐器 / 情绪关键词库</span></li>
+        <li><time>09:20–10:00</time><span class="lab"><b>Workshop 1</b> — 练习 1–2（拆解参考 + 第一次生成）</span></li>
+        <li><time>10:00–10:50</time><span class="lab"><b>Workshop 2</b> — 练习 3（把真实单钟钟声融进 AI 乐）</span></li>
+        <li><time>10:50–11:40</time><span class="lab"><b>Workshop 3</b> — 练习 4（加结构推终稿 + 双语标题）</span></li>
+        <li><time>11:40–12:00</time><span class="lab"><b>互评定稿</b> — 练习 5（盲听 + peer feedback）</span></li>
       </ul>
+    </div>
+
+    <div class="ex-head-line"><span class="k">生产流程 · Production process</span><span class="ln"></span></div>
+    <div class="process">
+      <div class="pcard"><span class="pno">1</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/VM_4737_Hubei_Provincial_Museum_-_bianzhong_performance.jpg" alt="编钟演奏" loading="lazy"><div class="pbody"><h5>真实钟声<span class="en">The real bell</span></h5><p>用录下的单钟钟声作锚点（≥10s）。</p><span class="cred">© Vmenkov · CC BY-SA 3.0 · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">2</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Guzheng.jpg" alt="古筝" loading="lazy"><div class="pbody"><h5>中式乐器词库<span class="en">Instrument palette</span></h5><p>古筝·笛·琵琶·二胡——译成 prompt 词。</p><span class="cred">© Whkoh · CC BY-SA 3.0 · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">3</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/5/52/Audacity_3.6_Screenshot.png" alt="音频波形编辑" loading="lazy"><div class="pbody"><h5>AI 生成<span class="en">Generate</span></h5><p>海绵/Suno 出 30s 片段，逐参数迭代。</p><span class="cred">© Audacity · GPL · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">4</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Microfone_de_Studio.jpg" alt="录音麦克风" loading="lazy"><div class="pbody"><h5>融真实采样<span class="en">Fold in real sound</span></h5><p>把真实钟声剪进首尾，淡入淡出各 2s。</p><span class="cred">© Kassoll Dji · CC BY-SA 4.0 · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">5</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Pipa_virtuoso_Wu_Man_performs_at_NEC%27s_Commencement_Ceremony_2021.jpg" alt="琵琶演奏" loading="lazy"><div class="pbody"><h5>加结构定稿<span class="en">Structure & finish</span></h5><p>起承转合/ABA，60–120s，双语标题。</p><span class="cred">© A. Hurlbut/NEC · CC BY-SA 4.0 · Wikimedia</span></div></div>
+    </div>
+
+    <div class="demo">
+      <div class="dh">讲座 + Demo · AI 怎么「作曲」<span class="en">Lecture + live demo</span></div>
+      <div class="dsub">09:00–09:20 · 约 20 分钟 · 教师演示</div>
+      <div class="demo-grid">
+        <ol class="beats">
+          <li><b>AI 如何生成音乐</b> — 一句话讲 diffusion / sequence 模型。<span class="say">「它不懂『中国风』这种词，它懂 pentatonic + guzheng + slow + reverb。」</span></li>
+          <li><b>乐器调色板</b> — 展示古筝 / 笛 / 琵琶，念出对应英文 prompt 词，让学生跟读。</li>
+          <li><b>现场生成（约 3 分钟）</b> — 用 starter prompt 在 Suno / 海绵生成 30s，只改一个变量再生成，对比听感。</li>
+          <li><b>抛出今日任务</b> — 给你那只编钟配一首 60–120s 主题曲，必须融进一段真实<b>单钟</b>钟声。</li>
+        </ol>
+        <figure><img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/VM_4737_Hubei_Provincial_Museum_-_bianzhong_performance.jpg" alt="编钟演奏" loading="lazy"><figcaption>编钟演奏 · 湖北省博物馆 © Vmenkov · CC BY-SA 3.0 · Wikimedia</figcaption></figure>
+      </div>
     </div>
 
     <div class="ex-head-line"><span class="k">AI Music Workshop · 5 道循序练习</span><span class="ln"></span></div>
@@ -968,7 +1107,7 @@ Same format. Be concrete.</pre></div>
       <div class="ex">
         <div class="ex-top">
           <div><span class="ex-no">Exercise 1</span> <h4>Listen Like an AI<span class="en">像 AI 一样听歌</span></h4></div>
-          <span class="time">20 min</span>
+          <span class="time">15 min</span>
         </div>
         <p class="goal"><b>目标</b> — 学会反向拆解一首歌为 AI 可消化的 prompt 元素。教师播 3 段参考音乐（30s/段，各 2 遍），学员仅听、禁止搜歌名。</p>
         <table class="mini-table">
@@ -976,6 +1115,12 @@ Same format. Be concrete.</pre></div>
           <tr><td>参考 2</td><td>古筝 + 笛子的现代国风（如《典籍里的中国》主题音乐）</td></tr>
           <tr><td>参考 3</td><td>中西融合电子</td></tr>
         </table>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>每段闭眼听 2 遍，禁止搜歌名。</li>
+          <li>每段填 5 列：Genre · Instruments · Mood · Tempo · One word。</li>
+          <li>把「不喜欢的地方」翻成一个可避免的 prompt 词。</li>
+          <li>用英文写下三段共同的「中国感」来源。</li>
+        </ol></div>
         <div class="ex-grid">
           <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">每段填 5 列表：Genre · Instruments · Mood · Tempo · One word.</div></div>
           <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>哪段最难拆？为什么？</li><li>把「不喜欢」翻译成可避免的 prompt 词。</li><li>三段的「中国感」共同点，能用英文说清吗？</li></ol></div>
@@ -986,7 +1131,7 @@ Same format. Be concrete.</pre></div>
       <div class="ex">
         <div class="ex-top">
           <div><span class="ex-no">Exercise 2</span> <h4>First Generation<span class="en">第一次生成</span></h4></div>
-          <span class="time">30 min</span>
+          <span class="time">25 min</span>
         </div>
         <p class="goal"><b>目标</b> — 在海绵 / Suno 做出第一段可听的中国风音乐，体会 prompt → output 的距离。用 starter 生成后，改至少 3 个变量重生成，共 4 版。</p>
         <div class="prompt-box"><span class="plabel">Starter · 海绵 / Suno</span><pre>A 30-second instrumental piece.
@@ -995,6 +1140,12 @@ Same format. Be concrete.</pre></div>
 - Mood: contemplative, vast, slightly melancholic
 - Tempo: 60 BPM
 - No vocals</pre></div>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>把 starter prompt 原样贴进海绵 / Suno，生成 v1。</li>
+          <li>每次只改 1 个变量（乐器 / 速度 / 情绪 / 混响），各重生成一版。</li>
+          <li>共 4 版，记调参日志：改了什么 · 听感变化。</li>
+          <li>选出最接近想象的一版留用。</li>
+        </ol></div>
         <div class="ex-grid">
           <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">4 个音频 + 调参日志（改了什么 / 听感变化 / 喜欢哪点）。</div></div>
           <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>哪个参数改动让你「啊？！」？</li><li>AI 给的 v1 与你想象差多远？</li><li>prompt 在哪被 AI 误解了？</li></ol></div>
@@ -1005,7 +1156,7 @@ Same format. Be concrete.</pre></div>
       <div class="ex">
         <div class="ex-top">
           <div><span class="ex-no">Exercise 3 · wow point</span> <h4>Voice of the Yongle Bell<span class="en">让钟开口</span></h4></div>
-          <span class="time">60 min</span>
+          <span class="time">40 min</span>
         </div>
         <p class="goal"><b>目标</b> — 把昨天的真实钟声录音（≥10s）作为锚点，融进 AI 生成的音乐。</p>
         <div class="prompt-box"><span class="plabel">路径 A · 海绵 / Suno 直接参考</span><pre>A 60-second contemplative piece inspired by the bronze temple bell
@@ -1016,6 +1167,12 @@ to a final bell strike at second 50, fading to silence by 60.
 Tempo 55 BPM. Mood: vast, reverent.
 [Reference attached: Yongle Bell recording]</pre></div>
         <p class="goal"><b>路径 B</b>（不接受参考音频则手工拼接）：AI 生成 50s 无钟纯乐 → Audacity/CapCut 把真实钟声剪入首尾 → 调整淡入淡出各 2 秒。</p>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>取昨天 ≥10s 的真实<b>单钟</b>钟声录音。</li>
+          <li>路径 A：上传为参考，按 prompt 让 AI 围绕钟声写 60s。</li>
+          <li>路径 B（不支持参考音频）：AI 出 50s 纯乐 → Audacity / CapCut 把真钟声剪入首尾，淡入淡出各 2s。</li>
+          <li>写 50 字英文 liner notes。</li>
+        </ol></div>
         <div class="ex-grid">
           <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">1 段 60s 整合作品（真实钟 + AI 乐）+ 50 字英文 liner notes。</div></div>
           <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>真实钟声出现时，音乐「换味儿」了吗？</li><li>AI 乐器和真实钟的混响匹配吗？</li><li>能听出「哪 10 秒是真的」吗？意味着什么？</li></ol></div>
@@ -1026,14 +1183,20 @@ Tempo 55 BPM. Mood: vast, reverent.
       <div class="ex">
         <div class="ex-top">
           <div><span class="ex-no">Exercise 4</span> <h4>Capstone Track<span class="en">推到终稿</span></h4></div>
-          <span class="time">90 min</span>
+          <span class="time">45 min</span>
         </div>
-        <p class="goal"><b>目标</b> — 完成正式提交物：60–120s、可放进 Capstone 的音乐。基于 Ex.3 + Day 1 Brief 做一次「加结构」的升级。</p>
+        <p class="goal"><b>目标</b> — 完成正式提交物：60–120s、可放进 Capstone 的音乐。基于 Ex.3 + 钟主题 做一次「加结构」的升级。</p>
         <div class="prompt-box alt"><span class="plabel">结构模板 · 任选其一或自定义</span><pre>A. 起–承–转–合（4 段，每段 15–30 秒）
 B. ABA（钟主题 → 对比段 → 钟主题回归）
 C. 时间线叙事（晨钟 → 日常 → 暮钟）
 
 要求：时长 60–120s · 至少 1 处结构转折 · 至少 1 段真实采样 · 双语标题</pre></div>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>选一个结构模板（起承转合 / ABA / 时间线）。</li>
+          <li>在 Ex.3 基础上加结构：≥1 处转折 · ≥1 段真实采样。</li>
+          <li>控制时长 60–120s，起一个双语标题。</li>
+          <li>导出 <code>music-final.mp3</code> + 写 <code>music-card.md</code>。</li>
+        </ol></div>
         <div class="ex-grid">
           <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver"><code>music-final.mp3</code> + <code>music-card.md</code>（标题 / 结构图 / prompt 链 ≥5 轮 / 灵感来源）。</div></div>
           <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>结构转折在第几秒？听众能感觉到吗？</li><li>只保留 30 秒，你留哪 30 秒？</li><li>这段音乐能脱开钟的故事独立成立吗？应不应该？</li></ol></div>
@@ -1044,7 +1207,7 @@ C. 时间线叙事（晨钟 → 日常 → 暮钟）
       <div class="ex">
         <div class="ex-top">
           <div><span class="ex-no">Exercise 5</span> <h4>Critique &amp; Polish<span class="en">互评与定稿</span></h4></div>
-          <span class="time">60 min</span>
+          <span class="time">30 min</span>
         </div>
         <p class="goal"><b>目标</b> — 用同学的耳朵当镜子做最后打磨。两轮听：盲听（不看作品名，写 3 句反馈）→ 带 brief 听（先 30 秒讲选题再放）。</p>
         <div class="prompt-box"><span class="plabel">反馈卡 · 每位听众填一张/组</span><pre>听完盲听版后第一感受：______（1 句）
@@ -1052,6 +1215,12 @@ C. 时间线叙事（晨钟 → 日常 → 暮钟）
 1 个最弱时刻（时间戳）：____
 听完 brief 后，你的感受变了吗？怎么变的？
 一句话建议：______</pre></div>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>盲听：不报名字，每位听众写 3 句反馈（首感 + 2 强点 + 1 弱点，带时间戳）。</li>
+          <li>带 brief 听：先 30 秒讲选题再放，记录感受变化。</li>
+          <li>据反馈做一次定稿（改音或改结构，二选一为主）。</li>
+          <li>覆盖 Ex.4，回收 Critique Notes。</li>
+        </ol></div>
         <div class="ex-grid">
           <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">定稿音频（覆盖 Ex.4）+ Critique Notes 回收。</div></div>
           <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>盲听 vs 听 brief 差别最大的一组说明了什么？</li><li>最有用 / 最没用的反馈各是什么？</li><li>你的 polish 改了音还是改了结构？</li></ol></div>
@@ -1072,19 +1241,27 @@ C. 时间线叙事（晨钟 → 日常 → 暮钟）
     <div class="course-band">
       <div class="course-num">Ⅲ</div>
       <div class="course-meta">
-        <span class="tag">Day 3 · D5 · Visual + UX · 交互可视化</span>
+        <span class="tag">Day 3 · Visual + UX · 交互可视化</span>
         <h2>用 Gemini 做音乐可视化<span class="en">Interactive Music Visualizer with Gemini — generative UI</span></h2>
         <p class="lead">
-          The radical idea: students never write code. They describe what they want
-          in natural language and Gemini generates runnable HTML/JS; the student
-          only iterates the prompt and the aesthetics. They load Day 2's audio, make
-          it react to sound, add one interaction, restyle it as Chinese ink-wash, and
-          ship it to a public URL.<br />
-          核心思路：学员不写代码——用自然语言对 Gemini 描述想要的交互，Gemini 直接生成可运行 HTML，
-          学员只迭代 prompt 与审美。加载 Day 2 音频 → 让画面对声音反应 → 加一种交互 → 改成水墨风 → 发布公开链接。
+          The radical idea: students never write code. They describe what they want in
+          natural language and Gemini generates runnable HTML/JS; the student only iterates
+          the prompt and the aesthetics. They load Day 2's music and the Day 1 3D bell, make
+          the visuals genuinely REACT to the sound (bass / mid / treble + beats) with cool,
+          cinematic effects, restyle it as real Chinese ink-wash, and ship it to a public URL.<br />
+          核心思路：学员不写代码——用自然语言对 Gemini 描述，Gemini 直接生成可运行 HTML，学员只迭代
+          prompt 与审美。载入 Day 2 音乐与 Day 1 的 3D 编钟 → 让画面<b>真正随声音反应</b>（低/中/高频 +
+          节拍）、做出炫酷成片效果 → 改成<b>真正的水墨</b> → 发布公开链接。
         </p>
         <div class="deliver-pill"><b>当天产出 / Deliverable</b> — 可在浏览器打开的交互页面 + 公开 URL + 30s 演示视频 + Prompt 日志（≥5 轮迭代）</div>
       </div>
+    </div>
+
+    <div class="samplenote" style="border-left:3px solid #b06a57;">
+      <b>⚠️ 课前必须确认 3 件事 · Pre-flight (instructor, the night before)</b><br />
+      ① <b>3D 模型就位了吗?</b> <code>website/models/</code> 目前<b>是空的</b>（没有 <code>编钟.glb</code>）。三选一（默认 B）：A 课前把 <code>.glb</code> 放进 <code>models/</code> 并改 <code>src</code>；<b>B 用 <a href="bianzhong.html">bianzhong.html</a> 的「拖拽 .glb 入舞台」现场加载</b>；C 走 SVG 编钟架降级。<span style="opacity:.7;">The model folder is currently EMPTY — pick one (default B: drag-drop at runtime).</span><br />
+      ② <b>每人能登录 Gemini 吗?</b> 课前测营地网络 + 备 2–3 个 Google 账号 + 存好三案例本地副本。<span style="opacity:.7;">Test Wi-Fi, keep spare accounts &amp; offline copies.</span><br />
+      ③ <b>本地服务器起了吗?</b> 麦克风/摄像头/部分 <code>.glb</code> 在 <code>file://</code> 会被拒——课前用 <code>python3 -m http.server</code> 起 <code>localhost</code> 跑通三案例。<span style="opacity:.7;">Mic/cam/.glb need <code>localhost</code> or HTTPS, not <code>file://</code>.</span>
     </div>
 
     <div class="cols">
@@ -1092,9 +1269,9 @@ C. 时间线叙事（晨钟 → 日常 → 暮钟）
         <div class="block-title">学习目标 <span class="en">Learning objectives</span></div>
         <ul class="obj-list">
           <li>掌握生成式 UI 编程范式：描述 → 预览 → 迭代<span class="en">Describe → preview → iterate</span></li>
-          <li>把「模糊审美意图」翻译成结构化技术 prompt<span class="en">Translate aesthetic intent into structured prompts</span></li>
-          <li>理解 AI 生成代码的边界与调试方法<span class="en">Understand limits &amp; debugging of AI code</span></li>
-          <li>设计至少一种交互：鼠标 / 键盘 / 麦克风 / 摄像头<span class="en">Design at least one interaction</span></li>
+          <li>让画面随音乐多频段反应（低/中/高 + 节拍），做出炫酷效果<span class="en">React across bands + beats — flashy, alive</span></li>
+          <li>把「水墨」做成真水墨：渗墨 · 飞白 · 留白 · 泼墨<span class="en">Real ink-wash: bleed, flying-white, negative space, splashed ink</span></li>
+          <li>设计一种「招牌交互」；理解并调试 AI 生成的代码<span class="en">A signature interaction; understand &amp; debug AI code</span></li>
         </ul>
       </div>
       <div>
@@ -1111,17 +1288,91 @@ C. 时间线叙事（晨钟 → 日常 → 暮钟）
       </div>
     </div>
 
+    <div class="ex-head-line"><span class="k">无障碍与安全 · Accessibility &amp; Safety（先读 · read first）</span><span class="ln"></span></div>
+    <p class="lead" style="margin:6px 0 10px;font-size:14px;max-width:780px;">本课默认有闪光、抖动、强对比脉冲——对光敏性癫痫是<b>真实风险</b>。下列约束<b>全程适用并计入评分</b>，括号内英文句可直接粘进 prompt。<span style="color:var(--mute)">Flashing/shake/high-contrast pulses are a real photosensitivity risk; these apply all day, are graded, and the English lines paste straight into prompts.</span></p>
+    <table class="mini-table">
+      <tr><td>防闪光 Anti-flash</td><td class="en">Cap any flash to under 3 per second, never a full-screen pure-white strobe; keep flashes local and brief.</td></tr>
+      <tr><td>减弱动效 Reduced motion</td><td class="en">Respect @media (prefers-reduced-motion: reduce): disable screen-shake and heavy bloom, soften pulses to opacity fades.</td></tr>
+      <tr><td>可暂停/静音 Pause &amp; mute</td><td class="en">Always keep a visible Pause and Mute control; nothing auto-plays loud.</td></tr>
+      <tr><td>对比度 Contrast</td><td class="en">Ensure text and the red seal meet WCAG AA contrast on the #FAF6F0 paper.</td></tr>
+      <tr><td>字幕 / 声明 Caption &amp; note</td><td>demo 视频加一行字幕；投屏前口头提示「含闪光与运动」。 One caption line on the clip; say "contains flashing &amp; motion" before the showcase.</td></tr>
+    </table>
+
     <div class="sched">
-      <h3>当天流程 · Hour-by-hour（全天 6 小时）</h3>
+      <h3>当天流程 · Hour-by-hour（约 3 小时）</h3>
       <ul class="sched-list">
-        <li><time>09:00–09:45</time><span class="lab"><b>讲座</b> — Generative UI：用语言「画」出交互页面（含 Gemini Canvas 演示）</span></li>
-        <li><time>09:45–10:30</time><span class="lab"><b>Live demo</b> — 1 个 prompt 让 Gemini 生成「音频反应的水墨粒子」页面（15 分钟内）</span></li>
-        <li><time>10:30–12:00</time><span class="lab"><b>Workshop 1</b> — 上传 Day 2 音频，用 starter prompt 跑通第一版</span></li>
-        <li><time>13:30–15:00</time><span class="lab"><b>Workshop 2</b> — 加入一种交互</span></li>
-        <li><time>15:00–16:00</time><span class="lab"><b>Workshop 3</b> — 美学迭代：用中国文化关键词反复改 prompt</span></li>
-        <li><time>16:00–17:00</time><span class="lab"><b>导出 HTML → 部署 → 内部 Demo</b></span></li>
+        <li><time>09:00–09:25</time><span class="lab"><b>讲座 + Demo</b> — Generative UI：用语言生成可交互页面（Gemini Canvas 演示）</span></li>
+        <li><time>09:25–10:05</time><span class="lab"><b>Workshop 1</b> — 练习 1–2（Hello Canvas + 载入 Day 2 音频）</span></li>
+        <li><time>10:05–10:45</time><span class="lab"><b>Workshop 2</b> — 练习 3（加一种交互）</span></li>
+        <li><time>10:45–11:30</time><span class="lab"><b>Workshop 3</b> — 练习 4（水墨 / 中国风 + 可放入 Day 1 的 3D 编钟）</span></li>
+        <li><time>11:30–12:00</time><span class="lab"><b>导出 → 部署 → Demo</b> — 练习 5（Ship It）</span></li>
       </ul>
     </div>
+
+    <div class="ex-head-line"><span class="k">生产流程 · Production process</span><span class="ln"></span></div>
+    <div class="process">
+      <div class="pcard"><span class="pno">1</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Processing_4.0b1_Screenshot.png" alt="创意编程环境" loading="lazy"><div class="pbody"><h5>用语言生成<span class="en">Describe → code</span></h5><p>对 Gemini 描述，直接生成可运行 HTML。</p><span class="cred">© Processing Foundation · GPL · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">2</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Voice_waveform_and_spectrum.png" alt="音频波形与频谱" loading="lazy"><div class="pbody"><h5>声音驱动画面<span class="en">Audio-reactive</span></h5><p>低/中/高三频段 + 节拍，各驱动不同炫酷效果。</p><span class="cred">© Bob K · Public domain · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">3</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Fractals_Geometric_Pattern_%288665018571%29.jpg" alt="生成式视觉" loading="lazy"><div class="pbody"><h5>加一种交互<span class="en">One interaction</span></h5><p>鼠标拖墨 / 点击冲击波——让人想再玩一次。</p><span class="cred">© Dilshan Jayakody · CC BY-SA 2.0 · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">4</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Sesshu_-_Haboku-Sansui.jpg" alt="水墨山水" loading="lazy"><div class="pbody"><h5>水墨风格<span class="en">Ink-wash style</span></h5><p>米纸底 + 水墨笔触 + 中轴线，风格即叙事。</p><span class="cred">© Sesshū Tōyō (1495) · Public domain · Wikimedia</span></div></div>
+      <div class="pcard"><span class="pno">5</span><img class="pthumb" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Chromium_web_browser.PNG" alt="浏览器中的网页" loading="lazy"><div class="pbody"><h5>发布分享<span class="en">Ship a URL</span></h5><p>导出 → 部署 → 公开链接，手机可开。</p><span class="cred">© Google · CC BY-SA 4.0 · Wikimedia</span></div></div>
+    </div>
+
+    <div class="demo">
+      <div class="dh">讲座 + Demo · 用语言「画」出网页<span class="en">Lecture + live demo</span></div>
+      <div class="dsub">09:00–09:25 · 约 25 分钟 · 教师演示</div>
+      <div class="demo-grid">
+        <ol class="beats">
+          <li><b>生成式 UI 是什么</b> — <span class="say">「你不写代码，你描述；Gemini 写出可运行的 HTML。」</span></li>
+          <li><b>现场一条 prompt（约 5 分钟）</b> — 让 Gemini Canvas 生成「音频反应的水墨泼墨 + 辉光粒子」页面，当场加载音频——低音一来，墨点炸开。</li>
+          <li><b>报错 = 沟通失败</b> — 故意触发一个错误，把报错原样粘回 Gemini 让它自己修。</li>
+          <li><b>抛出今日任务</b> — 把你的音乐 + 那只 3D 编钟，做成一个能发公开链接的交互页面，水墨风。</li>
+        </ol>
+        <figure><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Fractals_Geometric_Pattern_%288665018571%29.jpg" alt="生成式视觉" loading="lazy"><figcaption>生成式 / 创意编程视觉（示意）© Dilshan Jayakody · CC BY-SA 2.0 · Wikimedia</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="ex-head-line"><span class="k">素材交接 · Hand-off</span><span class="ln"></span></div>
+    <div class="handoff">
+      <div class="ho-col ho-in"><div class="ho-h">收到 · Receives</div><ul>
+        <li>Day 1 · <code>编钟.glb</code>（3D 编钟模型）</li>
+        <li>Day 2 · <code>music-final.mp3</code>（主题曲）</li>
+      </ul></div>
+      <div class="ho-arrow">→</div>
+      <div class="ho-col ho-this"><div class="ho-h">本课 · Day 3</div><p>音频驱动的<b>水墨交互页面</b>——编钟随乐起舞、墨随节拍泼洒。</p></div>
+      <div class="ho-arrow">→</div>
+      <div class="ho-col ho-out"><div class="ho-h">交出 · Hands off</div><ul>
+        <li>公开 URL + <code>demo.mp4</code> + <code>prompt-log.md</code></li>
+        <li>→ D8 Capstone 展示 · D9 打磨</li>
+      </ul></div>
+    </div>
+
+    <div class="ex-head-line"><span class="k">三大活案例 · Three live case studies（demo · 靶子 · 二创底版）</span><span class="ln"></span></div>
+    <p class="lead" style="margin:6px 0 0;font-size:14px;max-width:800px;">三个<b>真实可跑</b>的本地范例，贯穿全天——先在 <code>localhost</code> 让学员亲手玩，再「从效果倒推 prompt」。完整可交互版见 <a href="visualizers.html">🎵 音乐可视化示例</a>。<span style="color:var(--mute)">Three REAL runnable demos used as demo / target / remix base all day; play them, then reverse-engineer the prompts. Live gallery → visualizers.html.</span></p>
+    <div class="process">
+      <div class="pcard"><span class="pno">A</span><div class="pbody"><h5>中軸律动 Sumi-e<span class="en">audio + mic/cam + ink</span></h5><p>FFT 取低音 → 墨点爆发；麦克风/摄像头/滚轮/拖拽 = 同一套「一个数值 → 一个视觉参数」映射。<br /><span style="opacity:.7;">Audio-reactive ink — the target for Ex.2–4; one value → one visual param.</span></p><span class="cred"><code>examples/elegant_audio_visualizer.html</code></span></div></div>
+      <div class="pcard"><span class="pno">B</span><div class="pbody"><h5>古韻青銅<span class="en">3D + AR + fallback</span></h5><p>&lt;model-viewer&gt; 一标签拿 3D + AR；振荡器合成钟声；3D 失败 <b>2.2s 超时 → SVG 编钟架</b>降级。<br /><span style="opacity:.7;">model-viewer + AR + synthesized bells + graceful SVG fallback — the target when Ex.4 brings in the 3D bell.</span></p><span class="cred"><code>examples/elegant_bianzhong.html</code></span></div></div>
+      <div class="pcard"><span class="pno">C</span><div class="pbody"><h5>编钟可交互<span class="en">tap-to-ring + pipeline</span></h5><p>点击位置 → 五声音阶音高；拖入自己的 .glb；页面内嵌可复制 Gemini prompt = 作业桥。<br /><span style="opacity:.7;">Click→pitch, drag-drop your model, an embedded copy-ready prompt — bridges Ex.4's 3D and Ex.5's shipping.</span></p><span class="cred"><code>bianzhong.html</code></span></div></div>
+    </div>
+    <table class="mini-table" style="margin-top:14px;">
+      <tr><td><b>练习 Exercise</b></td><td><b>对照案例 · Aim for which case</b></td></tr>
+      <tr><td>Ex.2 让声音住进页面 Audio</td><td>→ <b>A 中軸律动</b>（FFT 三频段 + 节拍 + 半透明拖尾 + bloom）</td></tr>
+      <tr><td>Ex.3 招牌交互 Interaction</td><td>→ <b>A</b>（冲击波 / 拖拽提笔 / 拍手炸墨）· <b>C</b>（点击位置 → 音高）</td></tr>
+      <tr><td>Ex.4 风格即文化 + 3D 编钟</td><td>→ <b>A</b>（水墨美学）+ <b>B/C</b>（model-viewer 放入 3D 编钟，低音加速旋转，<b>必加 2.2s → SVG 降级</b>）</td></tr>
+      <tr><td>Ex.5 发布 Ship It</td><td>→ <b>C</b>（同源托管 / data-URI 内嵌 .glb → 喂回 prompt）</td></tr>
+    </table>
+
+    <div class="ex-head-line"><span class="k">效果配方 + 样例 · Effect recipes &amp; samples</span><span class="ln"></span></div>
+    <p class="lead" style="margin:6px 0 0;font-size:14px;max-width:760px;">想更炫？把下面的「配方」一条条加进同一个 Gemini 对话即可（可叠加）。<span style="color:var(--mute)">Stack these copy-paste recipes into the same chat to make it cooler.</span></p>
+    <div class="recipes">
+      <div class="prompt-box"><span class="plabel">辉光 / 泛光 · Bloom</span><pre>Add an additive bloom/glow pass so bright parts halo and bleed light into the paper.</pre></div>
+      <div class="prompt-box"><span class="plabel">节拍粒子 · Beat particles</span><pre>On each detected beat, emit ~30 glowing ink droplets that fly outward and fade.</pre></div>
+      <div class="prompt-box"><span class="plabel">拖尾 · Trails</span><pre>Don't fully clear the canvas each frame — fade it ~8% so motion leaves silky ink trails.</pre></div>
+      <div class="prompt-box"><span class="plabel">冲击波 · Shockwave</span><pre>On click or a strong onset, send an expanding ring that warps everything it passes.</pre></div>
+      <div class="prompt-box"><span class="plabel">景深 / 视差 · Parallax</span><pre>Layer 3 depths of strokes; move them at different speeds with the mouse for depth.</pre></div>
+      <div class="prompt-box alt"><span class="plabel">让编钟转 · Spin the bell</span><pre>Load the Day-1 编钟.glb via &lt;model-viewer&gt;; auto-rotate it and speed it up with the bass.</pre></div>
+    </div>
+    <div class="samplenote"><b>课程提供的样例素材 / Provided samples</b> — 课前发一个<b>示例 编钟.glb</b> + 一段 <b>20s 示例音乐</b>，自己的还没做好也能先开工；另附 <code>starter.html</code>（已接好音频 + FFT 骨架）。<b>参考范例 / Aim for</b> — 直接用上面<b>三大活案例</b>（<a href="visualizers.html">🎵 音乐可视化示例</a>）作为目标观感与二创底版。Use the three live cases (visualizers.html) as the target look &amp; remix base.</div>
 
     <div class="ex-head-line"><span class="k">Gemini Visualizer Workshop · 5 道循序练习</span><span class="ln"></span></div>
     <div class="ex-list">
@@ -1136,6 +1387,12 @@ C. 时间线叙事（晨钟 → 日常 → 暮钟）
 white background. When I click anywhere, the circle should bounce
 once (scale up to 1.5x and back). Use vanilla JS, no libraries.
 Make it elegant and minimal.</pre></div>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>打开 Gemini Canvas / AI Studio，贴第一个 prompt。</li>
+          <li>预览运行，点几下看交互。</li>
+          <li>截图 + 存下这一版 HTML。</li>
+          <li>自问：你能用一句话描述它在做什么吗？</li>
+        </ol></div>
         <div class="ex-grid">
           <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">1 个能跑的 HTML 页面 + 截图。</div></div>
           <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>第一次「看到代码运行」是什么感觉？</li><li>Gemini 多给了 / 少给了什么？</li><li>这段代码你看得懂吗？需要看得懂吗？</li></ol></div>
@@ -1146,35 +1403,54 @@ Make it elegant and minimal.</pre></div>
       <div class="ex">
         <div class="ex-top">
           <div><span class="ex-no">Exercise 2</span> <h4>Audio Lives in the Page<span class="en">让声音住进页面</span></h4></div>
-          <span class="time">30 min</span>
+          <span class="time">25 min</span>
         </div>
-        <p class="goal"><b>目标</b> — 把 Day 2 的音乐塞进页面，让画面对声音有反应。在 Ex.1 基础上迭代（保留同一对话）。失败时把报错直接粘回 Gemini，不要自己 debug。</p>
-        <div class="prompt-box"><span class="plabel">Iterate in the same chat</span><pre>Now make this page load an audio file (let me pick a local .mp3).
-Show a small play/pause button.
-Use the Web Audio API to do a real-time FFT.
-Make the circle's SIZE react to the bass (low frequencies):
-big bass = big circle.
-Keep it elegant. Single HTML file.</pre></div>
+        <p class="goal"><b>目标</b> — 让画面<b>真正「听见」音乐</b>：不是一个圆变大，而是低/中/高三频段 + 节拍各自驱动不同效果。在 Ex.1 基础上同一对话迭代；报错就粘回 Gemini。</p>
+        <div class="prompt-box"><span class="plabel">Iterate in the same chat</span><pre>Now load a local .mp3 (small play/pause button) and drive everything with
+the Web Audio API in real time. Split the FFT into 3 bands and make AT
+LEAST 3 things react:
+  - BASS (low)    -> the core pulses / scales on every kick
+  - MIDS          -> concentric rings ripple outward
+  - TREBLE (high) -> a spray of small bright particles
+Add simple BEAT DETECTION: on a strong onset, fire a quick flash / shockwave.
+Add a soft additive GLOW (bloom) and short motion TRAILS so it feels alive,
+not jittery; smooth every value (lerp) so it breathes.
+Single HTML file, vanilla JS + canvas.</pre></div>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>同一对话继续迭代，贴入多频段 prompt，加载 <code>music-final.mp3</code>。</li>
+          <li>先跑通基础 FFT，再逐条加：低频脉冲 → 中频涟漪 → 高频粒子。</li>
+          <li>再加节拍闪光 + 辉光(bloom) + 拖尾；所有数值做平滑(lerp)防抖。</li>
+          <li>录 30s，确认「安静段安静、高潮段炸」；报错粘回 Gemini。</li>
+        </ol></div>
         <div class="ex-grid">
-          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">能加载音频 + 圆圈随低音脉动的页面 + 30s 屏幕录制。</div></div>
-          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>圆圈的反应「听上去对吗」？延迟 / 过激 / 麻木？</li><li>最多用几轮 prompt 才跑通？</li><li>Gemini 哪一次给的代码错了？错在哪？</li></ol></div>
+          <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">三频段 + 节拍反应、带辉光/拖尾的页面 + 30s 录屏（要含一段「安静 → 高潮」对比）。</div></div>
+          <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>安静段与高潮段的差别够大吗？</li><li>哪个频段最难「听对」？延迟 / 过激 / 麻木怎么调？</li><li>Gemini 哪一次给的代码错了？错在哪？</li></ol></div>
         </div>
-        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — <b>bug = 沟通失败</b>。粘报错是最高效的「再描述」。</div></div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 别让<b>一个圆</b>代表整首歌——拆成低/中/高 + 节拍，画面才像在「听」。bug = 沟通失败，粘报错最高效。</div></div>
       </div>
 
       <div class="ex">
         <div class="ex-top">
           <div><span class="ex-no">Exercise 3</span> <h4>Add One Interaction<span class="en">加一个交互</span></h4></div>
-          <span class="time">60 min</span>
+          <span class="time">35 min</span>
         </div>
-        <p class="goal"><b>目标</b> — 从「被动反应」变「主动可玩」，体会交互设计。每人选 <b>1 种</b>交互加入（不要贪多）。</p>
+        <p class="goal"><b>目标</b> — 从「被动反应」变「主动可玩」。每人选 <b>1 种</b>作为你的「招牌动作」（宁精勿多），做得够爽。</p>
         <table class="mini-table">
           <tr><td>鼠标</td><td class="en">"When I move the mouse, the circle follows my cursor with a 0.3s lag."</td></tr>
           <tr><td>键盘</td><td class="en">"When I press SPACE, trigger an extra bell-like visual flash."</td></tr>
           <tr><td>麦克风</td><td class="en">"When I make a sound into the mic, a smaller circle appears and pulses with my voice."</td></tr>
           <tr><td>滚轮</td><td class="en">"Mouse-wheel up = warmer color tone; down = cooler tone."</td></tr>
-          <tr><td>摄像头</td><td class="en">"When my face moves left/right (webcam), the circle shifts left/right."</td></tr>
+          <tr><td>摄像头</td><td class="en">"When my face moves left/right (webcam), the visuals shift left/right."</td></tr>
+          <tr><td>拖动画笔</td><td class="en">"Click-drag leaves a trailing ink brush-stroke that slowly fades."</td></tr>
+          <tr><td>点击冲击波</td><td class="en">"On click, emit a shockwave ring that warps everything it passes through."</td></tr>
+          <tr><td>摇一摇 / 拍手</td><td class="en">"On a loud clap or device shake, trigger an ink-splash explosion."</td></tr>
         </table>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>从上表选 <b>1 种</b>交互（鼠标 / 键盘 / 麦克风 / 滚轮 / 摄像头）。</li>
+          <li>用一句自然语言把它描述给 Gemini。</li>
+          <li>跑通后自测：你会想「再用一次」吗？</li>
+          <li>录一段带交互的 30s 演示。</li>
+        </ol></div>
         <div class="ex-grid">
           <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">含一种交互的页面 + 30s 带交互演示视频。</div></div>
           <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>你的交互「用一次就够」还是「想再用一次」？</li><li>交互改变了观众听音乐的方式吗？</li><li>给产品经理看，他会怎么改？</li></ol></div>
@@ -1185,31 +1461,41 @@ Keep it elegant. Single HTML file.</pre></div>
       <div class="ex">
         <div class="ex-top">
           <div><span class="ex-no">Exercise 4</span> <h4>Style as Culture<span class="en">风格即文化</span></h4></div>
-          <span class="time">60 min</span>
+          <span class="time">35 min</span>
         </div>
-        <p class="goal"><b>目标</b> — 把视觉从「通用酷炫」改成「中国文化叙事」。继续迭代，加入下面至少 3 项。</p>
-        <div class="prompt-box alt"><span class="plabel">Apply at least 3 of these</span><pre>Apply the following visual treatment:
-1. Background: warm rice-paper cream (#FAF6F0), not pure white
-2. Main visual: replace the circle with concentric ink-wash brush
-   strokes (sumi-e style); B&W with one accent color (jade green
-   #5B8C7E OR temple bronze #B08D57 — your call)
-3. Add a faint vertical line down the center of the page —
-   the Beijing Central Axis
-4. Use a Chinese serif font for any text (Noto Serif SC via Google Fonts)
-5. When the bass hits, the ink strokes should SPLATTER outward like
-   actual ink, then settle
-6. Add subtle paper-grain texture overlay (very low opacity)</pre></div>
+        <p class="goal"><b>目标</b> — 把视觉做成<b>真水墨</b>——渗墨、飞白、留白、泼墨，而不是「灰色几何形」。继续迭代，加入下面至少 3 项。</p>
+        <div class="prompt-box alt"><span class="plabel">Apply at least 3 of these</span><pre>Restyle it as REAL Chinese ink-wash (水墨 / sumi-e), not "grey shapes":
+1. Canvas = warm rice-paper cream (#FAF6F0) with a faint fibrous grain
+   and lots of empty space (留白 negative space).
+2. Brush strokes, NOT geometric shapes: tapered ends, varied width, wet
+   edges that BLEED softly into the paper (feathered alpha).
+3. Ink in tonal washes (dark -> pale, 墨分五色) + dry-brush "flying-white"
+   streaks (飞白) on fast strokes; ONE restrained accent only — a
+   cinnabar-red seal 印章 OR jade #5B8C7E.
+4. On a strong BEAT, throw a splashed-ink burst (泼墨): droplets scatter,
+   then DIFFUSE and dry into the paper over ~1s.
+5. The bass pulse should look like fresh ink BLOOMING on wet paper —
+   not a circle scaling.
+6. A single faint vertical centre line (Beijing Central Axis), a Chinese
+   serif (Noto Serif SC), and a small red seal in one corner.
+Reference look: Sesshu's "splashed-ink" (haboku) landscape.</pre></div>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>继续迭代，套用上方 ≥3 项水墨 / 中国风处理。</li>
+          <li>（可选）用 <code>&lt;model-viewer&gt;</code> 放入 Day 1 的 <b>3D 编钟</b>，让它随低音转动。</li>
+          <li>删掉一个 AI 多给、不搭的元素。</li>
+          <li>保留完整 Prompt Log（所有迭代）。</li>
+        </ol></div>
         <div class="ex-grid">
           <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">视觉升级后的页面 + Prompt Log（保留所有迭代历史）。</div></div>
           <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>这些视觉元素真的「中国」吗？还是只是符号？</li><li>你删掉了哪个 AI 给的元素？为什么？</li><li>不懂中国文化的观众能感觉到「水墨」吗？</li></ol></div>
         </div>
-        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 风格不是装饰——风格是<b>告诉观众「用什么眼睛看」</b>的元数据。</div></div>
+        <div class="teach"><span class="star">✦</span><div><b>教学点</b> — 水墨的关键不是「黑白」，而是<b>墨分五色 + 留白 + 笔触动态</b>；印章 / 中轴是点睛，不是堆砌。</div></div>
       </div>
 
       <div class="ex">
         <div class="ex-top">
           <div><span class="ex-no">Exercise 5</span> <h4>Ship It<span class="en">发布</span></h4></div>
-          <span class="time">60 min</span>
+          <span class="time">30 min</span>
         </div>
         <p class="goal"><b>目标</b> — 让作品有公开链接，可以发给爱尔兰朋友打开。选一条部署路径。</p>
         <table class="mini-table">
@@ -1218,6 +1504,12 @@ Keep it elegant. Single HTML file.</pre></div>
           <tr><td>C. GitHub Pages</td><td>中等 — 建 repo → push → Settings → Pages</td></tr>
           <tr><td>D. p5 Web Editor</td><td>简单 — 粘代码 → Share button</td></tr>
         </table>
+        <div class="steps"><div class="h">步骤 · Steps</div><ol>
+          <li>选一条部署路径（Gemini share / Netlify Drop / GitHub Pages / p5）。</li>
+          <li>发布拿到公开 URL，用手机打开测一遍。</li>
+          <li>录 30s <code>demo.mp4</code>，整理 <code>prompt-log.md</code>（≥5 轮）。</li>
+          <li>备份 <code>index.html</code>，把链接发群里。</li>
+        </ol></div>
         <div class="ex-grid">
           <div class="ex-cell"><div class="h">产出 / Deliverable</div><div class="deliver">✅ 公开 URL · ✅ <code>demo.mp4</code>（30s）· ✅ <code>prompt-log.md</code>（≥5 轮）· ✅ <code>index.html</code> 备份。</div></div>
           <div class="ex-cell"><div class="h">讨论 / Discussion</div><ol><li>移动端打开效果如何？需要响应式吗？</li><li>给群外的爱尔兰朋友发链接，他会怎么反应？</li><li>加 1 件事就完美，会是什么？（D9 Polish 用）</li></ol></div>
@@ -1226,6 +1518,23 @@ Keep it elegant. Single HTML file.</pre></div>
       </div>
 
     </div>
+
+    <div class="ex-head-line"><span class="k">常见报错与急救 · Common failures &amp; fixes（对照三案例真实代码）</span><span class="ln"></span></div>
+    <table class="mini-table">
+      <tr><td>点了播放没声音 Silent on play</td><td class="en">Autoplay policy — create/resume the AudioContext inside the play / ENTER click; call resume() whenever state==='suspended'.</td></tr>
+      <tr><td>麦克风/摄像头被拒 Mic/cam denied</td><td class="en">getUserMedia needs HTTPS / localhost, not file://; try/catch and reset the toggle on failure.</td></tr>
+      <tr><td>3D 模型不出现 Model missing</td><td class="en">404 / wrong path / blocked CDN / file absent → keep a 2.2s timeout + 'error' listener → SVG fallback, or use the drag-to-load path.</td></tr>
+      <tr><td>跨域加载失败 .glb CORS</td><td class="en">Host the .glb same-origin (same Pages/Netlify site), or base64-embed a small one as a data-URI.</td></tr>
+      <tr><td><code>createMediaElementSource</code> 报错</td><td class="en">Only once per &lt;audio&gt; — make the AudioContext + source a guarded singleton (if(audioCtx) return).</td></tr>
+      <tr><td>掉帧 / 手机卡 Frame drops</td><td class="en">Cap rings/particles, shrink the frame-diff canvas (40×30), reuse one Uint8Array, disable shake/shadowBlur on weak devices.</td></tr>
+      <tr><td>多钟齐响爆音 Bell crackle</td><td class="en">Insert a DynamicsCompressorNode before destination to tame overlapping partials.</td></tr>
+      <tr><td>AR 桌面无反应 AR on desktop</td><td class="en">WebXR / Quick-Look are phone-only over HTTPS; treat AR as an optional enhancement, never required for full marks.</td></tr>
+    </table>
+    <div class="samplenote" style="border-left:3px solid var(--jade);">
+      <b>🆘 Gemini 反复给坏结果 · escalation ladder</b> — 同一问题<b>试 3 次仍失败就换方法</b>，别死磕：① 报错原样粘回 + <code>return the full corrected HTML</code>；② 缩小范围 <code>Only change the audio part; keep the rest identical</code>；③ <b>回滚</b>到上一版能跑的 HTML，再只加一小步；④ 仍不行 → 叫老师 / 换更简单的交互 / 直接拿三案例之一二创。<b>铁律：永远留一份「上一版能跑的 HTML」。</b><br />
+      <span style="opacity:.8;">3 fails on one issue → change tactic: paste the error → narrow the scope → roll back to last-good → ask a human or remix a case. Always keep a last-known-good file — rolling back &amp; re-describing IS the skill.</span>
+    </div>
+
   </div>
 </section>
 
@@ -1234,19 +1543,19 @@ Keep it elegant. Single HTML file.</pre></div>
 <!-- =================== SHARED ELEMENTS =================== -->
 <section id="shared">
   <div class="container">
-    <div class="eyebrow">Across the Three Days · 跨三天统一要素</div>
+    <div class="eyebrow">Across the Three Modules · 跨三模块统一要素</div>
     <h2 class="section-title">通用要素<span class="en">Teams, assessment, materials, and what can go wrong.</span></h2>
     <p class="section-lead">
-      The same teams, rubric and material kit carry across all three days so the
+      The same teams, rubric and material kit carry across all three modules so the
       work accumulates into one Capstone.<br />
-      同一组、同一评估、同一物料包贯穿三天，作品累积成一件 Capstone。
+      同一组、同一评估、同一物料包贯穿三个模块，作品累积成一件 Capstone。
     </p>
 
     <div class="shared-grid">
 
       <div class="shared-card">
         <h3>分组 &amp; 评估<span class="en">Teams &amp; assessment</span></h3>
-        <p>建议 <b style="color:var(--bronze-l)">2–3 人/组</b>：1 偏研究 · 1 偏审美 ·（1 偏技术）。三天保持同一组，便于作品累积。</p>
+        <p>建议 <b style="color:var(--bronze-l)">2–3 人/组</b>：1 偏研究 · 1 偏审美 ·（1 偏技术）。三个模块保持同一组，便于作品累积。</p>
         <div class="assess">
           <div class="assess-row"><div class="top"><span class="zh">Cultural depth 文化理解</span><span class="pct">30%</span></div><div class="bar"><span style="width:30%"></span></div><span class="en">Sincerity &amp; accuracy of cultural understanding</span></div>
           <div class="assess-row"><div class="top"><span class="zh">AI craft 提示与迭代</span><span class="pct">30%</span></div><div class="bar"><span style="width:30%"></span></div><span class="en">Quality of prompting &amp; iteration</span></div>
@@ -1258,12 +1567,13 @@ Keep it elegant. Single HTML file.</pre></div>
       <div class="shared-card">
         <h3>必备物料<span class="en">Required materials</span></h3>
         <ul>
-          <li>教室稳定 WiFi（带宽测试，能跑 Suno）</li>
-          <li>学员账号：豆包 · Suno/海绵 · Google + Gemini · GitHub（课前注册并登一次）</li>
+          <li>教室稳定 WiFi（带宽测试，能跑 Suno / 图生 3D）</li>
+          <li>学员账号：豆包 · 即梦 · 混元3D/Tripo · Suno/海绵 · Google + Gemini · GitHub（课前注册并登一次）</li>
+          <li><b style="color:var(--bronze-l)">3D 打印机 ×1–2 + 耗材（PLA）+ 切片软件</b>（Day 1 用；无机器则改交 STL + 渲染）</li>
           <li>中国乐器术语 cheat sheet（中英对照）</li>
-          <li>中国传统色卡 + 字体包（Day 3 用）</li>
-          <li>Day 3 starter code 仓库</li>
-          <li>移动硬盘 / 共享盘，集中收作品</li>
+          <li>中国传统色卡 + 字体包（Day 1 周边 / Day 3 视觉用）</li>
+          <li>Day 3 starter code 仓库（含 &lt;model-viewer&gt; 载入 .glb 示例）</li>
+          <li>移动硬盘 / 共享盘，集中收作品（含 .glb / .stl）</li>
         </ul>
       </div>
 
@@ -1275,6 +1585,8 @@ Keep it elegant. Single HTML file.</pre></div>
           <li><b style="color:var(--bronze-l)">学员无编程基础</b> — 已用 Gemini 生成式 UI 解决</li>
           <li><b style="color:var(--bronze-l)">Google 账号注册受限</b> — 课前邮件指引提前注册登录</li>
           <li><b style="color:var(--bronze-l)">设备性能差</b> — Gemini 生成的是浏览器页面，最低配也能跑</li>
+          <li><b style="color:var(--bronze-l)">3D 打印慢 / 失败</b> — 课上轮流排队、课后取件；备「无打印机」路径（交 STL + 渲染）</li>
+          <li><b style="color:var(--bronze-l)">图生 3D 额度 / 背面穿帮</b> — 课前充值；改用正侧背三视图重生成</li>
         </ul>
       </div>
 
@@ -1288,8 +1600,8 @@ Keep it elegant. Single HTML file.</pre></div>
     <div>
       <div class="foot-brand">灵境 · <span class="accent">工坊</span></div>
       <p>
-        Miracle Craft Workshop · The Three-Day AI Course (Days 3–5).<br />
-        Text → Music → Interactive, one chain from a single bell.
+        Miracle Craft Workshop · The Three-Module AI Course.<br />
+        3D → Music → Interactive, one chain from a single bell.
       </p>
       <p style="margin-top: 12px; opacity: 0.6;">
         中国传媒大学国际传媒教育学院（境外学生事务中心）· 2026
@@ -1299,7 +1611,7 @@ Keep it elegant. Single HTML file.</pre></div>
       <h4>On This Page</h4>
       <ul>
         <li><a href="#spine">课程主线 Spine</a></li>
-        <li><a href="#text">Ⅰ 文本 · Prompt Gym</a></li>
+        <li><a href="#product">Ⅰ 三维编钟 · 3D &amp; 文创</a></li>
         <li><a href="#music">Ⅱ 音乐 · AI Music</a></li>
         <li><a href="#visual">Ⅲ 交互 · Gemini</a></li>
         <li><a href="#shared">通用要素 Shared</a></li>
@@ -1316,7 +1628,7 @@ Keep it elegant. Single HTML file.</pre></div>
     </div>
   </div>
   <div class="foot-bottom">
-    © 2026 CUC AI Lab · Three days, three modalities, one bell. · Press <kbd style="background: rgba(250,246,240,0.1); padding: 1px 6px; border-radius: 3px; font-family: ui-monospace, monospace;">G</kbd> top · <kbd style="background: rgba(250,246,240,0.1); padding: 1px 6px; border-radius: 3px; font-family: ui-monospace, monospace;">1–3</kbd> jump to a course
+    © 2026 CUC AI Lab · Three modules, one bell. · Press <kbd style="background: rgba(250,246,240,0.1); padding: 1px 6px; border-radius: 3px; font-family: ui-monospace, monospace;">G</kbd> top · <kbd style="background: rgba(250,246,240,0.1); padding: 1px 6px; border-radius: 3px; font-family: ui-monospace, monospace;">1–3</kbd> jump to a course
   </div>
 </footer>
 
@@ -1340,7 +1652,7 @@ Keep it elegant. Single HTML file.</pre></div>
   backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // ===== Active section tracking (nav + TOC) =====
-  const sections = ['hero', 'spine', 'text', 'music', 'visual', 'shared']
+  const sections = ['hero', 'spine', 'product', 'music', 'visual', 'shared']
     .map((id) => document.getElementById(id))
     .filter(Boolean);
   const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
@@ -1374,7 +1686,7 @@ Keep it elegant. Single HTML file.</pre></div>
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.key === 'g' || e.key === 'G') window.scrollTo({ top: 0, behavior: 'smooth' });
     else if (e.key === 'b' || e.key === 'B') window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    else if (e.key === '1') document.getElementById('text')?.scrollIntoView({ behavior: 'smooth' });
+    else if (e.key === '1') document.getElementById('product')?.scrollIntoView({ behavior: 'smooth' });
     else if (e.key === '2') document.getElementById('music')?.scrollIntoView({ behavior: 'smooth' });
     else if (e.key === '3') document.getElementById('visual')?.scrollIntoView({ behavior: 'smooth' });
     else if (e.key === '0') document.getElementById('spine')?.scrollIntoView({ behavior: 'smooth' });

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#1A1A1A" />
+<title>音乐可视化示例 · Music Visualization Examples | CUC × UCC AIGC 训练营</title>
+<meta name="description" content="Interactive examples of music visualization from the CUC × UCC AIGC training camp — a sumi-e audio visualizer and an interactive 3D bianzhong. 来自训练营的音乐可视化交互示例：水墨音频可视化与可交互 3D 编钟。" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;800&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --ink:#1A1A1A; --paper:#FAF6F0; --paper-2:#F2EBDE; --paper-3:#ECE2D0;
+    --bronze:#B08D57; --bronze-d:#8C6D3F; --bronze-l:#C9AB7C; --jade:#5B8C7E;
+    --mute:#8B847B; --line:#D9D2C4;
+    --serif-en:"Cormorant Garamond",Georgia,serif;
+    --serif-cn:"Noto Serif SC","Songti SC",serif;
+    --sans:"Inter","Noto Sans SC",-apple-system,sans-serif;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.05;z-index:1;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+
+  .topnav{position:sticky;top:0;z-index:50;background:rgba(250,246,240,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+  .topnav-inner{max-width:1180px;margin:0 auto;padding:13px clamp(18px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:18px;}
+  .brand{font-family:var(--serif-cn);font-weight:800;font-size:17px;letter-spacing:.05em;display:flex;align-items:center;gap:9px;}
+  .brand .dot{width:20px;height:20px;color:var(--bronze);}
+  .brand .accent{color:var(--bronze);}
+  .nav-links{display:flex;gap:clamp(10px,2vw,20px);font-size:13px;list-style:none;}
+  .nav-links a{color:var(--ink);text-decoration:none;opacity:.72;transition:.2s;}
+  .nav-links a:hover{opacity:1;color:var(--bronze-d);}
+  @media(max-width:680px){.nav-links li:not(:last-child){display:none;}}
+
+  header.intro{max-width:1180px;margin:0 auto;padding:clamp(34px,6vw,64px) clamp(18px,4vw,40px) clamp(18px,3vw,26px);position:relative;z-index:2;}
+  .eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze-d);margin-bottom:14px;}
+  h1{font-family:var(--serif-cn);font-weight:800;font-size:clamp(30px,5vw,46px);line-height:1.2;}
+  h1 .en{display:block;font-family:var(--serif-en);font-style:italic;font-weight:500;font-size:.5em;color:var(--mute);margin-top:6px;}
+  .lead{max-width:760px;font-size:clamp(14px,1.5vw,16px);color:#444;margin-top:14px;}
+  .lead .cn{display:block;color:var(--mute);margin-top:6px;font-size:.95em;}
+
+  main{max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,40px) clamp(50px,7vw,80px);position:relative;z-index:2;
+    display:flex;flex-direction:column;gap:clamp(34px,5vw,56px);}
+
+  .demo{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--paper-2);box-shadow:0 20px 46px -22px rgba(0,0,0,.18);}
+  .demo-head{padding:22px clamp(18px,3vw,28px);display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justify-content:space-between;}
+  .demo-head .meta{max-width:680px;}
+  .demo-num{font-family:var(--serif-en);font-style:italic;color:var(--bronze);font-size:13px;letter-spacing:.12em;margin-bottom:8px;}
+  .demo-head h2{font-family:var(--serif-cn);font-weight:800;font-size:clamp(20px,2.6vw,28px);line-height:1.25;}
+  .demo-head h2 .en{font-family:var(--serif-en);font-style:italic;font-weight:500;color:var(--mute);font-size:.6em;margin-left:10px;}
+  .demo-head p{font-size:13.5px;color:#555;line-height:1.65;margin-top:8px;}
+  .demo-head p .cn{display:block;color:var(--mute);margin-top:3px;}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+  .tag{font-size:11px;letter-spacing:.04em;color:var(--bronze-d);border:1px solid var(--bronze);border-radius:100px;padding:3px 11px;background:var(--paper);}
+  .open-full{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+    background:var(--ink);color:var(--paper);border-radius:100px;padding:11px 20px;font-family:var(--serif-en);font-style:italic;font-size:15px;transition:.2s;white-space:nowrap;}
+  .open-full:hover{background:var(--bronze-d);}
+
+  .frame{position:relative;border-top:1px solid var(--line);background:#000;}
+  .frame iframe{display:block;width:100%;height:min(76vh,680px);border:0;background:var(--paper);}
+  .note{padding:11px clamp(18px,3vw,28px);font-size:12px;color:var(--mute);background:var(--paper-3);border-top:1px solid var(--line);line-height:1.55;}
+  .note b{color:var(--bronze-d);}
+
+  footer{background:var(--ink);color:rgba(250,246,240,.6);padding:30px clamp(18px,4vw,40px);text-align:center;font-size:12px;position:relative;z-index:2;}
+  footer a{color:var(--bronze-l);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <svg class="dot" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><path d="M32 12 C34 24,40 30,52 32 C40 34,34 40,32 52 C30 40,24 34,12 32 C24 30,30 24,32 12 Z"/></svg>
+      音乐可视化 · <span class="accent">示例</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#viz1">水墨 Sumi-e</a></li>
+      <li><a href="#viz2">古韻青銅</a></li>
+      <li><a href="#viz3">可交互编钟</a></li>
+      <li><a href="index.html">← 返回主站 Home</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="intro">
+  <div class="eyebrow">Music Visualization · 音乐可视化 · Student Examples</div>
+  <h1>音乐可视化示例<span class="en">Turning sound into moving image — three interactive demos.</span></h1>
+  <p class="lead">
+    Three interactive pieces from the AIGC training camp: a sumi-e canvas that paints itself to sound,
+    and two takes on a playable 3D bianzhong. Click <b>fullscreen</b> for the real experience.
+    <span class="cn">来自 AIGC 训练营的三件交互作品：随声音作画的水墨画布，以及两种可演奏的 3D 编钟。点击<b>全屏</b>获得完整体验。</span>
+  </p>
+</header>
+
+<main>
+
+  <!-- ===== Example 1: Sumi-e audio visualizer ===== -->
+  <section class="demo" id="viz1">
+    <div class="demo-head">
+      <div class="meta">
+        <div class="demo-num">EXAMPLE 01 · 多模态 Multimodal</div>
+        <h2>中軸律动<span class="en">Sumi-e Multimodal Art Visualizer</span></h2>
+        <p>
+          An ink-wash canvas that paints itself to sound. Speak or play into your microphone — or upload an
+          audio file — and drag on the "rice paper" to add living brush strokes.
+          <span class="cn">随声音自我作画的水墨画布。对着麦克风说话/播放，或上传一段音频；在「宣纸」上拖动即可留下灵动的笔触。</span>
+        </p>
+        <div class="tags">
+          <span class="tag">🎤 麦克风 / 上传 Mic / Upload</span>
+          <span class="tag">🖌️ 水墨 Sumi-e</span>
+          <span class="tag">🎚️ Web Audio</span>
+          <span class="tag">📷 摄像头 Camera</span>
+        </div>
+      </div>
+      <a class="open-full" href="examples/elegant_audio_visualizer.html" target="_blank" rel="noopener">⛶ 全屏打开 Open fullscreen</a>
+    </div>
+    <div class="frame">
+      <iframe src="examples/elegant_audio_visualizer.html"
+        title="中軸律动 — Sumi-e Multimodal Art Visualizer"
+        loading="lazy"
+        allow="microphone; camera; autoplay; fullscreen; accelerometer; gyroscope; xr-spatial-tracking"
+        allowfullscreen></iframe>
+    </div>
+    <div class="note">
+      🔊 <b>需要声音输入</b>：点击页面内的「麦克风接入」授权，或上传音频文件。<br />
+      <b>Needs a sound source</b>: allow the mic inside the demo, or upload an audio file. (On a local <code>file://</code> preview the mic may be blocked by the browser — use upload, or the deployed site over https.)
+    </div>
+  </section>
+
+  <!-- ===== Example 2: Bianzhong 3D chimes ===== -->
+  <section class="demo" id="viz2">
+    <div class="demo-head">
+      <div class="meta">
+        <div class="demo-num">EXAMPLE 02 · 三维交互 3D Interactive</div>
+        <h2>古韻青銅<span class="en">Bianzhong 3D Interactive Chime Bells</span></h2>
+        <p>
+          A 3D bianzhong (ancient Chinese chime bells) you can orbit, zoom and play — click the bells to
+          ring synthesized tones, or view it in your room with AR.
+          <span class="cn">可旋转、缩放、演奏的 3D 编钟：点击钟体发出合成音色，也可用 AR 置入实景。</span>
+        </p>
+        <div class="tags">
+          <span class="tag">🔔 3D model-viewer</span>
+          <span class="tag">🕶️ AR</span>
+          <span class="tag">🎚️ Web Audio</span>
+        </div>
+      </div>
+      <a class="open-full" href="examples/elegant_bianzhong.html" target="_blank" rel="noopener">⛶ 全屏打开 Open fullscreen</a>
+    </div>
+    <div class="frame">
+      <iframe src="examples/elegant_bianzhong.html"
+        title="古韻青銅 — Bianzhong 3D Interactive Chime Bells"
+        loading="lazy"
+        allow="microphone; autoplay; fullscreen; accelerometer; gyroscope; xr-spatial-tracking; web-share"
+        allowfullscreen></iframe>
+    </div>
+    <div class="note">
+      🧊 <b>3D 模型</b>：把 <code>Bianzhong.glb</code> 放到 <code>website/models/</code> 并部署后即显示真实模型；在此之前会显示内置的水墨矢量挂架降级图。<br />
+      <b>3D model</b>: drop <code>Bianzhong.glb</code> into <code>website/models/</code> and deploy to show the real model — until then the demo shows its built-in vector fallback.
+    </div>
+  </section>
+
+  <!-- ===== Example 3: Playable bianzhong + Gemini pipeline ===== -->
+  <section class="demo" id="viz3">
+    <div class="demo-head">
+      <div class="meta">
+        <div class="demo-num">EXAMPLE 03 · 可演奏 + 制作流程 Playable + How-it's-made</div>
+        <h2>编钟 · 可交互 3D<span class="en">Bianzhong — playable bells &amp; the Gemini pipeline</span></h2>
+        <p>
+          A second take on the 3D bianzhong: tap anywhere on the bells to ring a tuned note — pitch follows
+          where you click (left→right = low→high), pentatonic 宫商角徵羽. It also documents the build —
+          how to host the model, plus a ready-to-copy <b>Gemini prompt</b>.
+          <span class="cn">3D 编钟的另一种做法：点击钟体任意位置即发声，音高随点击位置从左(低)到右(高)，五声音阶宫商角徵羽。页面还附带制作流程——如何托管模型，以及可直接复制的 <b>Gemini 提示词</b>。</span>
+        </p>
+        <div class="tags">
+          <span class="tag">🔔 3D model-viewer</span>
+          <span class="tag">🎹 点击发声 Tap-to-ring</span>
+          <span class="tag">🧩 拖拽载入 Drag-drop</span>
+          <span class="tag">🛠️ Gemini 流程 Pipeline</span>
+        </div>
+      </div>
+      <a class="open-full" href="bianzhong.html#pipeline" target="_blank" rel="noopener">⛶ 全屏打开 Open fullscreen</a>
+    </div>
+    <div class="frame">
+      <iframe src="bianzhong.html"
+        title="编钟 · 可交互 3D — playable bells &amp; pipeline"
+        loading="lazy"
+        allow="microphone; autoplay; fullscreen; accelerometer; gyroscope; xr-spatial-tracking"
+        allowfullscreen></iframe>
+    </div>
+    <div class="note">
+      🎹 <b>点击钟体发声</b>，或拖入你自己的 <code>.glb</code> 预览；并含「托管 + Gemini」制作流程。<br />
+      <b>Tap the bells</b> to ring tones, or drag in your own <code>.glb</code>; also includes the hosting + Gemini build pipeline.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  音乐可视化示例 · Music Visualization Examples · CUC × University College Cork · AIGC 应用训练营 ·
+  <a href="index.html">返回主站 Home</a>
+</footer>
+
+</body>
+</html>

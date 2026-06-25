@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#1A1A1A" />
+<title>编钟 · 交互 3D | Bianzhong Interactive 3D · CUC × UCC AIGC 训练营</title>
+<meta name="description" content="An interactive 3D bianzhong (ancient Chinese chime bells) — orbit, zoom, and tap the bells to ring tuned notes. Built for the Gemini interactive-visualization phase. 可旋转、缩放，点击钟体发声的交互式编钟 3D 体验。" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;800&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Google model-viewer (web component for .glb/.gltf) -->
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink:#1A1A1A; --ink-2:#2C2724; --paper:#FAF6F0; --paper-2:#F2EBDE; --paper-3:#ECE2D0;
+    --bronze:#B08D57; --bronze-d:#8C6D3F; --bronze-l:#C9AB7C; --jade:#5B8C7E;
+    --mute:#8B847B; --line:#D9D2C4;
+    --serif-en:"Cormorant Garamond",Georgia,serif;
+    --serif-cn:"Noto Serif SC","Songti SC",serif;
+    --sans:"Inter","Noto Sans SC",-apple-system,sans-serif;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:0.05;z-index:1;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+
+  /* ---- top bar ---- */
+  .topnav{position:sticky;top:0;z-index:50;background:rgba(250,246,240,0.85);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);}
+  .topnav-inner{max-width:1180px;margin:0 auto;padding:13px clamp(18px,4vw,40px);
+    display:flex;align-items:center;justify-content:space-between;gap:18px;}
+  .brand{font-family:var(--serif-cn);font-weight:800;font-size:17px;letter-spacing:.05em;display:flex;align-items:center;gap:9px;}
+  .brand .dot{width:20px;height:20px;color:var(--bronze);}
+  .brand .accent{color:var(--bronze);}
+  .nav-links{display:flex;gap:clamp(10px,2vw,20px);font-size:13px;list-style:none;}
+  .nav-links a{color:var(--ink);text-decoration:none;opacity:.72;transition:.2s;}
+  .nav-links a:hover{opacity:1;color:var(--bronze-d);}
+  @media(max-width:680px){.nav-links li:not(:last-child){display:none;}}
+
+  /* ---- header ---- */
+  header.intro{max-width:1180px;margin:0 auto;padding:clamp(34px,6vw,64px) clamp(18px,4vw,40px) clamp(20px,3vw,30px);position:relative;z-index:2;}
+  .eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--bronze-d);margin-bottom:14px;}
+  h1{font-family:var(--serif-cn);font-weight:800;font-size:clamp(30px,5vw,48px);line-height:1.2;margin-bottom:8px;}
+  h1 .en{display:block;font-family:var(--serif-en);font-style:italic;font-weight:500;font-size:.5em;color:var(--mute);margin-top:6px;}
+  .lead{max-width:760px;font-size:clamp(14px,1.5vw,16px);color:#444;margin-top:14px;}
+  .lead .cn{display:block;color:var(--mute);margin-top:6px;font-size:.95em;}
+
+  /* ---- stage ---- */
+  .stage-wrap{max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,40px) clamp(40px,6vw,72px);position:relative;z-index:2;}
+  .stage-grid{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start;}
+  @media(max-width:880px){.stage-grid{grid-template-columns:1fr;}}
+
+  .viewer-card{position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% 0%,var(--paper-2),var(--paper-3));box-shadow:0 22px 50px -20px rgba(0,0,0,.18);}
+  model-viewer{width:100%;height:min(70vh,640px);--poster-color:transparent;background:transparent;outline:none;}
+  /* note flash */
+  .note-flash{position:absolute;top:18px;left:50%;transform:translateX(-50%) translateY(-8px);
+    font-family:var(--serif-en);font-style:italic;font-size:34px;color:var(--bronze-d);
+    opacity:0;transition:opacity .12s, transform .12s;pointer-events:none;text-shadow:0 2px 10px rgba(250,246,240,.8);}
+  .note-flash.on{opacity:1;transform:translateX(-50%) translateY(0);}
+  .ripple{position:absolute;border:2px solid var(--bronze);border-radius:50%;pointer-events:none;
+    transform:translate(-50%,-50%) scale(0);opacity:.7;}
+  @keyframes rip{to{transform:translate(-50%,-50%) scale(4);opacity:0;}}
+
+  /* empty state overlay */
+  .empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:30px;gap:14px;background:rgba(250,246,240,.55);backdrop-filter:blur(2px);}
+  .empty.hide{display:none;}
+  .empty .ico{font-family:var(--serif-cn);font-size:54px;color:var(--bronze);line-height:1;}
+  .empty h3{font-family:var(--serif-cn);font-weight:600;font-size:19px;}
+  .empty p{font-size:13px;color:var(--mute);max-width:340px;line-height:1.6;}
+  .drop-hint{font-size:12px;color:var(--bronze-d);border:1px dashed var(--bronze);border-radius:100px;padding:7px 16px;}
+  .viewer-card.dragover .empty{background:rgba(176,141,87,.14);}
+  .viewer-card.dragover{outline:2px dashed var(--bronze);outline-offset:-6px;}
+
+  /* ---- side panel ---- */
+  .panel{display:flex;flex-direction:column;gap:16px;}
+  .pcard{border:1px solid var(--line);border-radius:14px;background:var(--paper-2);padding:18px 18px 20px;}
+  .pcard h4{font-family:var(--serif-cn);font-size:15px;font-weight:600;margin-bottom:4px;}
+  .pcard h4 .en{font-family:var(--serif-en);font-style:italic;font-weight:400;color:var(--mute);font-size:.85em;margin-left:6px;}
+  .pcard p{font-size:12.5px;color:#555;line-height:1.6;}
+  .btn{display:inline-flex;align-items:center;gap:7px;justify-content:center;width:100%;
+    border:none;cursor:pointer;border-radius:100px;padding:11px 16px;font-family:var(--serif-en);font-style:italic;
+    font-size:15px;background:var(--ink);color:var(--paper);transition:.2s;margin-top:4px;}
+  .btn:hover{background:var(--bronze-d);}
+  .btn.ghost{background:transparent;color:var(--bronze-d);border:1px solid var(--bronze);font-style:normal;font-family:var(--sans);font-size:13px;}
+  .btn.ghost:hover{background:var(--bronze);color:var(--paper);}
+  .btn-row{display:flex;gap:8px;margin-top:8px;}
+  .btn-row .btn{margin-top:0;}
+  .toggle{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#444;margin-top:10px;}
+  .switch{appearance:none;width:38px;height:22px;border-radius:100px;background:var(--line);position:relative;cursor:pointer;transition:.2s;outline:none;}
+  .switch:checked{background:var(--jade);}
+  .switch::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s;}
+  .switch:checked::after{transform:translateX(16px);}
+  .scale-keys{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .key{flex:1 1 40px;min-width:40px;text-align:center;font-family:var(--serif-en);font-style:italic;font-size:14px;
+    color:var(--bronze-d);border:1px solid var(--line);border-radius:8px;padding:8px 4px;cursor:pointer;background:var(--paper);transition:.12s;}
+  .key:hover{background:var(--bronze-l);color:#fff;}
+  .key.lit{background:var(--bronze);color:#fff;transform:translateY(-2px);}
+  .hint{font-size:11px;color:var(--mute);line-height:1.5;margin-top:8px;}
+  code{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--bronze-d);background:rgba(176,141,87,.1);padding:1px 5px;border-radius:4px;}
+
+  /* ---- pipeline section ---- */
+  .pipe{background:var(--paper-2);border-top:1px solid var(--line);position:relative;z-index:2;}
+  .pipe-inner{max-width:1180px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(18px,4vw,40px);}
+  .pipe h2{font-family:var(--serif-cn);font-weight:800;font-size:clamp(22px,3vw,30px);margin-bottom:6px;}
+  .pipe h2 .en{font-family:var(--serif-en);font-style:italic;font-weight:500;font-size:.55em;color:var(--mute);margin-left:10px;}
+  .pipe-lead{max-width:720px;color:#555;font-size:14px;margin-bottom:34px;}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:760px){.steps{grid-template-columns:1fr;}}
+  .step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px 20px;}
+  .step .n{font-family:var(--serif-en);font-style:italic;color:var(--bronze);font-size:13px;letter-spacing:.1em;margin-bottom:10px;}
+  .step h3{font-family:var(--serif-cn);font-size:17px;font-weight:600;margin-bottom:4px;}
+  .step .en{font-family:var(--serif-en);font-style:italic;color:var(--mute);font-size:13px;margin-bottom:10px;display:block;}
+  .step p{font-size:13px;color:#555;line-height:1.65;}
+  .step p + p{margin-top:8px;}
+  .gemini-box{margin-top:30px;background:var(--ink);color:var(--paper);border-radius:16px;padding:26px 26px 28px;}
+  .gemini-box h3{font-family:var(--serif-cn);font-size:18px;font-weight:600;color:var(--bronze-l);margin-bottom:4px;}
+  .gemini-box .en{font-family:var(--serif-en);font-style:italic;color:rgba(250,246,240,.6);font-size:13px;}
+  .prompt{margin-top:16px;background:rgba(250,246,240,.07);border:1px solid rgba(176,141,87,.4);border-radius:10px;
+    padding:16px 18px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.7;color:rgba(250,246,240,.92);white-space:pre-wrap;}
+  .copy-btn{margin-top:12px;background:var(--bronze);color:var(--ink);border:none;border-radius:100px;padding:9px 18px;font-size:13px;cursor:pointer;font-weight:500;}
+  .copy-btn:hover{background:var(--bronze-l);}
+
+  footer{background:var(--ink);color:rgba(250,246,240,.6);padding:30px clamp(18px,4vw,40px);text-align:center;font-size:12px;position:relative;z-index:2;}
+  footer a{color:var(--bronze-l);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <svg class="dot" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><path d="M32 12 C34 24,40 30,52 32 C40 34,34 40,32 52 C30 40,24 34,12 32 C24 30,30 24,32 12 Z"/></svg>
+      编钟 · <span class="accent">交互 3D</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#stage">舞台 Stage</a></li>
+      <li><a href="#pipeline">流程 Pipeline</a></li>
+      <li><a href="index.html">← 返回主站 Home</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="intro" id="stage">
+  <div class="eyebrow">Interactive Visualization · 交互可视化 · Gemini Phase</div>
+  <h1>编钟 · 可交互 3D<span class="en">Ring the bells — an explorable 3D bianzhong.</span></h1>
+  <p class="lead">
+    Orbit and zoom the model, then <b>tap the bells to ring tuned notes</b> — pitch follows where you
+    click across the rack, low on the left to high on the right. No model file yet? Drag a
+    <code>.glb</code> onto the stage to preview instantly.
+    <span class="cn">旋转、缩放查看模型，然后<b>点击钟体即可发声</b>——音高随点击位置在钟架上从左(低)到右(高)变化。还没有模型？把 <code>.glb</code> 文件拖到舞台上即可立即预览。</span>
+  </p>
+</header>
+
+<section class="stage-wrap">
+  <div class="stage-grid">
+
+    <!-- 3D stage -->
+    <div class="viewer-card" id="card">
+      <model-viewer
+        id="mv"
+        src="models/bianzhong.glb"
+        alt="编钟 3D model · ancient Chinese chime bells"
+        camera-controls
+        auto-rotate
+        auto-rotate-delay="800"
+        rotation-per-second="14deg"
+        interaction-prompt="none"
+        shadow-intensity="1.1"
+        shadow-softness="0.9"
+        exposure="1.05"
+        environment-image="neutral"
+        camera-orbit="35deg 78deg auto"
+        min-camera-orbit="auto 0deg auto"
+        max-camera-orbit="auto 160deg auto"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        touch-action="pan-y">
+      </model-viewer>
+      <div class="note-flash" id="noteFlash">A</div>
+      <div class="empty" id="empty">
+        <div class="ico">钟</div>
+        <h3>放入你的编钟模型 / Add your bianzhong model</h3>
+        <p>
+          Put your file at <code>models/bianzhong.glb</code>, or drag a <code>.glb</code> / <code>.gltf</code> here to preview now.
+          <br /><span style="opacity:.85;">把模型放到 <code>models/bianzhong.glb</code>，或把 <code>.glb</code> / <code>.gltf</code> 拖到这里立即预览。</span>
+        </p>
+        <label class="drop-hint" for="fileInput">＋ 选择 .glb 文件 / Choose a .glb file</label>
+        <input id="fileInput" type="file" accept=".glb,.gltf,model/gltf-binary,model/gltf+json" hidden />
+      </div>
+    </div>
+
+    <!-- controls -->
+    <aside class="panel">
+      <div class="pcard">
+        <h4>奏响编钟 <span class="en">Play the bells</span></h4>
+        <p>Tap anywhere on the model to ring a note, or use the keys below. 点击模型任意位置发声，或点下方音键。</p>
+        <div class="scale-keys" id="keys"></div>
+        <div class="btn-row">
+          <button class="btn ghost" id="playScale">▶ 奏一段 Run the scale</button>
+        </div>
+        <div class="toggle"><span>自动旋转 Auto-rotate</span><input type="checkbox" class="switch" id="spin" checked /></div>
+        <p class="hint">编钟为五声音阶（宫商角徵羽）。Pitch mapped left→right = low→high; a real one-bell-two-tones model can map each bell precisely later.</p>
+      </div>
+
+      <div class="pcard">
+        <h4>换个模型 <span class="en">Load / replace model</span></h4>
+        <p>支持 <code>.glb</code>（推荐）或 <code>.gltf</code>。Other formats (.obj/.fbx/.blend) → export to <code>.glb</code> first.</p>
+        <button class="btn" id="loadBtn">＋ 载入模型文件 / Load a model</button>
+        <button class="btn ghost" id="resetView">↺ 复位视角 Reset view</button>
+      </div>
+
+      <div class="pcard">
+        <h4>用于 Gemini 阶段 <span class="en">For the Gemini phase</span></h4>
+        <p>This page <i>is</i> the interactive 3D state. To let a Gemini-generated page load the model, host the <code>.glb</code> (see Pipeline ↓) and reference its URL. 把模型托管后用 URL 引用即可（见下方流程）。</p>
+        <a class="btn ghost" href="#pipeline">↓ 看托管 + Gemini 流程</a>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ============ PIPELINE ============ -->
+<section class="pipe" id="pipeline">
+  <div class="pipe-inner">
+    <h2>怎么"上传"并接入 Gemini<span class="en">Getting the model online &amp; into Gemini.</span></h2>
+    <p class="pipe-lead">
+      "Upload" really means: put the model somewhere a web page can fetch it by URL. Three steps.
+      「上传」的本质是：把模型放到一个网页能用 URL 取到的地方。三步走。
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="n">STEP 1</div>
+        <h3>导出为 .glb</h3>
+        <span class="en">Export to .glb</span>
+        <p><code>.glb</code> is the single-file, web-native format model-viewer &amp; Three.js load directly.</p>
+        <p>If yours is <code>.obj/.fbx/.blend/.usdz</code>: open in Blender → <i>File ▸ Export ▸ glTF (.glb)</i>, or use an online converter. 把其它格式先导出/转换为 <code>.glb</code>。</p>
+      </div>
+      <div class="step">
+        <div class="n">STEP 2</div>
+        <h3>托管模型（= 上传）</h3>
+        <span class="en">Host it (this is the "upload")</span>
+        <p><b>Easiest, reuses your site:</b> drop the file at <code>website/models/bianzhong.glb</code> and push — it goes live at:</p>
+        <p><code>haner199022.github.io/ireland-study-tour/models/bianzhong.glb</code></p>
+        <p>放进 <code>website/models/</code> 并推送到 GitHub Pages，即得到公开 URL。</p>
+      </div>
+      <div class="step">
+        <div class="n">STEP 3</div>
+        <h3>交互页加载</h3>
+        <span class="en">Load it in the interactive page</span>
+        <p>This page already loads <code>models/bianzhong.glb</code>. A Gemini-generated page just needs that URL in a <code>&lt;model-viewer src="…"&gt;</code> tag.</p>
+        <p><b>Fully self-contained option:</b> base64-embed the <code>.glb</code> as a data-URI so the single HTML file needs no hosting at all. 也可把模型 base64 内嵌成 data-URI，单文件即可运行。</p>
+      </div>
+    </div>
+
+    <div class="gemini-box">
+      <h3>给 Gemini 的提示词 <span class="en">A ready prompt for the Gemini phase</span></h3>
+      <div class="prompt" id="prompt">Build a single self-contained HTML file: an interactive 3D viewer for a Chinese bianzhong (chime bells).
+Use Google's &lt;model-viewer&gt; (load from unpkg). Load the model from this URL:
+  https://haner199022.github.io/ireland-study-tour/models/bianzhong.glb
+Requirements:
+• Orbit + zoom + auto-rotate, soft shadows, neutral environment lighting, an AR button.
+• On tap, ring a bell tone synthesized with the Web Audio API (inharmonic bell partials, ~3s decay).
+• Map pitch to the horizontal click position across the model: left = low, right = high, using a
+  pentatonic scale (gong–shang–jue–zhi–yu) spanning ~2 octaves. Show the note name as it rings.
+• Paper-and-bronze visual theme; bilingual (中文 + English) labels.
+Output one complete HTML file, no build step.</div>
+      <button class="copy-btn" id="copyPrompt">⧉ 复制提示词 Copy prompt</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  编钟交互 3D · CUC × University College Cork · AIGC 应用训练营 ·
+  <a href="index.html">返回主站 Home</a>
+</footer>
+
+<script>
+  const mv = document.getElementById('mv');
+  const card = document.getElementById('card');
+  const empty = document.getElementById('empty');
+  const noteFlash = document.getElementById('noteFlash');
+  const keysWrap = document.getElementById('keys');
+
+  /* ---------- Web Audio bell synth ---------- */
+  let actx;
+  function ensureAudio(){ if(!actx) actx = new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); return actx; }
+  // pentatonic (gong shang jue zhi yu) over ~2 octaves
+  const NOTES = [
+    {n:'G3',f:196.00},{n:'A3',f:220.00},{n:'C4',f:261.63},{n:'D4',f:293.66},{n:'E4',f:329.63},
+    {n:'G4',f:392.00},{n:'A4',f:440.00},{n:'C5',f:523.25},{n:'D5',f:587.33},{n:'E5',f:659.25}
+  ];
+  function bell(freq){
+    const ctx = ensureAudio(); const t0 = ctx.currentTime;
+    const partials = [[1,1.0],[2.01,0.55],[2.76,0.38],[3.52,0.22],[5.06,0.14],[6.8,0.08]];
+    const master = ctx.createGain(); master.connect(ctx.destination);
+    master.gain.setValueAtTime(0.0001,t0);
+    master.gain.exponentialRampToValueAtTime(0.85,t0+0.006);
+    master.gain.exponentialRampToValueAtTime(0.0001,t0+3.4);
+    partials.forEach(([r,g])=>{
+      const o=ctx.createOscillator(), gg=ctx.createGain();
+      o.type='sine'; o.frequency.value=freq*r;
+      // slight inharmonic shimmer
+      gg.gain.value=g; o.connect(gg); gg.connect(master);
+      o.start(t0); o.stop(t0+3.5);
+    });
+  }
+  function ring(idx, x, y){
+    idx = Math.max(0, Math.min(NOTES.length-1, idx));
+    const note = NOTES[idx];
+    bell(note.f);
+    // flash note name
+    noteFlash.textContent = note.n.replace(/[0-9]/,'');
+    noteFlash.classList.add('on');
+    clearTimeout(noteFlash._t); noteFlash._t = setTimeout(()=>noteFlash.classList.remove('on'), 520);
+    // light the key
+    const k = keysWrap.children[idx];
+    if(k){ k.classList.add('lit'); setTimeout(()=>k.classList.remove('lit'), 320); }
+    // ripple at click point
+    if(x!=null){
+      const r = document.createElement('div'); r.className='ripple';
+      const rect = card.getBoundingClientRect();
+      r.style.left = (x-rect.left)+'px'; r.style.top = (y-rect.top)+'px';
+      r.style.width='42px'; r.style.height='42px'; r.style.animation='rip .6s ease-out forwards';
+      card.appendChild(r); setTimeout(()=>r.remove(), 620);
+    }
+  }
+
+  /* ---------- build key pad ---------- */
+  NOTES.forEach((note,i)=>{
+    const b=document.createElement('div'); b.className='key'; b.textContent=note.n.replace(/[0-9]/,'');
+    b.title=note.n; b.addEventListener('click',()=>ring(i));
+    keysWrap.appendChild(b);
+  });
+
+  /* ---------- tap the model to ring (pitch by horizontal hit position) ---------- */
+  let dims=null, center=null;
+  function refreshBounds(){ try{ dims=mv.getDimensions(); center=mv.getBoundingBoxCenter(); }catch(e){ dims=null; } }
+  mv.addEventListener('click', (e)=>{
+    let idx;
+    const hit = mv.positionAndNormalFromPoint ? mv.positionAndNormalFromPoint(e.clientX, e.clientY) : null;
+    if(hit && dims && dims.x){
+      // normalize hit X across model width → note index
+      const nx = (hit.position.x - center.x)/dims.x + 0.5;     // 0..1 left→right
+      idx = Math.round(nx*(NOTES.length-1));
+    } else {
+      // no model / no hit: map by pixel X across the stage
+      const rect = card.getBoundingClientRect();
+      const nx = (e.clientX-rect.left)/rect.width;
+      idx = Math.round(nx*(NOTES.length-1));
+    }
+    ring(idx, e.clientX, e.clientY);
+  });
+
+  /* ---------- model load / empty state ---------- */
+  mv.addEventListener('load', ()=>{ empty.classList.add('hide'); refreshBounds(); });
+  mv.addEventListener('error', ()=>{ empty.classList.remove('hide'); });
+  // if src 404s quickly, model-viewer fires error; keep empty visible until a real load.
+
+  /* ---------- file loader + drag-drop ---------- */
+  const fileInput = document.getElementById('fileInput');
+  function loadFile(file){
+    if(!file) return;
+    const url = URL.createObjectURL(file);
+    mv.src = url;
+  }
+  fileInput.addEventListener('change', e=> loadFile(e.target.files[0]));
+  document.getElementById('loadBtn').addEventListener('click', ()=> fileInput.click());
+  ['dragenter','dragover'].forEach(ev=> card.addEventListener(ev, e=>{e.preventDefault();card.classList.add('dragover');}));
+  ['dragleave','drop'].forEach(ev=> card.addEventListener(ev, e=>{e.preventDefault();card.classList.remove('dragover');}));
+  card.addEventListener('drop', e=>{ const f=e.dataTransfer.files[0]; if(f) loadFile(f); });
+
+  /* ---------- controls ---------- */
+  document.getElementById('spin').addEventListener('change', e=>{ mv.autoRotate = e.target.checked; });
+  document.getElementById('resetView').addEventListener('click', ()=>{ mv.cameraOrbit='35deg 78deg auto'; mv.resetTurntableRotation && mv.resetTurntableRotation(); });
+  document.getElementById('playScale').addEventListener('click', ()=>{
+    ensureAudio();
+    NOTES.forEach((note,i)=> setTimeout(()=>ring(i), i*230));
+  });
+
+  /* ---------- copy Gemini prompt ---------- */
+  document.getElementById('copyPrompt').addEventListener('click', function(){
+    navigator.clipboard.writeText(document.getElementById('prompt').textContent).then(()=>{
+      const b=this; const t=b.textContent; b.textContent='✓ 已复制 Copied'; setTimeout(()=>b.textContent=t,1600);
+    });
+  });
+</script>
+</body>
+</html>
