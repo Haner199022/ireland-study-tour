@@ -142,13 +142,13 @@
     <ul class="nav-links">
       <li><a href="#stage">舞台 Stage</a></li>
       <li><a href="#pipeline">流程 Pipeline</a></li>
-      <li><a href="index.html">← 返回主站 Home</a></li>
+      <li><a href="index.html">← 返回主站 Back to Home</a></li>
     </ul>
   </div>
 </nav>
 
 <header class="intro" id="stage">
-  <div class="eyebrow">Interactive Visualization · 交互可视化 · Gemini Phase</div>
+  <div class="eyebrow">Interactive Visualization · 交互可视化 · Gemini Phase · Gemini 阶段</div>
   <h1>编钟 · 可交互 3D<span class="en">Ring the bells — an explorable 3D bianzhong.</span></h1>
   <p class="lead">
     Orbit and zoom the model, then <b>tap the bells to ring tuned notes</b> — pitch follows where you
@@ -206,7 +206,7 @@
           <button class="btn ghost" id="playScale">▶ 奏一段 Run the scale</button>
         </div>
         <div class="toggle"><span>自动旋转 Auto-rotate</span><input type="checkbox" class="switch" id="spin" checked /></div>
-        <p class="hint">编钟为五声音阶（宫商角徵羽）。Pitch mapped left→right = low→high; a real one-bell-two-tones model can map each bell precisely later.</p>
+        <p class="hint">Pitch mapped left→right = low→high; a real "one-bell-two-tones" model can map each bell precisely later.<br /><span style="opacity:.7;">编钟为五声音阶（宫商角徵羽）；音高从左到右由低到高，未来接入「一钟双音」模型后可逐钟精确映射。</span></p>
       </div>
 
       <div class="pcard">
@@ -218,8 +218,8 @@
 
       <div class="pcard">
         <h4>用于 Gemini 阶段 <span class="en">For the Gemini phase</span></h4>
-        <p>This page <i>is</i> the interactive 3D state. To let a Gemini-generated page load the model, host the <code>.glb</code> (see Pipeline ↓) and reference its URL. 把模型托管后用 URL 引用即可（见下方流程）。</p>
-        <a class="btn ghost" href="#pipeline">↓ 看托管 + Gemini 流程</a>
+        <p>This page <i>is</i> the interactive 3D state. To let a Gemini-generated page load the model, host the <code>.glb</code> (see Pipeline ↓) and reference its URL.<br /><span style="opacity:.7;">本页本身就是交互 3D 成品。若要让 Gemini 生成的页面加载模型，先把 <code>.glb</code> 托管好（见下方流程），再用 URL 引用即可。</span></p>
+        <a class="btn ghost" href="#pipeline">↓ 看托管 + Gemini 流程 / Hosting + Gemini flow</a>
       </div>
     </aside>
 
@@ -229,7 +229,7 @@
 <!-- ============ PIPELINE ============ -->
 <section class="pipe" id="pipeline">
   <div class="pipe-inner">
-    <h2>怎么"上传"并接入 Gemini<span class="en">Getting the model online &amp; into Gemini.</span></h2>
+    <h2>怎么「上传」并接入 Gemini<span class="en">Getting the model online &amp; into Gemini.</span></h2>
     <p class="pipe-lead">
       "Upload" really means: put the model somewhere a web page can fetch it by URL. Three steps.
       「上传」的本质是：把模型放到一个网页能用 URL 取到的地方。三步走。
@@ -240,46 +240,56 @@
         <div class="n">STEP 1</div>
         <h3>导出为 .glb</h3>
         <span class="en">Export to .glb</span>
-        <p><code>.glb</code> is the single-file, web-native format model-viewer &amp; Three.js load directly.</p>
-        <p>If yours is <code>.obj/.fbx/.blend/.usdz</code>: open in Blender → <i>File ▸ Export ▸ glTF (.glb)</i>, or use an online converter. 把其它格式先导出/转换为 <code>.glb</code>。</p>
+        <p><code>.glb</code> is the single-file, web-native format model-viewer &amp; Three.js load directly.<br /><span style="opacity:.7;"><code>.glb</code> 是单文件、面向网页的原生格式，model-viewer 与 Three.js 都能直接加载。</span></p>
+        <p>If yours is <code>.obj/.fbx/.blend/.usdz</code>: open in Blender → <i>File ▸ Export ▸ glTF (.glb)</i>, or use an online converter.<br /><span style="opacity:.7;">若你的文件是 <code>.obj/.fbx/.blend/.usdz</code>：在 Blender 中打开 →<i>File ▸ Export ▸ glTF (.glb)</i>，或用在线转换器，先导出/转换为 <code>.glb</code>。</span></p>
       </div>
       <div class="step">
         <div class="n">STEP 2</div>
         <h3>托管模型（= 上传）</h3>
         <span class="en">Host it (this is the "upload")</span>
-        <p><b>Easiest, reuses your site:</b> drop the file at <code>website/models/bianzhong.glb</code> and push — it goes live at:</p>
+        <p><b>Easiest, reuses your site:</b> drop the file at <code>website/models/bianzhong.glb</code> and push — it goes live at:<br /><span style="opacity:.7;"><b>最省事、复用现有站点：</b>把文件放到 <code>website/models/bianzhong.glb</code> 并推送，它就会上线到：</span></p>
         <p><code>haner199022.github.io/ireland-study-tour/models/bianzhong.glb</code></p>
-        <p>放进 <code>website/models/</code> 并推送到 GitHub Pages，即得到公开 URL。</p>
+        <p>放进 <code>website/models/</code> 并推送到 GitHub Pages，即得到公开 URL。<br /><span style="opacity:.7;">Drop it into <code>website/models/</code> and push to GitHub Pages to get the public URL.</span></p>
       </div>
       <div class="step">
         <div class="n">STEP 3</div>
         <h3>交互页加载</h3>
         <span class="en">Load it in the interactive page</span>
-        <p>This page already loads <code>models/bianzhong.glb</code>. A Gemini-generated page just needs that URL in a <code>&lt;model-viewer src="…"&gt;</code> tag.</p>
-        <p><b>Fully self-contained option:</b> base64-embed the <code>.glb</code> as a data-URI so the single HTML file needs no hosting at all. 也可把模型 base64 内嵌成 data-URI，单文件即可运行。</p>
+        <p>This page already loads <code>models/bianzhong.glb</code>. A Gemini-generated page just needs that URL in a <code>&lt;model-viewer src="…"&gt;</code> tag.<br /><span style="opacity:.7;">本页已经加载 <code>models/bianzhong.glb</code>。Gemini 生成的页面只需把这个 URL 填进 <code>&lt;model-viewer src="…"&gt;</code> 标签即可。</span></p>
+        <p><b>Fully self-contained option:</b> base64-embed the <code>.glb</code> as a data-URI so the single HTML file needs no hosting at all.<br /><span style="opacity:.7;"><b>完全自包含的做法：</b>把 <code>.glb</code> 以 base64 内嵌成 data-URI，单个 HTML 文件无需任何托管即可运行。</span></p>
       </div>
     </div>
 
     <div class="gemini-box">
       <h3>给 Gemini 的提示词 <span class="en">A ready prompt for the Gemini phase</span></h3>
-      <div class="prompt" id="prompt">Build a single self-contained HTML file: an interactive 3D viewer for a Chinese bianzhong (chime bells).
-Use Google's &lt;model-viewer&gt; (load from unpkg). Load the model from this URL:
+      <div class="prompt" id="prompt">Build a single self-contained HTML file: an interactive 3D viewer for a Chinese bianzhong (chime bells). No build step; load Google's &lt;model-viewer&gt; from unpkg. Load the model from this URL:
   https://haner199022.github.io/ireland-study-tour/models/bianzhong.glb
-Requirements:
-• Orbit + zoom + auto-rotate, soft shadows, neutral environment lighting, an AR button.
-• On tap, ring a bell tone synthesized with the Web Audio API (inharmonic bell partials, ~3s decay).
-• Map pitch to the horizontal click position across the model: left = low, right = high, using a
-  pentatonic scale (gong–shang–jue–zhi–yu) spanning ~2 octaves. Show the note name as it rings.
-• Paper-and-bronze visual theme; bilingual (中文 + English) labels.
-Output one complete HTML file, no build step.</div>
+
+THE 3D STAGE
+• model-viewer with orbit + zoom + gentle auto-rotate (resumes after a brief idle delay), soft shadows, neutral environment lighting, and an AR button (webxr / scene-viewer / quick-look).
+• Let me drag my own .glb or .gltf onto the stage — or pick a file — to swap the model instantly. If the model URL fails to load, show a friendly "add your model" empty drop-zone instead of a blank or broken stage.
+
+PLAY THE BELLS
+• Tap anywhere on the model to ring a bell tone synthesized with the Web Audio API: stack ~6 inharmonic sine partials (detuned, bell-like), a fast attack and a ~3-second exponential decay.
+• Pitch follows the HORIZONTAL position of the tap across the model: left = low, right = high. Use the Chinese pentatonic scale 宫商角徵羽 (gong–shang–jue–zhi–yu) — 10 notes over ~2 octaves: G3 A3 C4 D4 E4 G4 A4 C5 D5 E5.
+• Also show a row of clickable note keys under the stage, plus a "奏一段 / Run the scale" button that plays all 10 notes in sequence.
+• On every ring: flash the note name large over the stage, send a soft ripple out from the tap point, and light up the matching key.
+
+CONTROLS + LOOK
+• An auto-rotate on/off toggle and a "reset view" button.
+• Rice-paper-and-bronze theme (paper #FAF6F0, bronze #B08D57); bilingual 中文 + English labels throughout.
+
+Output one complete, self-contained HTML file.</div>
       <button class="copy-btn" id="copyPrompt">⧉ 复制提示词 Copy prompt</button>
+      <p style="margin-top:14px;font-size:13px;color:rgba(250,246,240,.7);line-height:1.6;">想一步一步做、而不是一口气贴完？<a href="build-bianzhong.html" style="color:var(--bronze-l);text-decoration:none;font-weight:500;">→ 看 7 步逐步走报</a>——把上面这条 prompt 拆成 7 步，每步一个可复制的 prompt。<br /><span style="opacity:.75;">Prefer it step by step? <a href="build-bianzhong.html" style="color:var(--bronze-l);text-decoration:none;">→ Open the 7-step build</a> — the same prompt, broken into seven copy-paste stages.</span></p>
     </div>
   </div>
 </section>
 
 <footer>
-  编钟交互 3D · CUC × University College Cork · AIGC 应用训练营 ·
-  <a href="index.html">返回主站 Home</a>
+  编钟交互 3D · CUC × University College Cork · AIGC 应用训练营<br />
+  <span style="opacity:.7;">Bianzhong Interactive 3D · CUC × University College Cork · AIGC Applications Summer Camp</span> ·
+  <a href="index.html">返回主站 Back to Home</a>
 </footer>
 
 <script>

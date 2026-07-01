@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Communication, Culture, and Artificial Intelligence — Opening Address by Dean Jin · CUC × Ireland Study Tour</title>
+<title>Communication, Culture, and Artificial Intelligence — Opening Address by Dean Jin · CUC × University College Cork</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -161,6 +161,48 @@
   .accent { color: var(--bronze-d); }
   .dark .accent { color: var(--bronze); }
   .jade { color: var(--jade); }
+
+  /* ===== Bilingual Chinese secondary line ===== */
+  /* A dignified, muted second language under every English element.
+     Inherits its host's font-size context but reads quieter, so English
+     stays primary and the slide hierarchy is undisturbed. */
+  .cn {
+    display: block;
+    font-family: "Songti SC", "STSong", "Noto Serif SC", var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.04em;
+    color: var(--mute);
+    opacity: 0.78;
+    margin-top: 0.35em;
+  }
+  .dark .cn { color: rgba(250, 246, 240, 0.6); }
+
+  /* Scale the secondary line to its host so it never overwhelms or overflows */
+  .eyebrow .cn { font-size: 12px; letter-spacing: 0.12em; text-transform: none; margin-top: 6px; font-weight: 400; }
+  .h-title .cn { font-size: clamp(18px, 2.2vw, 28px); line-height: 1.3; margin-top: 0.5em; }
+  .h-body .cn { font-size: clamp(17px, 2vw, 24px); line-height: 1.3; margin-top: 0.45em; }
+  .lede .cn { font-size: 0.84em; line-height: 1.5; margin-top: 0.5em; }
+  .quote .cn { font-size: 0.62em; font-style: normal; line-height: 1.45; margin-top: 0.7em; }
+  .subtitle .cn { font-size: 0.7em; font-style: normal; margin-top: 0.4em; }
+  .speaker .cn, .institution .cn { font-size: 13px; letter-spacing: 0.04em; margin-top: 3px; }
+  .occasion .cn { font-size: 11px; letter-spacing: 0.08em; text-transform: none; margin-top: 5px; }
+  .fcard h4 .cn { font-size: 15px; margin-top: 4px; }
+  .fcard p .cn { font-size: 13px; margin-top: 5px; }
+  .roman-num .cn { font-size: 12px; letter-spacing: 0.04em; text-transform: none; margin-top: 3px; }
+  .six-list .name .cn { font-size: 16px; margin-top: 2px; }
+  .six-list .desc .cn { font-size: 13px; margin-top: 3px; }
+  .pblock h5 .cn { font-size: 14px; margin-top: 4px; }
+  .pblock p .cn { font-size: 12px; margin-top: 4px; }
+  .pillar-caption .cn { font-size: 13px; font-style: normal; margin-top: 5px; }
+  .dblock h4 .cn { font-size: 15px; margin-top: 4px; }
+  .dblock p .cn { font-size: 12.5px; margin-top: 5px; }
+  .dblock .roman .cn { display: inline; margin: 0; font-size: 13px; }
+  .obrow .q .cn { font-size: 0.66em; font-style: normal; margin-top: 0.5em; }
+  .two-q .one .q .cn { font-size: 0.62em; font-style: normal; margin-top: 0.5em; }
+  .map-table .cn { font-size: 13px; margin-top: 3px; }
+  .map-table th .cn { font-size: 10px; letter-spacing: 0.12em; margin-top: 2px; }
+  .cost-table .by .cn { font-size: 0.8em; margin-top: 2px; }
 
   /* ===== Slide 1 Title ===== */
   .title-slide .slide-inner { max-width: 1080px; }
@@ -610,6 +652,26 @@
     .two-q .one .q { font-size: 18px !important; line-height: 1.3 !important; }
 
     .slide.axis::after { top: 30px !important; bottom: 30px !important; }
+
+    /* keep the bilingual secondary line proportional in print/PDF */
+    .cn { margin-top: 0.3em !important; opacity: 0.72 !important; }
+    .eyebrow .cn { font-size: 9px !important; margin-top: 4px !important; }
+    .h-title .cn { font-size: 18px !important; line-height: 1.25 !important; }
+    .h-body .cn { font-size: 15px !important; line-height: 1.25 !important; }
+    .lede .cn { font-size: 0.84em !important; line-height: 1.4 !important; }
+    .quote .cn { font-size: 0.6em !important; line-height: 1.35 !important; }
+    .fcard h4 .cn { font-size: 11px !important; }
+    .fcard p .cn { font-size: 10px !important; }
+    .six-list .name .cn { font-size: 11px !important; }
+    .six-list .desc .cn { font-size: 9.5px !important; }
+    .pblock h5 .cn { font-size: 10px !important; }
+    .pblock p .cn { font-size: 9px !important; }
+    .dblock h4 .cn { font-size: 11px !important; }
+    .dblock p .cn { font-size: 10px !important; }
+    .obrow .q .cn { font-size: 0.62em !important; }
+    .two-q .one .q .cn { font-size: 0.6em !important; }
+    .map-table .cn { font-size: 10px !important; }
+    .cost-table .by .cn { font-size: 0.78em !important; }
   }
 </style>
 </head>
@@ -617,22 +679,23 @@
 
 <div class="progress" id="progress"></div>
 <div class="hud"><span class="cur" id="cur">1</span> / <span id="total">20</span></div>
-<div class="keyhint">← / → · space · home / end · F fullscreen</div>
+<div class="keyhint">← / → · space · home / end · F fullscreen · 翻页 / 空格 / 起止 / F 全屏</div>
 
 <!-- ============ Slide 1: TITLE ============ -->
 <section class="slide title-slide axis">
   <div class="slide-inner">
-    <div class="eyebrow institutional">An Opening Address · Day 2 of the Programme</div>
-    <h1 class="h-title">Communication, Culture,<br />and <em>Artificial Intelligence</em></h1>
-    <div class="subtitle">Reflections on the Field, on the Moment, and on the Work Ahead</div>
+    <div class="eyebrow institutional">An Opening Address · Day 2 of the Programme<span class="cn">开幕致辞 · 项目第二日</span></div>
+    <h1 class="h-title">Communication, Culture,<br />and <em>Artificial Intelligence</em><span class="cn">传播、文化与人工智能</span></h1>
+    <div class="subtitle">Reflections on the Field, on the Moment, and on the Work Ahead<span class="cn">关于学科、当下与未来之责的思考</span></div>
 
     <div class="institutional-block">
-      <div class="speaker">Dean Jin</div>
+      <div class="speaker">Dean Jin<span class="cn">金院长</span></div>
       <div class="institution">
         Dean, School of International Communication<br />
         Communication University of China
+        <span class="cn">中国传媒大学　国际传播学院　院长</span>
       </div>
-      <div class="occasion">CUC × Ireland Study Tour · Beijing · 2026</div>
+      <div class="occasion">CUC × University College Cork · Beijing · 2026<span class="cn">中国传媒大学 × 科克大学 · 北京 · 二〇二六</span></div>
     </div>
   </div>
 </section>
@@ -640,18 +703,20 @@
 <!-- ============ Slide 2: WELCOME ============ -->
 <section class="slide cream">
   <div class="slide-inner">
-    <div class="eyebrow institutional">A welcome from the School of International Communication</div>
-    <h2 class="h-body">It is my privilege to <em>welcome you</em> to Beijing.</h2>
+    <div class="eyebrow institutional">A welcome from the School of International Communication<span class="cn">国际传播学院的欢迎之辞</span></div>
+    <h2 class="h-body">It is my privilege to <em>welcome you</em> to Beijing.<span class="cn">能在北京迎接诸位，是我莫大的荣幸。</span></h2>
     <p class="lede">
       The Communication University of China has been engaged in the study of
       communication — its theories, its practices, and its global circulation —
       for more than half a century. Your presence here, as undergraduates from
       Ireland, is part of a longer conversation between our institutions and
       traditions. We do not take that lightly.
+      <span class="cn">中国传媒大学投身传播研究——其理论、其实践、其全球流通——已逾半个世纪。诸位作为来自爱尔兰的本科学子莅临于此，正是我们两所学府、两种传统之间一场更为悠长的对话的一部分。对此，我们不敢轻忽。</span>
     </p>
     <p class="lede small" style="margin-top: 18px;">
       I would also like to acknowledge our partner colleagues in Ireland,
       whose work has made your journey here possible.
+      <span class="cn">我亦要向我们在爱尔兰的合作同仁致意，正是他们的辛劳，方使诸位的此次远行成为可能。</span>
     </p>
   </div>
 </section>
@@ -659,13 +724,14 @@
 <!-- ============ Slide 3: WHAT THIS HOUR IS ============ -->
 <section class="slide">
   <div class="slide-inner">
-    <div class="eyebrow">On what this hour is</div>
-    <h2 class="h-body">Not a lecture in the traditional sense.<br /><em>An orientation.</em></h2>
+    <div class="eyebrow">On what this hour is<span class="cn">关于这一小时的意义</span></div>
+    <h2 class="h-body">Not a lecture in the traditional sense.<br /><em>An orientation.</em><span class="cn">这并非传统意义上的讲授，<br />而是一次引路。</span></h2>
     <p class="lede">
       I am not going to ask you to take notes on a body of theory. I am going
       to ask you to consider a few questions — questions that are, in fact,
       unsettled in our field, and that you will encounter, in concrete form,
-      almost every day of the next twelve.
+      almost every day of the next ten.
+      <span class="cn">我不会要求诸位记下成套的理论，而是请诸位思索几个问题——这些问题在我们的学科之中实则尚无定论，而在未来的十天里，诸位几乎每日都将以具体的形态与之相逢。</span>
     </p>
   </div>
 </section>
@@ -673,13 +739,15 @@
 <!-- ============ Slide 4: THE QUESTION ============ -->
 <section class="slide center axis">
   <div class="slide-inner">
-    <div class="eyebrow">The Question of Our Time</div>
+    <div class="eyebrow">The Question of Our Time<span class="cn">我们时代之问</span></div>
     <h2 class="h-title" style="text-align: center;">
       <em>How does meaning travel<br />across borders today?</em>
+      <span class="cn">在今日，意义如何跨越疆界而行？</span>
     </h2>
     <p class="lede" style="margin: 50px auto 0; text-align: center; color: var(--mute); font-style: italic;">
       This was the question of our field fifty years ago.<br />
       The answer has changed beyond recognition.
+      <span class="cn">五十年前，这是我们学科之问；<br />而今，答案已面目全非。</span>
     </p>
   </div>
 </section>
@@ -687,17 +755,19 @@
 <!-- ============ Slide 5: INTELLECTUAL MAP ============ -->
 <section class="slide cream">
   <div class="slide-inner">
-    <div class="eyebrow">A Brief Intellectual Map</div>
-    <h2 class="h-body">The field has <em>moved through paradigms</em>.</h2>
+    <div class="eyebrow">A Brief Intellectual Map<span class="cn">一幅简略的思想图谱</span></div>
+    <h2 class="h-body">The field has <em>moved through paradigms</em>.<span class="cn">这门学科，已历经数次范式的更迭。</span></h2>
     <p class="lede">
       The press and broadcasting era. The cultural-imperialism debate of
       Schiller and his interlocutors. The turn to globalisation and flow.
       The platform era — what Castells called the <em>Network Society</em>.
+      <span class="cn">报刊与广播的时代；席勒及其论敌关于「文化帝国主义」的争辩；转向全球化与流动的时代；以及平台的时代——卡斯特所称的「网络社会」。</span>
     </p>
     <p class="lede" style="margin-top: 28px; color: var(--bronze-d);">
       And now, what I would suggest we call an emerging fourth paradigm:
       the era of synthetic media, in which the production of meaning itself
       is increasingly automated.
+      <span class="cn">而如今，我愿称之为正在浮现的第四种范式：合成媒体的时代——在其中，意义的生产本身正日益走向自动化。</span>
     </p>
   </div>
 </section>
@@ -705,23 +775,23 @@
 <!-- ============ Slide 6: THREE FORCES ============ -->
 <section class="slide">
   <div class="slide-inner">
-    <div class="eyebrow">Three Structural Forces of Our Decade</div>
-    <h2 class="h-body">Three forces distinguish<br />the <em>present moment</em>.</h2>
+    <div class="eyebrow">Three Structural Forces of Our Decade<span class="cn">这十年的三股结构性力量</span></div>
+    <h2 class="h-body">Three forces distinguish<br />the <em>present moment</em>.<span class="cn">有三股力量，标定了当下这一时刻。</span></h2>
     <div class="force-row">
       <div class="fcard">
-        <div class="roman-num">I · The Platform</div>
-        <h4>Enclosure</h4>
-        <p>Communication today happens largely inside proprietary digital environments.</p>
+        <div class="roman-num">I · The Platform<span class="cn">其一 · 平台</span></div>
+        <h4>Enclosure<span class="cn">圈占</span></h4>
+        <p>Communication today happens largely inside proprietary digital environments.<span class="cn">今日之传播，大多发生于私有的数字环境之内。</span></p>
       </div>
       <div class="fcard">
-        <div class="roman-num">II · The Algorithm</div>
-        <h4>Computation</h4>
-        <p>Distribution is no longer primarily editorial. It is computational.</p>
+        <div class="roman-num">II · The Algorithm<span class="cn">其二 · 算法</span></div>
+        <h4>Computation<span class="cn">计算</span></h4>
+        <p>Distribution is no longer primarily editorial. It is computational.<span class="cn">分发已不再主要由编辑主导，而是由计算主导。</span></p>
       </div>
       <div class="fcard">
-        <div class="roman-num">III · The Model</div>
-        <h4>Generation</h4>
-        <p>The act of producing text, image, voice, is now within the reach of large-scale AI systems.</p>
+        <div class="roman-num">III · The Model<span class="cn">其三 · 模型</span></div>
+        <h4>Generation<span class="cn">生成</span></h4>
+        <p>The act of producing text, image, voice, is now within the reach of large-scale AI systems.<span class="cn">生产文字、图像与声音之举，如今已为大规模人工智能系统所能及。</span></p>
       </div>
     </div>
   </div>
@@ -730,8 +800,8 @@
 <!-- ============ Slide 7: CHINA'S TRAJECTORY ============ -->
 <section class="slide cream">
   <div class="slide-inner">
-    <div class="eyebrow">China's Distinctive Trajectory</div>
-    <h2 class="h-body">China has lived through these transitions<br />in a <em>particular sequence</em>.</h2>
+    <div class="eyebrow">China's Distinctive Trajectory<span class="cn">中国独特的发展轨迹</span></div>
+    <h2 class="h-body">China has lived through these transitions<br />in a <em>particular sequence</em>.<span class="cn">中国经历这些变迁，遵循着一种独特的次第。</span></h2>
     <p class="lede">
       Many other societies passed through several decades of personal-computer-based
       media before encountering the mobile internet. China largely arrived at
@@ -739,10 +809,12 @@
       daily life — commerce, services, identity, communication — than in most
       other parts of the world. And the development of indigenous artificial
       intelligence capacity has, in the past three years, been remarkably rapid.
+      <span class="cn">许多其他社会，在迎来移动互联网之前，先经历了数十年以个人电脑为基础的媒介时代；而中国大体上是径直步入了移动时代。此地的平台转向，与日常生活——商业、服务、身份、传播——的交融之深，胜于世界上多数地方。而本土人工智能能力的发展，在过去三年间更是迅猛得令人瞩目。</span>
     </p>
     <p class="lede" style="margin-top: 30px; font-style: italic; color: var(--bronze-d);">
       You will see this every day on the streets of Beijing. I would invite
       you to observe it not as foreign, but as instructive.
+      <span class="cn">在北京的街头，诸位每日都将目睹这一切。我恳请诸位，不要将它视作陌生之物，而要视作可资借鉴的启示。</span>
     </p>
   </div>
 </section>
@@ -750,15 +822,15 @@
 <!-- ============ Slide 8: SIX FORMS ============ -->
 <section class="slide">
   <div class="slide-inner">
-    <div class="eyebrow">A Working Vocabulary</div>
-    <h2 class="h-body">Six contemporary forms<br />of <em>digital communication</em>.</h2>
+    <div class="eyebrow">A Working Vocabulary<span class="cn">一套备用的概念词汇</span></div>
+    <h2 class="h-body">Six contemporary forms<br />of <em>digital communication</em>.<span class="cn">数字传播的六种当代形态。</span></h2>
     <ol class="six-list">
-      <li><span class="name">The platform</span><div class="desc">Meituan, Alibaba — environments in which other actors transact</div></li>
-      <li><span class="name">Algorithmic media</span><div class="desc">ByteDance, Douyin, TikTok — distribution as computation</div></li>
-      <li><span class="name">Subscription media</span><div class="desc">iQIYI, Tencent Video, the AI services you will use this week</div></li>
-      <li><span class="name">Ecosystem architectures</span><div class="desc">Xiaomi, Huawei — integration across devices and contexts</div></li>
-      <li><span class="name">Foundation models as service</span><div class="desc">DeepSeek, Wenxin, Doubao — the model itself as the offering</div></li>
-      <li><span class="name">AI-mediated persons</span><div class="desc">Baidu's Xiling digital humans — synthetic figures who communicate on behalf of organisations</div></li>
+      <li><span class="name">The platform<span class="cn">平台</span></span><div class="desc">Meituan, Alibaba — environments in which other actors transact<span class="cn">美团、阿里巴巴——供他者于其间交易的环境</span></div></li>
+      <li><span class="name">Algorithmic media<span class="cn">算法媒体</span></span><div class="desc">ByteDance, Douyin, TikTok — distribution as computation<span class="cn">字节跳动、抖音、TikTok——以计算行分发之事</span></div></li>
+      <li><span class="name">Subscription media<span class="cn">订阅媒体</span></span><div class="desc">iQIYI, Tencent Video, the AI services you will use this week<span class="cn">爱奇艺、腾讯视频，以及诸位本周将使用的人工智能服务</span></div></li>
+      <li><span class="name">Ecosystem architectures<span class="cn">生态体系架构</span></span><div class="desc">Xiaomi, Huawei — integration across devices and contexts<span class="cn">小米、华为——跨设备、跨情境的整合</span></div></li>
+      <li><span class="name">Foundation models as service<span class="cn">作为服务的基础模型</span></span><div class="desc">DeepSeek, Wenxin, Doubao — the model itself as the offering<span class="cn">DeepSeek、文心、豆包——以模型本身为所供之物</span></div></li>
+      <li><span class="name">AI-mediated persons<span class="cn">人工智能中介的人</span></span><div class="desc">Baidu's Xiling digital humans — synthetic figures who communicate on behalf of organisations<span class="cn">百度「曦灵」数字人——代机构发声的合成形象</span></div></li>
     </ol>
   </div>
 </section>
@@ -766,17 +838,17 @@
 <!-- ============ Slide 9: WHERE YOU WILL ENCOUNTER ============ -->
 <section class="slide cream">
   <div class="slide-inner">
-    <div class="eyebrow">Where You Will Encounter Each Form</div>
-    <h2 class="h-body">Walk into each setting<br />with this <em>map in mind</em>.</h2>
+    <div class="eyebrow">Where You Will Encounter Each Form<span class="cn">诸位将于何处与每种形态相逢</span></div>
+    <h2 class="h-body">Walk into each setting<br />with this <em>map in mind</em>.<span class="cn">每入一处情境，皆请心怀此图。</span></h2>
     <table class="map-table">
-      <thead><tr><th>Form</th><th>Where you will see it</th></tr></thead>
+      <thead><tr><th>Form<span class="cn">形态</span></th><th>Where you will see it<span class="cn">将于何处得见</span></th></tr></thead>
       <tbody>
-        <tr><td class="pattern">The platform</td><td>Daily life in Beijing — meal ordering, transportation, museum services</td></tr>
-        <tr><td class="pattern">Algorithmic media</td><td>Open Douyin or TikTok during your stay; the editorial logic is different here</td></tr>
-        <tr><td class="pattern">Subscription media</td><td>The AI music platforms you will use in the Day 2 workshop</td></tr>
-        <tr class="featured"><td class="pattern">Ecosystem architectures</td><td><strong>Xiaomi visit, Day 5</strong> — the architecture is the subject</td></tr>
-        <tr><td class="pattern">Foundation models as service</td><td>The Chinese models you compare in the Day 3 LLM workshop — Wenxin, Doubao, DeepSeek</td></tr>
-        <tr><td class="pattern">AI-mediated persons</td><td>Digital-human systems such as Xiling — synthetic communication, discussed as a case</td></tr>
+        <tr><td class="pattern">The platform<span class="cn">平台</span></td><td>Daily life in Beijing — meal ordering, transportation, museum services<span class="cn">北京的日常生活——点餐、出行、博物馆服务</span></td></tr>
+        <tr><td class="pattern">Algorithmic media<span class="cn">算法媒体</span></td><td>Open Douyin or TikTok during your stay; the editorial logic is different here<span class="cn">逗留期间打开抖音或 TikTok；此地的编辑逻辑迥然不同</span></td></tr>
+        <tr><td class="pattern">Subscription media<span class="cn">订阅媒体</span></td><td>The AI music platforms you will use in the Day 5 workshop<span class="cn">诸位将在第五日工作坊中使用的人工智能音乐平台</span></td></tr>
+        <tr class="featured"><td class="pattern">Ecosystem architectures<span class="cn">生态体系架构</span></td><td><strong>Xiaomi visit, Day 4</strong> — the architecture is the subject<span class="cn"><strong>第四日参访小米</strong>——架构本身即是主题</span></td></tr>
+        <tr><td class="pattern">Foundation models as service<span class="cn">作为服务的基础模型</span></td><td>The Chinese models you compare in the Day 4 LLM workshop — Wenxin, Doubao, DeepSeek<span class="cn">诸位将在第四日大模型工作坊中比较的中国模型——文心、豆包、DeepSeek</span></td></tr>
+        <tr><td class="pattern">AI-mediated persons<span class="cn">人工智能中介的人</span></td><td>Digital-human systems such as Xiling — synthetic communication, discussed as a case<span class="cn">如「曦灵」之类的数字人系统——作为案例研讨的合成传播</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -785,15 +857,17 @@
 <!-- ============ Slide 10: AI AS THRESHOLD ============ -->
 <section class="slide dark">
   <div class="slide-inner">
-    <div class="eyebrow">A Genuine Threshold</div>
-    <h2 class="h-body">For most of human history,<br />the production of meaning<br />required <em>time, training, and skill</em>.</h2>
+    <div class="eyebrow">A Genuine Threshold<span class="cn">一道真正的门槛</span></div>
+    <h2 class="h-body">For most of human history,<br />the production of meaning<br />required <em>time, training, and skill</em>.<span class="cn">在人类历史的绝大部分时间里，<br />意义的生产，须仰赖时间、训练与技艺。</span></h2>
     <p class="lede" style="margin-top: 36px;">
       A written article. A translated text. A composed image. A recorded
       performance. Each of these required human craft.
+      <span class="cn">一篇文章，一段译文，一幅构图，一场录制的表演——其中每一样，都曾需要人的匠心。</span>
     </p>
     <p class="lede" style="margin-top: 22px; color: var(--bronze);">
       Today, increasingly, it does not. This is not merely a tool update.
       It is a structural change in the economy of meaning-making.
+      <span class="cn">而今日，情形正日益不再如此。这不只是一次工具的更新，而是意义生产之经济结构的一场深层变革。</span>
     </p>
   </div>
 </section>
@@ -801,17 +875,18 @@
 <!-- ============ Slide 11: COST CURVE ============ -->
 <section class="slide">
   <div class="slide-inner">
-    <div class="eyebrow">A Measurable Change · The cost of translating one page of English into Chinese</div>
-    <h2 class="h-body">A fall of <em>three orders of magnitude</em><br />in ten years.</h2>
+    <div class="eyebrow">A Measurable Change · The cost of translating one page of English into Chinese<span class="cn">一项可度量的变化 · 将一页英文译为中文的成本</span></div>
+    <h2 class="h-body">A fall of <em>three orders of magnitude</em><br />in ten years.<span class="cn">十年之间，下降了三个数量级。</span></h2>
     <table class="cost-table">
-      <tr><td class="year">2015</td><td class="cost">€50.00</td><td class="by">a human translator</td></tr>
-      <tr><td class="year">2020</td><td class="cost">€5.00</td><td class="by">a junior with machine assistance</td></tr>
-      <tr><td class="year">2025</td><td class="cost">€0.05</td><td class="by">a single model call</td></tr>
+      <tr><td class="year">2015</td><td class="cost">€50.00</td><td class="by">a human translator<span class="cn">一位人类译者</span></td></tr>
+      <tr><td class="year">2020</td><td class="cost">€5.00</td><td class="by">a junior with machine assistance<span class="cn">一位借助机器的初级译员</span></td></tr>
+      <tr><td class="year">2025</td><td class="cost">€0.05</td><td class="by">a single model call<span class="cn">一次模型调用</span></td></tr>
     </table>
     <p class="lede" style="margin-top: 40px;">
       This is not a small change. It does not merely reduce expense. It
       reorganises who can communicate, at what scale, across which borders,
       and with what professional structures around the act.
+      <span class="cn">这绝非微末之变。它所改变的，不只是开销，更是重新厘定了：谁能传播、以何等规模、跨越哪些疆界，又凭借怎样的专业体系来承载这一行为。</span>
     </p>
   </div>
 </section>
@@ -819,14 +894,16 @@
 <!-- ============ Slide 12: THE NEW QUESTION ============ -->
 <section class="slide dark center axis">
   <div class="slide-inner">
-    <div class="eyebrow">The Central Question of Our Decade</div>
+    <div class="eyebrow">The Central Question of Our Decade<span class="cn">这十年的核心之问</span></div>
     <h2 class="h-title" style="text-align: center; max-width: 900px;">
       <em>If the production cost of cultural and<br />
       communicative work approaches zero,<br />
       what cultural work becomes <span class="accent">worth doing</span>?</em>
+      <span class="cn">倘若文化与传播之作的生产成本趋近于零，<br />那么，何种文化工作方才<span class="accent">值得去做</span>？</span>
     </h2>
     <p class="lede" style="margin: 60px auto 0; text-align: center; font-style: italic; color: rgba(250,246,240,0.7);">
-      I would invite you to hold this question through the next twelve days.
+      I would invite you to hold this question through the next ten days.
+      <span class="cn">我恳请诸位，将这一问题贯穿于未来的十日之中。</span>
     </p>
   </div>
 </section>
@@ -834,16 +911,18 @@
 <!-- ============ Slide 13: CULTURE ACROSS TIME ============ -->
 <section class="slide cream">
   <div class="slide-inner">
-    <div class="eyebrow">Chinese Culture Across Time</div>
-    <h2 class="h-body">For a thousand years,<br />Chinese culture travelled <em>slowly</em>.</h2>
+    <div class="eyebrow">Chinese Culture Across Time<span class="cn">穿越时间的中华文化</span></div>
+    <h2 class="h-body">For a thousand years,<br />Chinese culture travelled <em>slowly</em>.<span class="cn">千年以来，中华文化总是缓缓而行。</span></h2>
     <p class="lede">
       The silk roads. Religious missions. Scholarly translation. Library
       collection. Museum loan.
+      <span class="cn">丝绸之路，宗教传布，学者译述，典籍庋藏，馆际借展。</span>
     </p>
     <p class="lede" style="margin-top: 22px;">
       Each transmission required <em>custodianship</em> — a person, an
       institution, a tradition that took responsibility for what was being
       conveyed and how.
+      <span class="cn">每一次传递，皆须有守护之责——一个人、一所机构、一脉传统，为所传何物、如何而传而担当其责。</span>
     </p>
   </div>
 </section>
@@ -851,17 +930,19 @@
 <!-- ============ Slide 14: NEW CONDITIONS ============ -->
 <section class="slide">
   <div class="slide-inner">
-    <div class="eyebrow">The New Conditions of Cultural Circulation</div>
-    <h2 class="h-body">Today, that same culture can be circulated<br />in a <em>sixty-second video</em>.</h2>
+    <div class="eyebrow">The New Conditions of Cultural Circulation<span class="cn">文化流通的新境况</span></div>
+    <h2 class="h-body">Today, that same culture can be circulated<br />in a <em>sixty-second video</em>.<span class="cn">而今，同样的文化，可在一段六十秒的短视频里流转。</span></h2>
     <p class="lede">
       The constraint has shifted. The question is no longer whether culture
       can travel — clearly, it can. The question is what is worth sending,
       how it should be framed, who curates, who interprets, and to whom
       the work answers.
+      <span class="cn">约束已然位移。问题不再是文化能否传播——显然，它能；问题在于：何者值得传送，应如何取景立意，由谁来策展，由谁来阐释，而这作品，又当向谁负责。</span>
     </p>
     <p class="lede" style="margin-top: 26px; color: var(--bronze-d); font-style: italic;">
       These are not technical questions. They are questions of communicative
       ethics, of responsibility, and of craft. They are the questions of our field.
+      <span class="cn">这些都不是技术问题。它们关乎传播的伦理、责任与匠艺。它们，正是我们这门学科之问。</span>
     </p>
   </div>
 </section>
@@ -869,18 +950,20 @@
 <!-- ============ Slide 15: PROVOCATION ============ -->
 <section class="slide cream">
   <div class="slide-inner">
-    <div class="eyebrow">A Provocation</div>
+    <div class="eyebrow">A Provocation<span class="cn">一则诘问</span></div>
     <blockquote class="quote">
-      Consider three objects you will encounter in the next twelve days:<br /><br />
-      A <span class="accent">six-hundred-year-old bell</span> at the Dazhongsi museum.<br />
+      Consider three objects you will encounter in the next ten days:<br /><br />
+      A <span class="accent">six-hundred-year-old hall</span> in the Forbidden City.<br />
       A <span class="accent">large language model</span> capable of processing tens of trillions of tokens daily.<br />
       A <span class="accent">translation that costs five cents</span> to produce.<br /><br />
       What does international communication look like<br />
       when these three artefacts share a single room?
+      <span class="cn">且思未来十日里诸位将遇见的三样事物：紫禁城中一座<span class="accent">六百年的殿宇</span>；一具日处理逾数十万亿词元的<span class="accent">大语言模型</span>；一份成本仅<span class="accent">五分钱的译文</span>。当这三样造物同处一室，国际传播又会是怎样的图景？</span>
     </blockquote>
     <p class="lede small" style="margin-top: 24px; font-style: italic;">
       I do not have a complete answer. Neither, I believe, does our field.
-      Your work over the next two weeks is, in part, an attempted small reply.
+      Your work over the next ten days is, in part, an attempted small reply.
+      <span class="cn">我并无圆满的答案；我相信，我们这门学科亦无。诸位未来十日的功课，某种程度上，正是一份小小的、试探性的回应。</span>
     </p>
   </div>
 </section>
@@ -888,58 +971,59 @@
 <!-- ============ Slide 16: FOUR PILLARS ============ -->
 <section class="slide">
   <div class="slide-inner">
-    <div class="eyebrow">The Architecture of Your Programme</div>
-    <h2 class="h-body">Four pillars.<br /><em>Each feeds the next.</em></h2>
+    <div class="eyebrow">The Architecture of Your Programme<span class="cn">诸位项目的整体架构</span></div>
+    <h2 class="h-body">Four pillars.<br /><em>Each feeds the next.</em><span class="cn">四根支柱，<br />环环相生，前者哺育后者。</span></h2>
     <div class="pillar-row">
       <div class="pblock">
         <div class="roman">I</div>
-        <h5>The Bell-Theme Day</h5>
-        <p>encountering a cultural source</p>
+        <h5>Cultural Immersion<span class="cn">文化浸润</span></h5>
+        <p>encountering a cultural source<span class="cn">邂逅一处文化的源头</span></p>
       </div>
       <div class="pblock">
         <div class="roman">II</div>
-        <h5>The Corporate Visits</h5>
-        <p>observing the contemporary architecture</p>
+        <h5>The Corporate Visits<span class="cn">企业参访</span></h5>
+        <p>observing the contemporary architecture<span class="cn">观察当代的架构</span></p>
       </div>
       <div class="pblock">
         <div class="roman">III</div>
-        <h5>The AI Workshops</h5>
-        <p>practising the new craft</p>
+        <h5>The AI Workshops<span class="cn">人工智能工作坊</span></h5>
+        <p>practising the new craft<span class="cn">演练新的技艺</span></p>
       </div>
       <div class="pblock">
         <div class="roman">IV</div>
-        <h5>The Capstone</h5>
-        <p>producing an original work</p>
+        <h5>The Final Work<span class="cn">结业之作</span></h5>
+        <p>producing an original work<span class="cn">创作一件原创作品</span></p>
       </div>
     </div>
-    <div class="pillar-caption">Source → Architecture → Practice → Original work.</div>
+    <div class="pillar-caption">Source → Architecture → Practice → Original work.<span class="cn">源头 → 架构 → 实践 → 原创之作。</span></div>
   </div>
 </section>
 
 <!-- ============ Slide 17: WHAT YOU WILL CREATE ============ -->
 <section class="slide cream">
   <div class="slide-inner">
-    <div class="eyebrow">What You Will Create</div>
-    <h2 class="h-body">A single coherent work<br />in <em>three elements</em>.</h2>
+    <div class="eyebrow">What You Will Create<span class="cn">诸位将要创造之物</span></div>
+    <h2 class="h-body">A single coherent work<br />in <em>three elements</em>.<span class="cn">一件浑然一体的作品，<br />由三个部分构成。</span></h2>
     <div class="three-del">
       <div class="dblock">
         <div class="roman">I.</div>
-        <h4>A research brief</h4>
-        <p>Written in conversation with artificial intelligence — not by it. The text is yours; the inquiry is shared.</p>
+        <h4>A research brief<span class="cn">一份研究纲要</span></h4>
+        <p>Written in conversation with artificial intelligence — not by it. The text is yours; the inquiry is shared.<span class="cn">在与人工智能的对话中写就——而非由它代笔。文字属于诸位，探究则是共担的。</span></p>
       </div>
       <div class="dblock">
         <div class="roman">II.</div>
-        <h4>An original composition</h4>
-        <p>Music composed using AI tools and field recordings made by your own hand during the Bell-Theme Day.</p>
+        <h4>An original composition<span class="cn">一首原创乐曲</span></h4>
+        <p>Music composed using AI tools, shaped by your cultural research and your own recordings from Beijing.<span class="cn">以人工智能工具谱写，由诸位的文化研究与亲手在北京采录的声音所塑成。</span></p>
       </div>
       <div class="dblock">
         <div class="roman">III.</div>
-        <h4>An interactive work</h4>
-        <p>A page on the open internet that audiences in Ireland can experience directly, in their own time.</p>
+        <h4>An interactive work<span class="cn">一件交互作品</span></h4>
+        <p>A page on the open internet that audiences in Ireland can experience directly, in their own time.<span class="cn">一个置于开放互联网上的页面，让爱尔兰的观众得以在自己的时间里直接体验。</span></p>
       </div>
     </div>
     <p class="lede" style="margin-top: 44px; text-align: center; font-style: italic;">
       Together, one coherent act of cultural communication — one that you have authored.
+      <span class="cn">三者相合，便是一桩浑然一体的文化传播之举——而它，出自诸位之手。</span>
     </p>
   </div>
 </section>
@@ -947,24 +1031,25 @@
 <!-- ============ Slide 18: THREE OBSERVATIONS ============ -->
 <section class="slide">
   <div class="slide-inner">
-    <div class="eyebrow">Three Observations to Carry, Daily</div>
-    <h2 class="h-body">In every setting you enter,<br /><em>ask three questions</em>.</h2>
+    <div class="eyebrow">Three Observations to Carry, Daily<span class="cn">每日随身携带的三重观照</span></div>
+    <h2 class="h-body">In every setting you enter,<br /><em>ask three questions</em>.<span class="cn">每入一处情境，<br />都请自问三个问题。</span></h2>
     <div class="three-obs">
       <div class="obrow">
         <div class="n">I.</div>
-        <div class="q">Whose voice is being amplified?<br />Whose voice is being filtered, or absent?</div>
+        <div class="q">Whose voice is being amplified?<br />Whose voice is being filtered, or absent?<span class="cn">谁的声音被放大？谁的声音被过滤，或干脆缺席？</span></div>
       </div>
       <div class="obrow">
         <div class="n">II.</div>
-        <div class="q">What is being produced — and, by the same act,<br />what is being lost or displaced?</div>
+        <div class="q">What is being produced — and, by the same act,<br />what is being lost or displaced?<span class="cn">何物被生产出来——而同一行为之下，又有何物被失落或被取代？</span></div>
       </div>
       <div class="obrow">
         <div class="n">III.</div>
-        <div class="q">Who is the audience,<br />and what is being asked of them?</div>
+        <div class="q">Who is the audience,<br />and what is being asked of them?<span class="cn">受众是谁，而又有何事被要求于他们？</span></div>
       </div>
     </div>
     <p class="lede small" style="margin-top: 36px; font-style: italic; color: var(--mute);">
       These are not new questions in our field. But artificial intelligence has given them new urgency.
+      <span class="cn">在我们学科里，这些并非新问题。但人工智能，赋予了它们新的紧迫。</span>
     </p>
   </div>
 </section>
@@ -972,20 +1057,21 @@
 <!-- ============ Slide 19: TWO QUESTIONS HOME ============ -->
 <section class="slide cream">
   <div class="slide-inner">
-    <div class="eyebrow">Two Questions to Carry Home</div>
-    <h2 class="h-body">Before you return to Ireland,<br />I would be honoured by <em>your reply</em> to two questions.</h2>
+    <div class="eyebrow">Two Questions to Carry Home<span class="cn">两个带回家的问题</span></div>
+    <h2 class="h-body">Before you return to Ireland,<br />I would be honoured by <em>your reply</em> to two questions.<span class="cn">在诸位返回爱尔兰之前，<br />若能得诸位对两个问题的回应，我将深感荣幸。</span></h2>
     <div class="two-q">
       <div class="one">
         <div class="n">I.</div>
-        <div class="q">What have you learned about communication in China<br />that you could not have learned anywhere else?</div>
+        <div class="q">What have you learned about communication in China<br />that you could not have learned anywhere else?<span class="cn">关于中国的传播，诸位学到了什么，是在别处无从习得的？</span></div>
       </div>
       <div class="one">
         <div class="n">II.</div>
-        <div class="q">What kind of communicator<br />do you hope to become?</div>
+        <div class="q">What kind of communicator<br />do you hope to become?<span class="cn">诸位盼望，成为怎样的一位传播者？</span></div>
       </div>
     </div>
     <p class="lede small" style="margin-top: 40px; font-style: italic; color: var(--bronze-d);">
       The second question, I confess, is the one I most hope you will spend time with.
+      <span class="cn">我须坦言，第二个问题，才是我最盼诸位肯为之驻足细想的。</span>
     </p>
   </div>
 </section>
@@ -993,17 +1079,20 @@
 <!-- ============ Slide 20: CLOSING WELCOME ============ -->
 <section class="slide dark center axis">
   <div class="slide-inner">
-    <div class="eyebrow institutional">In Closing</div>
+    <div class="eyebrow institutional">In Closing<span class="cn">临别赠言</span></div>
     <h2 class="h-title" style="text-align: center; max-width: 880px; color: var(--paper);">
-      The next two weeks will ask you<br />
+      The next ten days will ask you<br />
       to <em>listen carefully</em>, to <em>look closely</em>,<br />
       and to <em>make things</em>.
+      <span class="cn">未来的十日，将请诸位<br />细心聆听，凝神观看，<br />并亲手创造。</span>
     </h2>
     <p class="lede" style="margin: 50px auto 0; text-align: center; color: rgba(250,246,240,0.8); font-style: italic;">
       I have every confidence that you will rise to the occasion.
+      <span class="cn">我深信，诸位定不负此行。</span>
     </p>
     <div style="margin-top: 100px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.35em; color: var(--bronze); text-transform: uppercase;">
       Thank you · Questions are welcome
+      <span class="cn" style="color: var(--bronze); opacity: 0.85; letter-spacing: 0.08em; text-transform: none; margin-top: 8px;">谢谢诸位 · 欢迎提问</span>
     </div>
   </div>
 </section>

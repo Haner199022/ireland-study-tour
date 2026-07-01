@@ -317,7 +317,7 @@
         </div>
         
         <div class="toggle-row">
-            <span>🎤 麦克风音频接入 (Voice Mic)</span>
+            <span>🎤 麦克风音频接入 (Mic Audio Input)</span>
             <label class="switch">
                 <input type="checkbox" id="mic-toggle">
                 <span class="slider"></span>
@@ -325,7 +325,7 @@
         </div>
 
         <div class="toggle-row">
-            <span>📷 摄像头头部追踪 (Webcam)</span>
+            <span>📷 摄像头头部追踪 (Webcam Head-Tracking)</span>
             <label class="switch">
                 <input type="checkbox" id="webcam-toggle">
                 <span class="slider"></span>
@@ -334,10 +334,15 @@
 
         <div class="legend-box">
             • <b>空格键 (Space)</b>: 敲击铜铃幻影并泛出音波<br>
+            <span style="opacity:.65;">Tap the phantom bell and ripple sound waves.</span><br>
             • <b>鼠标滚轮 (Scroll)</b>: 调整水墨冷暖色调温差<br>
+            <span style="opacity:.65;">Shift the ink palette between cool and warm tones.</span><br>
             • <b>拖拽点击 (Drag)</b>: 在宣纸上提笔画出水墨残影<br>
+            <span style="opacity:.65;">Drag to paint trailing ink strokes on the rice paper.</span><br>
             • <b>点击页面 (Click)</b>: 激发强烈空间扭曲冲击波<br>
-            • <b>大声拍手 / 摇一摇</b>: 激发墨滴瞬间炸裂
+            <span style="opacity:.65;">Click to unleash a space-warping shockwave.</span><br>
+            • <b>大声拍手 / 摇一摇</b>: 激发墨滴瞬间炸裂<br>
+            <span style="opacity:.65;">Clap loudly or shake to burst the ink droplets.</span>
         </div>
     </div>
 
@@ -351,13 +356,13 @@
     </div>
 
     <div class="controls-container">
-        <div id="track-name" class="track-info">可直接播放内置禅意合成器，或选择本地曲目</div>
+        <div id="track-name" class="track-info">可直接播放内置禅意合成器，或选择本地曲目 / Play the built-in zen synth, or pick a local track</div>
         
         <div class="actions">
             <input type="file" id="audio-file" class="hidden-input" accept="audio/*">
             
             <button class="btn" onclick="document.getElementById('audio-file').click()">
-                选择音频
+                选择音频 / Choose Audio
             </button>
 
             <button id="play-pause" class="play-pause-btn" aria-label="Play/Pause">
@@ -635,7 +640,7 @@
         function startProceduralSynth() {
             initAudioAnalyzer();
             isProceduralPlaying = true;
-            trackNameLabel.textContent = "🔊 内置禅意合成器循环中...";
+            trackNameLabel.textContent = "🔊 内置禅意合成器循环中... / Built-in zen synth looping...";
             trackNameLabel.style.color = '#5B8C7E';
             if (proceduralInterval) clearInterval(proceduralInterval);
             playProceduralBeat();
@@ -946,7 +951,7 @@
                     if (!animationFrameId) render();
                 } else {
                     stopProceduralSynth();
-                    trackNameLabel.textContent = "可直接播放内置禅意合成器，或选择本地曲目";
+                    trackNameLabel.textContent = "可直接播放内置禅意合成器，或选择本地曲目 / Play the built-in zen synth, or pick a local track";
                     trackNameLabel.style.color = '#8A857C';
                     playIcon.style.display = 'block';
                     pauseIcon.style.display = 'none';

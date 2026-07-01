@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#1A1A1A" />
+<meta name="robots" content="index, follow" />
+
+<title>一步步做出「可交互编钟」· Build the Playable Bianzhong, step by step | 灵境工坊 · CUC</title>
+<meta name="description" content="把可交互 3D 编钟页面拆成 7 步，每一步给出可直接复制的 Gemini 英文 prompt——从一个空舞台，到能点击发声、按五声音阶演奏、可拖入自己模型的 3D 乐器。A step-by-step teardown of the playable 3D bianzhong: 7 copy-paste Gemini prompts, empty stage to a tap-to-ring instrument." />
+<meta name="author" content="Faculty of International Media, CUC" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="灵境工坊 · Miracle Craft Workshop" />
+<meta property="og:title" content="一步步做出「可交互编钟」· Build the Playable Bianzhong step by step" />
+<meta property="og:description" content="编钟深拆：7 条可复制的 Gemini prompt，从空舞台做到点击发声、五声音阶演奏的 3D 编钟。 7 copy-paste prompts, empty stage to a playable 3D chime-bell instrument." />
+<meta property="og:locale" content="zh_CN" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23FAF6F0'/><path d='M32 12 C34 24, 40 30, 52 32 C40 34, 34 40, 32 52 C30 40, 24 34, 12 32 C24 30, 30 24, 32 12 Z' fill='%23B08D57'/></svg>" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;800&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============ Reset & tokens (shared with the rest of the site) ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
+
+  :root {
+    --ink: #1A1A1A; --ink-2: #2C2724;
+    --paper: #FAF6F0; --paper-2: #F2EBDE; --paper-3: #ECE2D0;
+    --bronze: #B08D57; --bronze-d: #8C6D3F; --bronze-l: #C9AB7C;
+    --jade: #5B8C7E; --jade-d: #436B5F;
+    --mute: #8B847B; --line: #D9D2C4;
+    --serif-en: "Cormorant Garamond", "Georgia", serif;
+    --serif-cn: "Noto Serif SC", "Songti SC", "STSong", serif;
+    --sans-en:  "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --sans-cn:  "Noto Sans SC", "PingFang SC", "Heiti SC", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --w-max: 1180px; --pad-x: clamp(20px, 5vw, 64px);
+    --shadow-soft: 0 12px 30px -10px rgba(0, 0, 0, 0.12);
+    --shadow-medium: 0 22px 50px -18px rgba(0, 0, 0, 0.18);
+  }
+
+  body {
+    font-family: var(--sans-en), var(--sans-cn);
+    color: var(--ink); background: var(--paper);
+    line-height: 1.6; font-weight: 400; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; opacity: 0.05; z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--bronze), var(--bronze-l)); width: 0%; z-index: 100; transition: width 0.1s linear; }
+
+  /* ============ Top nav ============ */
+  .topnav { position: sticky; top: 0; z-index: 50; background: rgba(250,246,240,0.85); backdrop-filter: blur(12px) saturate(120%); -webkit-backdrop-filter: blur(12px) saturate(120%); border-bottom: 1px solid var(--line); }
+  .topnav-inner { max-width: var(--w-max); margin: 0 auto; padding: 14px var(--pad-x); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { font-family: var(--serif-cn); font-weight: 800; font-size: 18px; letter-spacing: 0.05em; display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; }
+  .brand .bell-icon { width: 22px; height: 22px; display: inline-block; color: var(--bronze); }
+  .brand .accent { color: var(--bronze); }
+  .nav-links { display: flex; gap: clamp(12px, 2vw, 24px); font-size: 13px; list-style: none; }
+  .nav-links a { color: var(--ink); text-decoration: none; opacity: 0.72; transition: opacity 0.2s, color 0.2s; }
+  .nav-links a:hover { opacity: 1; color: var(--bronze-d); }
+  .nav-links a.home-link { color: var(--bronze-d); font-weight: 500; opacity: 1; }
+  @media (max-width: 760px) { .nav-links li.opt { display: none; } }
+
+  /* ============ Layout ============ */
+  section { padding: clamp(40px, 6vw, 80px) var(--pad-x); position: relative; z-index: 2; }
+  .container { max-width: var(--w-max); margin: 0 auto; }
+  .eyebrow { font-family: var(--sans-en); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--bronze-d); margin-bottom: 18px; }
+
+  /* ============ Hero ============ */
+  .hero { padding-top: clamp(48px, 7vw, 96px); padding-bottom: clamp(28px, 4vw, 56px); }
+  .hero h1 { font-family: var(--serif-cn); font-weight: 800; font-size: clamp(30px, 5vw, 50px); line-height: 1.2; margin-bottom: 12px; }
+  .hero h1 .en { display: block; font-family: var(--serif-en); font-weight: 500; font-style: italic; font-size: 0.5em; color: var(--mute); margin-top: 8px; letter-spacing: 0.01em; }
+  .hero .lead { font-size: clamp(15px, 1.6vw, 17px); color: #444; max-width: 740px; margin-bottom: 8px; }
+  .hero .lead.cn { color: var(--mute); font-size: 14.5px; max-width: 740px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .pill-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; text-decoration: none; padding: 10px 18px; border-radius: 100px; border: 1px solid var(--bronze); color: var(--bronze-d); transition: background 0.2s, color 0.2s, transform 0.2s; }
+  .pill-link:hover { background: var(--bronze); color: var(--paper); transform: translateY(-2px); }
+  .pill-link.solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .pill-link.solid:hover { background: var(--bronze-d); border-color: var(--bronze-d); }
+
+  /* ============ Prereq / loop note ============ */
+  .note-card { background: var(--paper-2); border-left: 3px solid var(--jade); border-radius: 0 12px 12px 0; padding: 20px 24px; margin-top: 30px; }
+  .note-card h3 { font-family: var(--serif-cn); font-weight: 700; font-size: 16px; color: var(--jade-d); margin-bottom: 10px; }
+  .note-card h3 .en { font-family: var(--serif-en); font-style: italic; font-weight: 400; font-size: 13px; color: var(--mute); margin-left: 8px; }
+  .note-card ul { list-style: none; }
+  .note-card li { position: relative; padding: 7px 0 7px 24px; font-size: 14px; color: #3c3c3c; line-height: 1.55; border-bottom: 1px dashed var(--line); }
+  .note-card li:last-child { border-bottom: none; }
+  .note-card li::before { content: '✦'; position: absolute; left: 0; top: 7px; color: var(--bronze); font-size: 12px; }
+  .note-card li b { color: var(--bronze-d); font-family: var(--serif-cn); }
+  .note-card li .en { color: var(--mute); }
+  .note-card code { font-family: var(--mono); font-size: 12.5px; color: var(--bronze-d); background: var(--paper-3); padding: 1px 6px; border-radius: 4px; }
+  .loop-line { margin-top: 14px; font-family: var(--serif-en); font-style: italic; font-size: 15px; color: var(--ink); }
+  .loop-line b { color: var(--bronze-d); font-style: normal; font-family: var(--sans-cn); font-weight: 600; }
+
+  /* ============ Steps ============ */
+  #steps { background: var(--paper-2); }
+  .ladder-title { font-family: var(--serif-cn); font-weight: 800; font-size: clamp(22px, 3.2vw, 30px); margin-bottom: 6px; }
+  .ladder-title .en { display: block; font-family: var(--serif-en); font-style: italic; font-weight: 500; font-size: 0.52em; color: var(--mute); margin-top: 6px; }
+  .ladder-sub { font-size: 14.5px; color: #555; max-width: 720px; margin: 8px 0 36px; }
+
+  .step-list { display: grid; gap: 22px; counter-reset: step; }
+  .step { position: relative; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: clamp(22px, 3vw, 30px); transition: box-shadow 0.25s, transform 0.25s; }
+  .step:hover { box-shadow: var(--shadow-soft); transform: translateY(-2px); }
+  .step-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 6px; }
+  .step-no { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--paper); font-family: var(--serif-en); font-style: italic; font-size: 17px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-soft); }
+  .step-h h3 { font-family: var(--serif-cn); font-weight: 700; font-size: 19px; line-height: 1.3; }
+  .step-h h3 .en { display: block; font-family: var(--serif-en); font-style: italic; font-weight: 500; font-size: 0.74em; color: var(--mute); margin-top: 2px; }
+  .step .goal { font-size: 14.5px; color: #3c3c3c; line-height: 1.6; margin: 12px 0 4px; }
+  .step .goal b { font-family: var(--serif-cn); color: var(--bronze-d); }
+  .step .goal .en { display: block; color: var(--mute); font-size: 13.5px; margin-top: 2px; }
+
+  /* prompt box (matches courses.html) */
+  .prompt-box { position: relative; background: var(--ink-2); color: #EDE6D8; border-radius: 10px; padding: 16px 18px 18px 20px; margin: 16px 0 14px; border-left: 3px solid var(--bronze); overflow: hidden; }
+  .prompt-box .plabel { display: block; font-family: var(--sans-en); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze-l); margin-bottom: 10px; padding-right: 84px; }
+  .prompt-box pre { font-family: var(--mono); font-size: 12.5px; line-height: 1.62; white-space: pre-wrap; word-break: break-word; color: #EDE6D8; }
+  .copy-btn { position: absolute; top: 12px; right: 12px; font-family: var(--sans-en); font-size: 11px; letter-spacing: 0.05em; color: var(--bronze-l); background: rgba(255,255,255,0.06); border: 1px solid rgba(201,171,124,0.4); border-radius: 100px; padding: 5px 12px; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .copy-btn:hover { background: var(--bronze); color: var(--ink); border-color: var(--bronze); }
+
+  /* verify + under-the-hood */
+  .step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 6px; }
+  @media (max-width: 680px) { .step-grid { grid-template-columns: 1fr; } }
+  .cell .h { font-family: var(--sans-en); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bronze-d); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .verify ul { list-style: none; }
+  .verify li { position: relative; padding: 5px 0 5px 22px; font-size: 13.5px; color: #3c3c3c; line-height: 1.5; }
+  .verify li::before { content: '✓'; position: absolute; left: 0; top: 5px; color: var(--jade-d); font-weight: 700; }
+  .verify li .en { display: block; color: var(--mute); font-size: 12.5px; }
+  .under { background: var(--paper-2); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #4a4a4a; line-height: 1.55; }
+  .under b { font-family: var(--serif-cn); color: var(--bronze-d); }
+  .under .en { display: block; color: var(--mute); font-size: 12px; margin-top: 3px; }
+  .under code { font-family: var(--mono); font-size: 11.5px; color: var(--bronze-d); }
+
+  /* ============ Closing ============ */
+  #closing { background: var(--ink); color: var(--paper); }
+  #closing .eyebrow { color: var(--bronze-l); }
+  #closing h2 { font-family: var(--serif-cn); font-weight: 800; font-size: clamp(24px, 3.4vw, 34px); margin-bottom: 8px; }
+  #closing h2 .en { display: block; font-family: var(--serif-en); font-style: italic; font-weight: 500; font-size: 0.5em; color: rgba(250,246,240,0.6); margin-top: 6px; }
+  #closing p { color: rgba(250,246,240,0.82); font-size: 15px; max-width: 720px; line-height: 1.75; margin-bottom: 8px; }
+  #closing p.cn { color: rgba(250,246,240,0.55); font-size: 14px; }
+  #closing .hero-actions { margin-top: 28px; }
+  #closing .pill-link { border-color: var(--bronze-l); color: var(--bronze-l); }
+  #closing .pill-link:hover { background: var(--bronze-l); color: var(--ink); }
+  #closing .pill-link.solid { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  #closing .pill-link.solid:hover { background: var(--bronze-l); border-color: var(--bronze-l); }
+
+  /* ============ Footer ============ */
+  footer { background: var(--ink); color: var(--paper); padding: 48px var(--pad-x) 36px; position: relative; z-index: 2; border-top: 1px solid rgba(250,246,240,0.1); }
+  .foot-inner { max-width: var(--w-max); margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: baseline; }
+  .foot-brand { font-family: var(--serif-cn); font-weight: 800; font-size: 18px; color: var(--paper); letter-spacing: 0.08em; }
+  .foot-brand .accent { color: var(--bronze); }
+  footer a { color: rgba(250,246,240,0.72); text-decoration: none; transition: color 0.2s; font-size: 13px; }
+  footer a:hover { color: var(--bronze-l); }
+  .foot-bottom { max-width: var(--w-max); margin: 28px auto 0; padding-top: 20px; border-top: 1px solid rgba(250,246,240,0.15); font-size: 12px; color: rgba(250,246,240,0.45); text-align: center; letter-spacing: 0.05em; }
+
+  /* ============ Reveal / motion ============ */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } .reveal { opacity: 1; transform: none; } }
+  @media print { .topnav, .progress, footer { display: none; } body { background: white; } body::before { display: none; } .step, .note-card { page-break-inside: avoid; } .prompt-box { background: #f4efe6; color: #1A1A1A; } .prompt-box pre, .prompt-box .plabel { color: #1A1A1A; } .copy-btn { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- =================== NAV =================== -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="index.html">
+      <svg class="bell-icon" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+        <path d="M32 12 C34 24, 40 30, 52 32 C40 34, 34 40, 32 52 C30 40, 24 34, 12 32 C24 30, 30 24, 32 12 Z" />
+      </svg>
+      灵境 · <span class="accent">工坊</span>
+    </a>
+    <ul class="nav-links">
+      <li class="opt"><a href="courses.html#visual">Day 3 课程 Course</a></li>
+      <li><a href="build-sumi-e.html">水墨深拆 Sumi-e build</a></li>
+      <li><a href="bianzhong.html" target="_blank" rel="noopener">运行此例 Run it</a></li>
+      <li><a href="courses.html" class="home-link">← 课程 Courses</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- =================== HERO =================== -->
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow reveal">Case B + C · Deep Build · 深拆可交互编钟</div>
+    <h1 class="reveal">一步步做出「可交互编钟」<span class="en">Build the Playable Bianzhong — one prompt at a time</span></h1>
+    <p class="lead reveal">This is the full teardown of the playable 3D bianzhong page — orbit the bronze bells, then tap them to ring tuned notes. We rebuild it from an empty stage into a finished instrument in <b>7 steps</b>, and every step is just one plain-English sentence you paste into Gemini. You never write code; you describe, you run, you check, you say the next sentence.</p>
+    <p class="lead cn reveal">这是「可交互 3D 编钟」页面的完整拆解——旋转那架青铜钟，再点击钟体奏出调准的音。我们从一个空舞台开始，用 <b>7 步</b>把它做成一件成品乐器，而每一步都只是你粘进 Gemini 的一句大白话。你不写代码；你描述、你运行、你检查，然后说下一句。</p>
+
+    <div class="hero-actions reveal">
+      <a class="pill-link solid" href="bianzhong.html" target="_blank" rel="noopener">▶ 先玩成品 Play the finished page</a>
+      <a class="pill-link" href="#steps">↓ 开始 7 步 Start the 7 steps</a>
+      <a class="pill-link" href="build-sumi-e.html">水墨案例 A 深拆 Sumi-e build</a>
+    </div>
+
+    <div class="note-card reveal">
+      <h3>动手前 · 三样东西<span class="en">Before you start — three things</span></h3>
+      <ul>
+        <li><b>一个 Gemini</b> — 打开 Google AI Studio 或 Gemini App 的 Canvas，登录即可。<span class="en">Open Gemini Canvas (AI Studio or the Gemini app) and sign in.</span></li>
+        <li><b>一个 3D 模型</b> — Step 1 用课程托管好的 <code>编钟.glb</code> 网址；如果该网址暂时取不到，<b>Step 2</b> 会让你把自己的 <code>.glb</code> 拖进舞台。<span class="en">A 3D model — Step 1 uses the course-hosted <code>编钟.glb</code> URL; if it isn't reachable yet, Step 2 lets you drag in your own <code>.glb</code>.</span></li>
+        <li><b>一个现代浏览器</b> — 本例不强求 <code>localhost</code>（模型从网址加载、声音用 Web Audio，都能直接跑）；只有手机 <b>AR</b> 需要 <code>https</code>，且永远是加分项。<span class="en">A modern browser — no <code>localhost</code> needed here; only phone <b>AR</b> needs <code>https</code>, and AR is always a bonus.</span></li>
+      </ul>
+      <p class="loop-line">每一步都跑同一个循环：<b>描述 → 预览 → 验证 → 迭代</b>。每次跑通，先存一份再往下改——「上一个能跑的版本」是你最好的安全网。</p>
+      <p class="loop-line" style="font-style:normal; font-family:var(--sans-cn); font-size:13px; color:var(--mute); margin-top:6px;">Every step runs the same loop: <i>describe → preview → verify → iterate</i>. Save each working version before you change it — your last working copy is your safety net.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =================== STEPS =================== -->
+<section id="steps">
+  <div class="container">
+    <div class="ladder-title reveal">7 步阶梯<span class="en">The 7-step ladder — empty stage to a playable instrument</span></div>
+    <p class="ladder-sub reveal">Step 1 builds the whole shell; Steps 2–7 are all said into the <b>same Gemini chat</b> — each one adds one capability on top of the last. 第 1 步搭好骨架，第 2–7 步都在<b>同一个对话</b>里继续说，每句加一样新能力。</p>
+
+    <div class="step-list">
+
+      <!-- STEP 1 -->
+      <div class="step reveal">
+        <div class="step-top">
+          <div class="step-no">1</div>
+          <div class="step-h"><h3>3D 舞台：载入编钟<span class="en">The 3D stage: load the bell</span></h3></div>
+        </div>
+        <p class="goal"><b>目标</b> — 一个能旋转、缩放、自转的 3D 编钟，配米纸+青铜的底子，外加一个 AR 按钮。<span class="en">Goal — a 3D bianzhong you can orbit, zoom and watch auto-rotate, on a rice-paper + bronze theme, with an AR button.</span></p>
+        <div class="prompt-box">
+          <span class="plabel">Prompt · 复制粘贴给 Gemini</span>
+          <button class="copy-btn" type="button">复制 Copy</button>
+<pre>Build a single self-contained HTML file: an interactive 3D viewer for a
+Chinese bianzhong (ancient bronze chime bells). No build step. Load
+Google's model-viewer web component from unpkg, and load the model from
+this URL:
+  https://haner199022.github.io/ireland-study-tour/models/bianzhong.glb
+Give it orbit + zoom + a gentle auto-rotate (resuming after a short idle
+delay), soft shadows, neutral environment lighting, and an AR button.
+Use a warm rice-paper (#FAF6F0) and bronze (#B08D57) visual theme with
+bilingual 中文 + English labels. Keep it elegant, with lots of calm space.</pre>
+        </div>
+        <div class="step-grid">
+          <div class="cell verify"><div class="h">✓ 验证 Verify</div><ul>
+            <li>钟出现了；能拖动旋转、滚轮缩放、自己缓缓转。<span class="en">The bell appears; you can orbit, zoom, and it slowly auto-rotates.</span></li>
+            <li>手机上能看到 AR 按钮。<span class="en">An AR button shows on a phone.</span></li>
+          </ul></div>
+          <div class="cell"><div class="h">底层揭秘 Under the hood</div><div class="under"><b>model-viewer 是一个网页标签</b>，只要一个 <code>.glb</code> 文件，就同时给你 3D 查看 + AR，不用自己写 3D 引擎。<span class="en">model-viewer is one web component: a single <code>.glb</code> gives you 3D viewing + AR, with no 3D engine to write.</span></div></div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step reveal">
+        <div class="step-top">
+          <div class="step-no">2</div>
+          <div class="step-h"><h3>取不到也不崩：空状态 + 拖入自己的模型<span class="en">Never break: empty state + drag in your own model</span></h3></div>
+        </div>
+        <p class="goal"><b>目标</b> — 模型网址失败时，给一张友好的「放入你的模型」卡片，而不是空白；并能把自己的 <code>.glb</code> 拖进舞台即时预览。<span class="en">Goal — if the URL fails, show a friendly "add your model" card instead of a blank stage; and let me drag my own <code>.glb</code> in to preview instantly.</span></p>
+        <div class="prompt-box">
+          <span class="plabel">Prompt · 同一个对话，继续说</span>
+          <button class="copy-btn" type="button">复制 Copy</button>
+<pre>In the same file, make it robust. If the model URL fails to load
+(missing or offline), do NOT show a blank or broken stage — show a
+friendly "add your bianzhong model" empty card over the stage instead.
+And let me load my own model: I can drag a .glb or .gltf file onto the
+stage, or click a button to pick one, and it loads and previews instantly.</pre>
+        </div>
+        <div class="step-grid">
+          <div class="cell verify"><div class="h">✓ 验证 Verify</div><ul>
+            <li>没有模型时，出现「放入你的模型」卡片，页面不空、不报错。<span class="en">With no model, the "add your model" card shows — no blank, no crash.</span></li>
+            <li>把一个 <code>.glb</code> 拖到舞台上，立刻显示。<span class="en">Drag a <code>.glb</code> onto the stage — it loads at once.</span></li>
+          </ul></div>
+          <div class="cell"><div class="h">底层揭秘 Under the hood</div><div class="under"><b>model-viewer 会发出 load / error 事件</b>：出错就显示空卡；拖进来的文件用一个临时 object URL 直接喂给它。<span class="en">model-viewer fires load / error events: on error, show the empty card; a dragged-in file is handed to it via a temporary object URL.</span></div></div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step reveal">
+        <div class="step-top">
+          <div class="step-no">3</div>
+          <div class="step-h"><h3>点一下，钟响：合成钟声<span class="en">Tap to ring: a synthesized bell</span></h3></div>
+        </div>
+        <p class="goal"><b>目标</b> — 点击模型就响起一声有金属质感、带长尾的钟声——不是电子「滴」声。<span class="en">Goal — tapping the model rings a metallic, long-decaying bell tone — not an electronic beep.</span></p>
+        <div class="prompt-box">
+          <span class="plabel">Prompt · 同一个对话，继续说</span>
+          <button class="copy-btn" type="button">复制 Copy</button>
+<pre>Now make it play. When I tap anywhere on the model, ring a bell tone
+synthesized with the Web Audio API. Don't use a single sine beep — stack
+about six inharmonic partials (slightly detuned overtones) with a fast
+attack and a long, roughly 3-second exponential decay, so it sounds like
+real struck bronze rather than an electronic tone.</pre>
+        </div>
+        <div class="step-grid">
+          <div class="cell verify"><div class="h">✓ 验证 Verify</div><ul>
+            <li>点钟体 → 响起一声金属感、余韵很长的钟声。<span class="en">Tap the bell → a metallic tone with a long ring-out.</span></li>
+            <li>听起来像青铜，不像「滴」。<span class="en">It sounds like bronze, not a beep.</span></li>
+          </ul></div>
+          <div class="cell"><div class="h">底层揭秘 Under the hood</div><div class="under"><b>真实的钟是「非谐」的</b>——把几个略微失谐的泛音叠在一起，才有青铜的质感；单一正弦只会是干净的电子音。<span class="en">Real bells are inharmonic — stacking a few detuned overtones gives the bronze timbre; a single sine is just a clean electronic note.</span></div></div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step reveal">
+        <div class="step-top">
+          <div class="step-no">4</div>
+          <div class="step-h"><h3>音高随位置走 + 五声音阶<span class="en">Pitch by position + the pentatonic scale</span></h3></div>
+        </div>
+        <p class="goal"><b>目标</b> — 点得越靠左越低、越靠右越高，走中国五声音阶 宫商角徵羽；每次发声，屏幕中央闪出音名。<span class="en">Goal — left = low, right = high, on the 宫商角徵羽 pentatonic scale; each ring flashes the note name.</span></p>
+        <div class="prompt-box">
+          <span class="plabel">Prompt · 同一个对话，继续说</span>
+          <button class="copy-btn" type="button">复制 Copy</button>
+<pre>Map the pitch to WHERE I tap, horizontally across the model: left = low,
+right = high. Use a Chinese pentatonic scale — 宫商角徵羽
+(gong-shang-jue-zhi-yu) — 10 notes spanning about two octaves:
+G3 A3 C4 D4 E4 G4 A4 C5 D5 E5. Each time a note rings, flash its name
+large over the stage.</pre>
+        </div>
+        <div class="step-grid">
+          <div class="cell verify"><div class="h">✓ 验证 Verify</div><ul>
+            <li>点左边=低音，点右边=高音；音高沿五声音阶走。<span class="en">Tap left = low, right = high; pitch follows the pentatonic scale.</span></li>
+            <li>每响一声，中央闪出对应音名。<span class="en">Each ring flashes its note name in the centre.</span></li>
+          </ul></div>
+          <div class="cell"><div class="h">底层揭秘 Under the hood</div><div class="under"><b>从点击点取出 3D 命中坐标</b>，把它的 X 在模型宽度上归一化（0→1）= 音的序号；取不到命中就退回用屏幕像素 X。<span class="en">Get the 3D hit point of the tap, normalise its X across the model width (0→1) → the note index; if there's no hit, fall back to the pixel X across the stage.</span></div></div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step reveal">
+        <div class="step-top">
+          <div class="step-no">5</div>
+          <div class="step-h"><h3>一排可点的音键<span class="en">An on-screen key pad</span></h3></div>
+        </div>
+        <p class="goal"><b>目标</b> — 舞台下方一排音键，点哪个响哪个并高亮；和点模型用的是同一套音。<span class="en">Goal — a row of note keys under the stage; click one to ring + light it; same notes as tapping the model.</span></p>
+        <div class="prompt-box">
+          <span class="plabel">Prompt · 同一个对话，继续说</span>
+          <button class="copy-btn" type="button">复制 Copy</button>
+<pre>Add a row of clickable note keys below the stage — one key per note in
+the scale, labelled with the note name. Clicking a key rings that note
+and briefly lights the key. Tapping the model and clicking the keys must
+use the exact same set of notes.</pre>
+        </div>
+        <div class="step-grid">
+          <div class="cell verify"><div class="h">✓ 验证 Verify</div><ul>
+            <li>下方出现一排音键；点某个键 → 响对应音并亮一下。<span class="en">A row of keys appears; click one → it rings and lights briefly.</span></li>
+            <li>键和点模型发的是同一套音，不跑调。<span class="en">Keys and model taps use the same notes — no drift.</span></li>
+          </ul></div>
+          <div class="cell"><div class="h">底层揭秘 Under the hood</div><div class="under"><b>音键和模型点击读同一个「10 音数组」</b>——一处定义、两处共用，是它们不跑调的原因。<span class="en">Keys and model taps both read one shared "10-note array" — one definition, used in two places, is why they stay in tune.</span></div></div>
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="step reveal">
+        <div class="step-top">
+          <div class="step-no">6</div>
+          <div class="step-h"><h3>奏一段 + 涟漪与高亮反馈<span class="en">Run the scale + ripple &amp; key-light feedback</span></h3></div>
+        </div>
+        <p class="goal"><b>目标</b> — 一个「奏一段」按钮顺次奏完全部音；每次发声，点击处冒出一圈涟漪、对应键亮一下。<span class="en">Goal — a "Run the scale" button plays all notes in order; each ring sends a ripple from the tap point and lights the matching key.</span></p>
+        <div class="prompt-box">
+          <span class="plabel">Prompt · 同一个对话，继续说</span>
+          <button class="copy-btn" type="button">复制 Copy</button>
+<pre>Add a "奏一段 / Run the scale" button that plays all the notes in order,
+low to high, with a short gap between each. And add visual feedback on
+every ring: send a soft expanding ripple out from the point I tapped, and
+light up the matching key on the key pad (keep the note-name flash you
+already have).</pre>
+        </div>
+        <div class="step-grid">
+          <div class="cell verify"><div class="h">✓ 验证 Verify</div><ul>
+            <li>点「奏一段」→ 从低到高顺次奏完。<span class="en">Click "Run the scale" → it plays low to high in order.</span></li>
+            <li>每次发声，点击处冒出一圈涟漪，对应音键亮一下。<span class="en">Each ring sends a ripple from the tap point and lights the key.</span></li>
+          </ul></div>
+          <div class="cell"><div class="h">底层揭秘 Under the hood</div><div class="under"><b>「奏一段」= 给每个音排一个小延时</b>（约 0.23 秒一个）顺序触发；涟漪是在点击坐标处放一个会扩散、淡出的小圆。<span class="en">"Run the scale" schedules each note on a small delay (~0.23s apart); the ripple is a little circle placed at the tap point that expands and fades.</span></div></div>
+        </div>
+      </div>
+
+      <!-- STEP 7 -->
+      <div class="step reveal">
+        <div class="step-top">
+          <div class="step-no">7</div>
+          <div class="step-h"><h3>控件、收尾与上线<span class="en">Controls, polish &amp; going live</span></h3></div>
+        </div>
+        <p class="goal"><b>目标</b> — 自动旋转开关 + 复位视角键；通页米纸+青铜、中英双语；导出一个完整文件。再把模型「上线」。<span class="en">Goal — an auto-rotate toggle + reset-view button; rice-paper + bronze, bilingual throughout; output one file. Then get your model online.</span></p>
+        <div class="prompt-box">
+          <span class="plabel">Prompt · 同一个对话，继续说</span>
+          <button class="copy-btn" type="button">复制 Copy</button>
+<pre>Finish it. Add an auto-rotate on/off toggle and a "reset view" button that
+re-centres the camera. Keep the whole page on the rice-paper-and-bronze
+theme with bilingual 中文 + English labels throughout. Output one complete,
+self-contained HTML file.</pre>
+        </div>
+        <div class="step-grid">
+          <div class="cell verify"><div class="h">✓ 验证 Verify</div><ul>
+            <li>自动旋转开关能开关；复位键把视角拉回正面。<span class="en">The auto-rotate toggle works; reset pulls the camera back to front.</span></li>
+            <li>通页米纸+青铜配色，标签中英双语。<span class="en">Rice-paper + bronze throughout; labels bilingual.</span></li>
+          </ul></div>
+          <div class="cell"><div class="h">底层揭秘 Under the hood</div><div class="under"><b>autoRotate、cameraOrbit 都是 model-viewer 的可读写属性</b>，开关/复位直接设它们即可。<span class="en">autoRotate and cameraOrbit are read/write properties on model-viewer — the toggle and reset just set them.</span></div></div>
+        </div>
+        <p class="goal" style="font-size:13px;color:var(--mute);margin-top:16px;"><b style="color:var(--bronze-d);">上线你的模型</b> — 「上传」其实就是：把 <code>.glb</code> 放到一个网页能用网址取到的地方。最省事的办法：把文件放进 <code>website/models/</code> 推送到 GitHub Pages，得到一个公开网址填回 Step 1；或者把 <code>.glb</code> 以 base64 内嵌成 data-URI，单文件即可运行。详见 <a href="bianzhong.html#pipeline" target="_blank" rel="noopener" style="color:var(--bronze-d);">编钟页的「托管 + Gemini 流程」↗</a>。<span class="en" style="display:block;color:var(--mute);margin-top:3px;">Going live — "upload" just means putting the <code>.glb</code> where a page can fetch it by URL: drop it in <code>website/models/</code> and push to GitHub Pages for a public URL (paste it back into Step 1), or base64-embed it as a data-URI for one self-contained file. See the bianzhong page's hosting flow ↗.</span></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =================== CLOSING =================== -->
+<section id="closing">
+  <div class="container">
+    <div class="eyebrow reveal">You built the bell · 你做出了可交互编钟</div>
+    <h2 class="reveal">就这样，一句一句，你做出了能演奏的 3D 编钟<span class="en">Sentence by sentence, you built a playable 3D bianzhong</span></h2>
+    <p class="reveal">Seven plain-English sentences took you from an empty stage to a 3D instrument: orbit it, tap it to ring tuned bronze on a Chinese pentatonic scale, play it from a key pad, drop in your own model — shipped as a single file. You never wrote a line of code. You described, you checked, you said the next sentence.</p>
+    <p class="cn reveal">七句大白话，把你从一个空舞台带到一件 3D 乐器：可旋转，可点击奏出五声音阶的青铜钟声，可用音键演奏，可拖入你自己的模型——打包成一个文件。你一行代码都没写。你描述、你检查，然后说下一句。</p>
+    <div class="hero-actions reveal">
+      <a class="pill-link solid" href="bianzhong.html#pipeline" target="_blank" rel="noopener">上线模型：托管流程 Host your model</a>
+      <a class="pill-link" href="bianzhong.html" target="_blank" rel="noopener">▶ 对照成品 Compare with the finished page</a>
+      <a class="pill-link" href="build-sumi-e.html">水墨案例 A 深拆 Sumi-e build</a>
+    </div>
+    <p class="cn reveal" style="margin-top:22px; font-size:13px;">想换成自己的钟？把第 1 步的网址换成你托管好的 <code style="font-family:var(--mono);color:var(--bronze-l);">.glb</code>，或直接在第 2 步把文件拖进舞台。Swap in your own bell — replace the URL in Step 1 with your hosted <code style="font-family:var(--mono);color:var(--bronze-l);">.glb</code>, or just drag your file onto the stage at Step 2.</p>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">灵境 · <span class="accent">工坊</span></div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+      <a href="index.html">总览 Overview</a>
+      <a href="courses.html#visual">Day 3 课程 Course</a>
+      <a href="build-sumi-e.html">水墨深拆 Sumi-e build</a>
+      <a href="bianzhong.html" target="_blank" rel="noopener">运行此例 Run it</a>
+    </div>
+  </div>
+  <div class="foot-bottom">灵境工坊 · Miracle Craft Workshop · CUC × University College Cork · 2026 — 可交互编钟 深拆 / Playable bianzhong deep build</div>
+</footer>
+
+<script>
+  // progress bar
+  const progress = document.getElementById('progress');
+  function onScroll() {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+    progress.style.width = (scrolled * 100) + '%';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // copy-to-clipboard on prompt boxes
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pre = btn.closest('.prompt-box').querySelector('pre');
+      const text = pre.innerText;
+      const done = () => { const old = btn.textContent; btn.textContent = '已复制 Copied ✓'; setTimeout(() => { btn.textContent = old; }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(() => fallback(text, done));
+      } else { fallback(text, done); }
+    });
+  });
+  function fallback(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+</script>
+</body>
+</html>
